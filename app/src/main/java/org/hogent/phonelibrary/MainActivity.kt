@@ -1,19 +1,15 @@
 package org.hogent.phonelibrary
 
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import org.hogent.phonelibrary.fragments.FavoritesFragment
+import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 import org.hogent.phonelibrary.fragments.SearchFragment
 
-class MainActivity : AppCompatActivity(), FavoritesFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener {
-
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragment.OnDevicesLookupResultsListener{
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val fragmentToSwitchTo: Fragment =
@@ -32,6 +28,14 @@ class MainActivity : AppCompatActivity(), FavoritesFragment.OnFragmentInteractio
         return@OnNavigationItemSelectedListener true
     }
 
+    override fun onDeviceslookupResultsFound() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onDeviceSelection() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,7 +45,7 @@ class MainActivity : AppCompatActivity(), FavoritesFragment.OnFragmentInteractio
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         //Set the org.hogent.phonelibrary.fragments.SearchFragment as the default fragment on startup.
-        switchFragment(SearchFragment.newInstance())
+        navView.selectedItemId = R.id.navigation_search
     }
 
     /**
