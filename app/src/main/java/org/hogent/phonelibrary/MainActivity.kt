@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import org.hogent.phonelibrary.fragments.DeviceDetailFragment
 import org.hogent.phonelibrary.fragments.FavoritesFragment
 import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 import org.hogent.phonelibrary.fragments.SearchFragment
@@ -29,11 +30,13 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
     }
 
     override fun onDeviceslookupResultsFound() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //Load the favorites fragment.
+        switchFragment(FavoritesFragment.newInstance())
     }
 
     override fun onDeviceSelection() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //Switch to the detail fragment.
+        switchFragment(DeviceDetailFragment.newInstance())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
