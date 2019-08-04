@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.MenuItem
 import org.hogent.phonelibrary.fragments.DeviceDetailFragment
 import org.hogent.phonelibrary.fragments.FavoritesFragment
 import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
@@ -62,7 +63,34 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
                 "Empty back stack",
                 "Closing back stack due to pressing back while the back stack is empty."
             )
+            //Close the activity.
             this.finish()
+        }
+        updateActionBarBackButton()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                //Call parent function to go back.
+                super.onBackPressed()
+                //Back button in action bar was pressed.
+                updateActionBarBackButton()
+                return true
+            }
+        }
+        //Else call parent.
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateActionBarBackButton() {
+        //If the back stack has one or less fragments, this is the root fragment.
+        if (supportFragmentManager.backStackEntryCount <= 1) {
+            //Root fragment, hide back button.
+            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        } else {
+            //Show the back button.
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -79,9 +107,6 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
             "Switch fragment",
             "Switching to fragment ${fragment::class.simpleName}. IsNavigationalRoot: $isNavigationalRoot"
         )
-
-        //Hide the back button on the activity if it's a root fragment.
-        actionBar?.setDisplayHomeAsUpEnabled(!isNavigationalRoot)
 
         //Check whether or not it's a root fragment.
         if (isNavigationalRoot) {
@@ -105,5 +130,8 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
                 .addToBackStack(null)
                 .commit()
         }
+
+        supportFragmentManager.executePendingTransactions()
+        updateActionBarBackButton()
     }
 }
