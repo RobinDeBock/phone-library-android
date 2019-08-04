@@ -83,17 +83,6 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         return super.onOptionsItemSelected(item)
     }
 
-    private fun updateActionBarBackButton() {
-        //If the back stack has one or less fragments, this is the root fragment.
-        if (supportFragmentManager.backStackEntryCount <= 1) {
-            //Root fragment, hide back button.
-            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        } else {
-            //Show the back button.
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
-    }
-
     /**
      * Helper function to show a new fragment on the screen.
      * If the fragment is a root fragment. Pressing the back button will close the activity.
@@ -131,7 +120,28 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
                 .commit()
         }
 
+        //Force execution of transactions for back stack on main thread.
         supportFragmentManager.executePendingTransactions()
         updateActionBarBackButton()
+    }
+
+    /**
+     * Updates the visibility of the action bar back button,
+     * based on the contents of the fragment back stack.
+     *
+     */
+    private fun updateActionBarBackButton() {
+        val amount = supportFragmentManager.backStackEntryCount
+
+        //Check if the top-stack fragment is a root fragment.
+        if (amount > 0) {
+            if (supportFragmentManager.getBackStackEntryAt(amount - 1).name == BACK_STACK_ROOT_TAG) {
+                //Root fragment, hide back button.
+                supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+                return
+            }
+        }
+        //Not a root fragment, show the back button.
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 }
