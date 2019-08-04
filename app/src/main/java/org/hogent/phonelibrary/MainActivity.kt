@@ -7,10 +7,7 @@ import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
-import org.hogent.phonelibrary.fragments.DeviceDetailFragment
-import org.hogent.phonelibrary.fragments.FavoritesFragment
-import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
-import org.hogent.phonelibrary.fragments.SearchFragment
+import org.hogent.phonelibrary.fragments.*
 
 private const val BACK_STACK_ROOT_TAG = "root_fragment"
 
@@ -35,7 +32,7 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
 
     override fun onDeviceslookupResultsFound() {
         //Load the favorites fragment.
-        switchFragment(FavoritesFragment.newInstance(), false)
+        switchFragment(DeviceListFragment.newInstance(), false)
     }
 
     override fun onDeviceSelection() {
@@ -57,7 +54,7 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //If the back stack has one or less fragments, close the activity.
+        //If the back stack has no fragments, close the activity.
         if (supportFragmentManager.backStackEntryCount < 1) {
             Log.i(
                 "Empty back stack",

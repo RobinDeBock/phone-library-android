@@ -7,9 +7,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_favorites_fragment">Hello favorites fragment</string>
     <string name="hello_search_fragment">Hello search fragment</string>
+    <string name="hello_list_fragment">Hello list fragment</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_detail_fragment">Hello detail fragment</string>
     <string name="open_detail">Open detail</string>
     <string name="show_results">Show results</string>
+
 </resources>
