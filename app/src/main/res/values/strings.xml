@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Phone library</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_favorites_fragment">Hello favorites fragment</string>
+    <string name="hello_search_fragment">Hello search fragment</string>
 </resources>
