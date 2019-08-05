@@ -4,6 +4,7 @@ import android.util.Log
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import io.reactivex.Observable
+import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
 
 private const val BASE_URL: String = "https://fonoapi.freshpixl.com/v1/"
 
@@ -30,8 +31,11 @@ class DeviceApi(private val token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6
                                 emitter.onError(ex)
                             }
                             is Result.Success -> {
-                                //todo check for error messages.
                                 val data = result.get()
+                                //Check for error messages in result.
+                                val error = checkForApiErrors(data)
+                                if (error != null) emitter.onError(error)
+                                //No errors, request was successful.
                                 emitter.onNext(true)
                                 emitter.onComplete()
                             }
@@ -44,7 +48,25 @@ class DeviceApi(private val token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6
         }
     }
 
-    companion object{
+    /**
+     * Help method to check for errors in a successful request result.
+     *
+     * @param jsonResult The result to check.
+     * @return The exception describing the error. Null if there wasn't any.
+     */
+    private fun checkForApiErrors(jsonResult: String) : Exception? {
+        if (jsonResult.contains("Invalid or blocked token", true)){
+            //Invalid token.
+            return InvalidApiTokenException()
+        }else if(jsonResult.contains("\"status\": \"error\"")){
+            //Unknown error in result.
+            return Exception("Unknown API error: $jsonResult")
+        }
+        //No errors found.
+        return null
+    }
+
+    companion object {
         @JvmStatic
         fun newInstance() = DeviceApi()
     }
