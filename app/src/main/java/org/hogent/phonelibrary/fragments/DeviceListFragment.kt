@@ -21,7 +21,7 @@ import org.hogent.phonelibrary.domain.repository.network.DeviceApi
 class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
-    private var subscription : Disposable? = null
+    private var subscription: Disposable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,9 +63,15 @@ class DeviceListFragment : Fragment() {
     }
 
     private fun checkForValidApiKey() {
-        subscription =  DeviceApi.newInstance().isValidApiKey()
+        subscription = DeviceApi.newInstance().isValidApiKey()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                device_list_detail_button.text = "fetching..."
+            }
+            .doOnTerminate{
+                device_list_detail_button.text = "done fetching"
+            }
             .subscribe({ result ->
                 device_list_detail_button.text = result.toString()
                 subscription?.dispose()
@@ -74,7 +80,6 @@ class DeviceListFragment : Fragment() {
                 subscription?.dispose()
             })
     }
-
 
     companion object {
         /**
