@@ -63,7 +63,7 @@ class DeviceListFragment : Fragment() {
     }
 
     private fun checkForValidApiKey() {
-        subscription = DeviceApi.newInstance().isValidApiKey()
+        subscription = DeviceApi.newInstance().fetchDevicesByBrand("xiaomi")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -73,7 +73,7 @@ class DeviceListFragment : Fragment() {
                 device_list_detail_button.text = "done fetching"
             }
             .subscribe({ result ->
-                device_list_detail_button.text = result.toString()
+                device_list_detail_button.text = result.count().toString()
                 subscription?.dispose()
             }, { error ->
                 device_list_detail_button.text = error.message
