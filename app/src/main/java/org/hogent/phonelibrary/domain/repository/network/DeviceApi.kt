@@ -11,10 +11,13 @@ import com.squareup.moshi.Types
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.repository.network.json.DeviceJsonAdapter
 
-private const val BASE_URL: String = "https://fonoapi.freshpixl.com/v1/"
 private const val MAX_RESULTS : Int = 20
 
-class DeviceApi(private val token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6ede3bc20e626f") : IDeviceApi {
+class DeviceApi(val BASE_URL: String) : IDeviceApi {
+
+    //The token is
+    //todo use setter injection for token.
+    private var token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6ede3bc20e626f"
 
     override fun fetchDevicesByName(deviceName: String): Observable<List<Device>> {
         //Build url.
@@ -193,11 +196,6 @@ class DeviceApi(private val token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6
         }
         //No errors found.
         return null
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = DeviceApi()
     }
 
 }

@@ -63,7 +63,7 @@ class DeviceListFragment : Fragment() {
     }
 
     private fun checkForValidApiKey() {
-        subscription = DeviceApi.newInstance().fetchDevicesByName("xiaomi")
+        /*subscription = DeviceApi.newInstance().fetchDevicesByName("xiaomi")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -78,7 +78,7 @@ class DeviceListFragment : Fragment() {
             }, { error ->
                 device_list_detail_button.text = error.message
                 subscription?.dispose()
-            })
+            })*/
     }
 
     companion object {
