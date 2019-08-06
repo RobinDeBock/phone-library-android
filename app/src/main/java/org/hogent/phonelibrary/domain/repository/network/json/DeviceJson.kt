@@ -1,10 +1,10 @@
-package org.hogent.phonelibrary.domain.repository.network.json_models
+package org.hogent.phonelibrary.domain.repository.network.json
 
 /**
  * Representation of the data from the API.
  *
  */
-class DeviceJson(){
+class DeviceJson{
     var DeviceName: String? = null
     var Brand: String? = null
     //Main specs

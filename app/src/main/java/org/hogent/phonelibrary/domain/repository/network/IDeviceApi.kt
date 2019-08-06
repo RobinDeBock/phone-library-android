@@ -1,7 +1,7 @@
 package org.hogent.phonelibrary.domain.repository.network
 
 import io.reactivex.Observable
-import org.hogent.phonelibrary.domain.repository.network.json_models.DeviceJson
+import org.hogent.phonelibrary.domain.models.Device
 
 /**
  * The API used to make HTTP requests for devices.
@@ -15,7 +15,7 @@ interface IDeviceApi {
      * @param brandName
      * @return a collection of all the devices.
      */
-    fun fetchDevicesByBrand(brandName: String): Observable<List<DeviceJson>>
+    fun fetchDevicesByBrand(brandName: String): Observable<List<Device>>
 
     /**
      * Check if the API key is valid.
