@@ -63,7 +63,7 @@ class DeviceListFragment : Fragment() {
     }
 
     private fun checkForValidApiKey() {
-        subscription = DeviceApi.newInstance().fetchDevicesByBrand("xiaomi")
+        subscription = DeviceApi.newInstance().fetchDevicesByName("xiaomi")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
