@@ -48,8 +48,11 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        //Set the org.hogent.phonelibrary.fragments.SearchFragment as the default fragment on startup.
-        navView.selectedItemId = R.id.navigation_search
+        //Check if bundle is empty, meaning this is the first time the activity was launched.
+        if (savedInstanceState == null) {
+            //Set the org.hogent.phonelibrary.fragments.SearchFragment as the default fragment on startup.
+            navView.selectedItemId = R.id.navigation_search
+        }
     }
 
     override fun onBackPressed() {
