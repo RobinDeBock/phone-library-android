@@ -111,6 +111,8 @@ class OnlineDeviceViewModel : BaseViewModel() {
         searchResult.postValue(SearchResult(null, Exception(error)))
         // The data is new and therefore not yet handled.
         isDataHandled = false
+        // Reset loading status.
+        isLoading.value = false
 
         subscription?.dispose()
     }

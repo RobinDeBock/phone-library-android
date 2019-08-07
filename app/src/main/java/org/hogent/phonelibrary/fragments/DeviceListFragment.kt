@@ -59,7 +59,7 @@ class DeviceListFragment : Fragment() {
         onlineDeviceViewModel.getResult()
             .observe(this, Observer {
                 if (it != null) {
-                    device_list_detail_button.text = it.devices!!.count().toString()
+                    device_list_detail_button.text = it.devices?.count().toString()
                 }
             })
     }

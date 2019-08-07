@@ -5,13 +5,18 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import org.hogent.phonelibrary.ParentActivity
 
 import org.hogent.phonelibrary.R
+import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
 import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
 
 // todo SearchFragment class documentation
@@ -45,14 +50,21 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
+        // Add listener to input text.
+        view.inputText.afterTextChanged {
+            // Update enable status of buttons if there's text entered.
+            search_name_button.isEnabled = it.isNotEmpty()
+            search_brand_button.isEnabled = it.isNotEmpty()
+        }
+
         // Add listener on button click.
         // Name
         view.search_name_button.setOnClickListener {
-            onlineDeviceViewModel.searchDevicesByName("xiaomi")
+            onlineDeviceViewModel.searchDevicesByName(view.inputText.text.toString())
         }
         // Brand
         view.search_brand_button.setOnClickListener {
-            onlineDeviceViewModel.searchDevicesByBrand("samsung")
+            onlineDeviceViewModel.searchDevicesByBrand(view.inputText.text.toString())
         }
 
         //Return the view.
@@ -65,20 +77,34 @@ class SearchFragment : Fragment() {
         // Observe the result.
         onlineDeviceViewModel.getResult()
             .observe(this, Observer {
+                // Check if there's an error.
+                if (it?.error != null) {
+                    // Check if error is from invalid API token.
+                    if (it.error?.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
+                        // If so, show token.
+                        listener!!.showToast("Invalid API key.")
+                    } else {
+                        // If not, show other token message.
+                        listener!!.showToast("Could not load devices. Please try again.")
+                    }
+                }
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back).
-                if (it != null && !onlineDeviceViewModel.isResultHandled()) {
-                    // Result is handled.
-                    listener!!.onDeviceslookupResultsFound()
+                else if (it?.devices != null && !onlineDeviceViewModel.isResultHandled()) {
                     // Switch fragment.
                     onlineDeviceViewModel.resultHandled()
+                    // Result is handled.
+                    listener!!.onDeviceslookupResultsFound()
                 }
             })
 
         // Observe the loading status.
         onlineDeviceViewModel.isLoading()
             .observe(this, Observer {
-                search_brand_button.text = if (it != false) "loading..." else "done..."
+                // Enable controls if not loading. (Null counts as false)
+                inputText.isEnabled = (it ?: false) != true
+                search_brand_button.isEnabled = (it ?: false) != true
+                search_name_button.isEnabled = (it ?: false) != true
             })
     }
 
@@ -88,11 +114,30 @@ class SearchFragment : Fragment() {
     }
 
     /**
+     * Help function for observing the text of an EditText by using a lambda expression.
+     * Source: https://stackoverflow.com/questions/40569436/kotlin-addtextchangelistener-lambda
+     *
+     * @param afterTextChanged
+     */
+    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+        })
+    }
+
+    /**
      * Functionality of an Activity which can handle a collection of fetched devices.
-     * TODO include the viewmodel as a parameter.
      *
      */
-    interface OnDevicesLookupResultsListener {
+    interface OnDevicesLookupResultsListener : ParentActivity {
         fun onDeviceslookupResultsFound()
     }
 

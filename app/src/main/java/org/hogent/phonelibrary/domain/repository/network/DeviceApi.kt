@@ -11,7 +11,7 @@ import com.squareup.moshi.Types
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.repository.network.json.DeviceJsonAdapter
 
-private const val MAX_RESULTS : Int = 20
+private const val MAX_RESULTS: Int = 20
 
 class DeviceApi(val BASE_URL: String) : IDeviceApi {
 
@@ -38,37 +38,40 @@ class DeviceApi(val BASE_URL: String) : IDeviceApi {
                                 val ex = result.getException()
                                 Log.e("Network error: request", ex.message)
                                 emitter.onError(ex)
-                                emitter.onComplete()
                             }
                             is Result.Success -> {
                                 val data = result.get()
                                 //Check for error messages in result.
                                 val error = checkForApiErrors(data)
-                                if (error != null) emitter.onError(error)
-                                //No errors, request was successful.
+                                if (error != null) {
+                                    Log.e("Network error: request", error.message)
+                                    emitter.onError(error)
+                                } else {
+                                    //No errors, request was successful.
 
-                                //Instantiate mochi converter.
-                                val moshi = Moshi.Builder()
-                                    .add(DeviceJsonAdapter())
-                                    .build()
+                                    //Instantiate mochi converter.
+                                    val moshi = Moshi.Builder()
+                                        .add(DeviceJsonAdapter())
+                                        .build()
 
-                                try {
-                                    //Json conversion.
+                                    try {
+                                        //Json conversion.
 
-                                    //Define jsonAdapter.
-                                    val type =
-                                        Types.newParameterizedType(List::class.java, Device::class.java)
-                                    val jsonAdapter: JsonAdapter<List<Device>> = moshi.adapter(type)
-                                    //Map from JSON.
-                                    val devices = jsonAdapter.fromJson(data)
-                                    //Emit results. Empty list if null, can't return a null list even if return type of observable is nullable.
-                                    emitter.onNext(devices ?: emptyList())
-                                } catch (ex: Exception) {
-                                    //JSON mapping failed failed.
-                                    Log.e("Network error: JSON", ex.message)
-                                    emitter.onError(ex)
+                                        //Define jsonAdapter.
+                                        val type =
+                                            Types.newParameterizedType(List::class.java, Device::class.java)
+                                        val jsonAdapter: JsonAdapter<List<Device>> = moshi.adapter(type)
+                                        //Map from JSON.
+                                        val devices = jsonAdapter.fromJson(data)
+                                        //Emit results. Empty list if null, can't return a null list even if return type of observable is nullable.
+                                        emitter.onNext(devices ?: emptyList())
+                                        emitter.onComplete()
+                                    } catch (ex: Exception) {
+                                        //JSON mapping failed failed.
+                                        Log.e("Network error: JSON", ex.message)
+                                        emitter.onError(ex)
+                                    }
                                 }
-                                emitter.onComplete()
                             }
                         }
                     }

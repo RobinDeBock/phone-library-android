@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import org.hogent.phonelibrary.fragments.*
 import java.lang.Exception
 
 private const val BACK_STACK_ROOT_TAG = "root_fragment"
 
-class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragment.OnDevicesLookupResultsListener {
+class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListener,
+    SearchFragment.OnDevicesLookupResultsListener {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val fragmentToSwitchTo: Fragment =
@@ -39,6 +41,10 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
     override fun onDeviceSelection() {
         //Switch to the detail fragment.
         switchFragment(DeviceDetailFragment.newInstance(), false)
+    }
+
+    override fun showToast(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -151,4 +157,13 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         //Not a root fragment, show the back button.
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
+}
+
+interface ParentActivity {
+    /**
+     * Helper function for showing a toast.
+     *
+     * @param text The text to show.
+     */
+    fun showToast(text: String)
 }
