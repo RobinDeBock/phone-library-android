@@ -12,15 +12,17 @@ import org.hogent.phonelibrary.domain.repository.network.IDeviceApi
 import javax.inject.Inject
 
 class OnlineDeviceViewModel : BaseViewModel() {
+    @Inject
+    lateinit var deviceApi: IDeviceApi
+
+    private var subscription: Disposable? = null
+
     private val searchResult = MutableLiveData<SearchResult>()
     private val isLoading = MutableLiveData<Boolean>()
 
     private var isDataHandled = false
 
-    @Inject
-    lateinit var deviceApi: IDeviceApi
-
-    private var subscription: Disposable? = null
+    var searchValue: String? = null
 
     /**
      * Get the result wrapper object. Contains either the devices or an error.

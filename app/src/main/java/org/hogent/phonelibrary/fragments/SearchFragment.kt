@@ -14,12 +14,12 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.hogent.phonelibrary.ParentActivity
-
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
 import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
 import android.view.animation.CycleInterpolator
 import android.view.animation.TranslateAnimation
+import android.widget.TextView
 
 // todo SearchFragment class documentation
 class SearchFragment : Fragment() {
@@ -40,6 +40,7 @@ class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Load view model.
         onlineDeviceViewModel = activity?.run {
             ViewModelProviders.of(this)[OnlineDeviceViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
@@ -52,11 +53,16 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
+        // Fill input text with value from view model.
+        view.inputText.setText(onlineDeviceViewModel.searchValue , TextView.BufferType.EDITABLE)
+
         // Add listener to input text.
         view.inputText.afterTextChanged {
             // Update enable status of buttons if there's text entered.
-            search_name_button.isEnabled = it.isNotEmpty()
-            search_brand_button.isEnabled = it.isNotEmpty()
+            search_name_button.isEnabled = it.isNotBlank()
+            search_brand_button.isEnabled = it.isNotBlank()
+            // Set the value in the view model.
+            onlineDeviceViewModel.searchValue = view.inputText.text.toString()
         }
 
         // Add listener on button click.
@@ -112,8 +118,11 @@ class SearchFragment : Fragment() {
             .observe(this, Observer {
                 // Enable controls if not loading. (Null counts as false)
                 inputText.isEnabled = (it ?: false) != true
-                search_brand_button.isEnabled = (it ?: false) != true
-                search_name_button.isEnabled = (it ?: false) != true
+                // If input field is empty, no updates are applied to button visibility.
+                if (inputText.text.isNotEmpty()) {
+                    search_brand_button.isEnabled = (it ?: false) != true
+                    search_name_button.isEnabled = (it ?: false) != true
+                }
             })
     }
 
@@ -140,6 +149,7 @@ class SearchFragment : Fragment() {
 
     /**
      * Animation for making a view shake.
+     * Source: https://stackoverflow.com/questions/15401658/vibration-of-edittext-in-android
      *
      * @return
      */

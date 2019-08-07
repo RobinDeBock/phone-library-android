@@ -159,8 +159,12 @@ class DeviceApi(private val BASE_URL: String) : IDeviceApi {
      * @return Whether or not the result is empty.
      */
     private fun checkIfNoResults(jsonResult: String): Boolean {
+        // Searching by name with no results yields an error.
         if (jsonResult.contains("\"message\":\"No Matching Results Found.\"", true)) {
             // No results.
+            return true
+        } else if (jsonResult.contains("[[]]")) {
+            // Searching by brand with no results yields an array in an array.
             return true
         }
         return false
