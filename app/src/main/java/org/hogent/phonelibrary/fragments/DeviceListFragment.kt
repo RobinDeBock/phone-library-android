@@ -1,27 +1,41 @@
 package org.hogent.phonelibrary.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
-import kotlinx.android.synthetic.main.fragment_favorites.view.*
-
 import org.hogent.phonelibrary.R
-import org.hogent.phonelibrary.domain.repository.network.DeviceApi
+import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
 
 //todo fix DeviceListFragment class documentation
-class DeviceListFragment : Fragment() {
+class DeviceListFragment : Fragment(), IOnBackPressListener {
     private var listener: OnDeviceSelectedListener? = null
 
-    private var subscription: Disposable? = null
+    private lateinit var onlineDeviceViewModel: OnlineDeviceViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //Check that parent activity implements required interface.
+        if (context is OnDeviceSelectedListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        onlineDeviceViewModel = activity?.run {
+            ViewModelProviders.of(this)[OnlineDeviceViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,46 +53,21 @@ class DeviceListFragment : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        checkForValidApiKey()
+        onlineDeviceViewModel.getDevices()
+            .observe(this, Observer {
+                if (it != null) {
+                    device_list_detail_button.text = it.count().toString()
+                }
+            })
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //Check that parent activity implements required interface.
-        if (context is OnDeviceSelectedListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
-        }
-    }
 
-    override fun onPause() {
-        super.onPause()
-
-        //Cancel subscription to observable, as updates won't have access to the view anymore.
-        subscription?.dispose()
-    }
-
-    private fun checkForValidApiKey() {
-        /*subscription = DeviceApi.newInstance().fetchDevicesByName("xiaomi")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                device_list_detail_button.text = "fetching..."
-            }
-            .doOnTerminate{
-                device_list_detail_button.text = "done fetching"
-            }
-            .subscribe({ result ->
-                device_list_detail_button.text = result.count().toString()
-                subscription?.dispose()
-            }, { error ->
-                device_list_detail_button.text = error.message
-                subscription?.dispose()
-            })*/
+    override fun onBackPressed() {
+        // Reset the view model when exiting this fragment.
+        onlineDeviceViewModel.resetSearch()
     }
 
     companion object {
