@@ -5,22 +5,19 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.hogent.phonelibrary.ParentActivity
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
 import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
-import android.view.animation.CycleInterpolator
-import android.view.animation.TranslateAnimation
 import android.widget.TextView
+import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.shakeView
+import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.afterTextChanged
+import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.setupClearButtonWithAction
 
 // todo SearchFragment class documentation
 class SearchFragment : Fragment() {
@@ -55,13 +52,12 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
         // Fill input text with value from view model.
-        view.inputText.setText(onlineDeviceViewModel.searchValue , TextView.BufferType.EDITABLE)
+        view.inputText.setText(onlineDeviceViewModel.searchValue, TextView.BufferType.EDITABLE)
 
         // Add listener to input text.
         view.inputText.afterTextChanged {
             // Update enable status of buttons if there's text entered.
-            search_name_button.isEnabled = it.isNotBlank()
-            search_brand_button.isEnabled = it.isNotBlank()
+            updateButtonEnableStatus()
             // Set the value in the view model.
             onlineDeviceViewModel.searchValue = view.inputText.text.toString()
         }
@@ -85,6 +81,9 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Update button enable status.
+        updateButtonEnableStatus()
 
         // Observe the result.
         onlineDeviceViewModel.getResult()
@@ -130,66 +129,16 @@ class SearchFragment : Fragment() {
             })
     }
 
+    private fun updateButtonEnableStatus(){
+        search_name_button.isEnabled = inputText.text.isNotBlank()
+        search_brand_button.isEnabled = inputText.text.isNotBlank()
+    }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
-    /**
-     * Help function for observing the text of an EditText by using a lambda expression.
-     * Source: https://stackoverflow.com/questions/40569436/kotlin-addtextchangelistener-lambda
-     *
-     * @param afterTextChanged
-     */
-    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-        this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(editable: Editable?) {
-                afterTextChanged.invoke(editable.toString())
-            }
-        })
-    }
-
-    /**
-     * Animation for making a view shake.
-     * Source: https://stackoverflow.com/questions/15401658/vibration-of-edittext-in-android
-     *
-     * @return
-     */
-    fun shakeView(): TranslateAnimation {
-        val shake = TranslateAnimation(0f, 10f, 0f, 0f)
-        shake.duration = 500
-        shake.interpolator = CycleInterpolator(7f)
-        return shake
-    }
-
-    /**
-     * Help function to show or hide a clear button on the edit text.
-     * Source: https://stackoverflow.com/questions/6355096/how-to-create-edittext-with-crossx-button-at-end-of-it
-     *
-     */
-    private fun EditText.setupClearButtonWithAction() {
-        addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                val clearIcon = if (editable?.isNotEmpty() == true) R.drawable.ic_clear else 0
-                setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
-        })
-
-        setOnTouchListener(View.OnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                if (event.rawX >= (this.right - this.compoundPaddingRight)) {
-                    this.setText("")
-                    return@OnTouchListener true
-                }
-            }
-            return@OnTouchListener false
-        })
-    }
 
     /**
      * Functionality of an Activity which can handle a collection of fetched devices.
