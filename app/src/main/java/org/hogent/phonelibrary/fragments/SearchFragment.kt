@@ -38,7 +38,6 @@ class SearchFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
     }
 
-    private var didSearch : Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,11 +47,8 @@ class SearchFragment : Fragment() {
 
         //Add listener on button click.
         view.search_results_button.setOnClickListener {
-            didSearch = true
             onlineDeviceViewModel.searchDevicesByName("xiaomi")
         }
-
-        if (didSearch) onlineDeviceViewModel.resetSearch()
 
         //Return the view.
         return view
@@ -61,23 +57,23 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onlineDeviceViewModel.getDevices()
+        // Observe the result.
+        onlineDeviceViewModel.getResult()
             .observe(this, Observer {
-                if (it != null) {
+                // Check that the result has not been handled yet.
+                // Otherwise it would instantly try to switch fragments after recreation (after going back).
+                if (it != null && !onlineDeviceViewModel.isResultHandled()) {
+                    // Result is handled.
                     listener!!.onDeviceslookupResultsFound()
+                    // Switch fragment.
+                    onlineDeviceViewModel.resultHandled()
                 }
             })
 
+        // Observe the loading status.
         onlineDeviceViewModel.isLoading()
             .observe(this, Observer {
                 search_results_button.text = if (it != false) "loading..." else "done..."
-            })
-
-        onlineDeviceViewModel.getException()
-            .observe(this, Observer {
-                if (it != null) {
-                    search_results_button.text = it.message
-                }
             })
     }
 

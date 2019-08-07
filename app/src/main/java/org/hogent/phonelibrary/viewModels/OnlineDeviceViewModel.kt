@@ -11,19 +11,22 @@ import org.hogent.phonelibrary.domain.repository.network.IDeviceApi
 import javax.inject.Inject
 
 class OnlineDeviceViewModel : BaseViewModel() {
-    private val devices = MutableLiveData<Collection<Device>>()
+    private val searchResult = MutableLiveData<SearchResult>()
     private val isLoading = MutableLiveData<Boolean>()
-    private val exception = MutableLiveData<Exception>()
+
+    private var isDataHandled = false
 
     @Inject
     lateinit var deviceApi: IDeviceApi
 
     private var subscription: Disposable? = null
 
+    /**
+     * Search devices by name.
+     *
+     * @param deviceName The name of the device.
+     */
     fun searchDevicesByName(deviceName: String) {
-        //Reset exception observables.
-        exception.value = null
-
         subscription = deviceApi.fetchDevicesByName(deviceName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -34,31 +37,52 @@ class OnlineDeviceViewModel : BaseViewModel() {
                 isLoading.postValue(false)
             }
             .subscribe({ result ->
-                devices.postValue(result)
+                searchResult.postValue(SearchResult(result, null))
+                // The data is new and therefore not yet handled.
+                isDataHandled = false
+
                 subscription?.dispose()
             }, { error ->
-                exception.postValue(error as Exception?)
+                searchResult.postValue(SearchResult(null, Exception(error)))
+                // The data is new and therefore not yet handled.
+                isDataHandled = false
+
                 subscription?.dispose()
             })
     }
 
-    fun getException(): LiveData<Exception> {
-        return exception
+    /**
+     * Get the result wrapper object. Contains either the devices or an error.
+     *
+     * @return The result wrapper object.
+     */
+    fun getResult(): LiveData<SearchResult> {
+        return searchResult
     }
 
-    fun getDevices(): LiveData<Collection<Device>> {
-        return devices
-    }
-
+    /**
+     * Check whether or not the data is still loading.
+     *
+     * @return Whether or not the data is still loading.
+     */
     fun isLoading(): LiveData<Boolean> {
         return isLoading
     }
 
-    fun resetSearch() {
-        //Reset values, using .value because on the main thread.
-        exception.value = null
-        devices.value = null
-        isLoading.value = false
+    /**
+     * Check if the current result has already been handled.
+     *
+     */
+    fun isResultHandled(): Boolean {
+        return isDataHandled
+    }
+
+    /**
+     * Used to indicate the current data result has already been handled.
+     *
+     */
+    fun resultHandled() {
+        isDataHandled = true
     }
 
     /**
@@ -71,3 +95,11 @@ class OnlineDeviceViewModel : BaseViewModel() {
         subscription?.dispose()
     }
 }
+
+/**
+ * The result wrapper class. Contains either the devices or the error.
+ *
+ * @property devices The devices.
+ * @property error The error.
+ */
+data class SearchResult(var devices: Collection<Device>? = null, var error: Exception? = null)

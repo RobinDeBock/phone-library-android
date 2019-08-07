@@ -14,7 +14,7 @@ import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
 
 //todo fix DeviceListFragment class documentation
-class DeviceListFragment : Fragment(), IOnBackPressListener {
+class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
     private lateinit var onlineDeviceViewModel: OnlineDeviceViewModel
@@ -56,18 +56,12 @@ class DeviceListFragment : Fragment(), IOnBackPressListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onlineDeviceViewModel.getDevices()
+        onlineDeviceViewModel.getResult()
             .observe(this, Observer {
                 if (it != null) {
-                    device_list_detail_button.text = it.count().toString()
+                    device_list_detail_button.text = it.devices!!.count().toString()
                 }
             })
-    }
-
-
-    override fun onBackPressed() {
-        // Reset the view model when exiting this fragment.
-        onlineDeviceViewModel.resetSearch()
     }
 
     companion object {

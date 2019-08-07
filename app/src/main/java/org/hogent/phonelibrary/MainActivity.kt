@@ -57,9 +57,6 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
     }
 
     override fun onBackPressed() {
-        // Get amount of back stack entries.
-        val amount = supportFragmentManager.backStackEntryCount
-
         super.onBackPressed()
         // If the back stack has no fragments, close the activity.
         if (supportFragmentManager.backStackEntryCount < 1) {
