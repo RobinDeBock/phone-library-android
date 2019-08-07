@@ -45,9 +45,14 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
-        //Add listener on button click.
-        view.search_results_button.setOnClickListener {
+        // Add listener on button click.
+        // Name
+        view.search_name_button.setOnClickListener {
             onlineDeviceViewModel.searchDevicesByName("xiaomi")
+        }
+        // Brand
+        view.search_brand_button.setOnClickListener {
+            onlineDeviceViewModel.searchDevicesByBrand("samsung")
         }
 
         //Return the view.
@@ -73,7 +78,7 @@ class SearchFragment : Fragment() {
         // Observe the loading status.
         onlineDeviceViewModel.isLoading()
             .observe(this, Observer {
-                search_results_button.text = if (it != false) "loading..." else "done..."
+                search_brand_button.text = if (it != false) "loading..." else "done..."
             })
     }
 

@@ -12,6 +12,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_detail_fragment">Hello detail fragment</string>
     <string name="open_detail">Open detail</string>
-    <string name="show_results">Show results</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="search_by_brand">Search by brand</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
