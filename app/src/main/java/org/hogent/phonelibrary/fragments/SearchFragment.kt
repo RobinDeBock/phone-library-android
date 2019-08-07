@@ -18,6 +18,8 @@ import org.hogent.phonelibrary.ParentActivity
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
 import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
+import android.view.animation.CycleInterpolator
+import android.view.animation.TranslateAnimation
 
 // todo SearchFragment class documentation
 class SearchFragment : Fragment() {
@@ -77,8 +79,8 @@ class SearchFragment : Fragment() {
         // Observe the result.
         onlineDeviceViewModel.getResult()
             .observe(this, Observer {
-                // Check if there's an error.
                 if (it?.error != null) {
+                    // ERROR FOUND.
                     // Check if error is from invalid API token.
                     if (it.error?.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
                         // If so, show token.
@@ -90,11 +92,18 @@ class SearchFragment : Fragment() {
                 }
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back).
-                else if (it?.devices != null && !onlineDeviceViewModel.isResultHandled()) {
-                    // Switch fragment.
+                else if (!onlineDeviceViewModel.isResultHandled()) {
+                    // Result gets handled.
                     onlineDeviceViewModel.resultHandled()
-                    // Result is handled.
-                    listener!!.onDeviceslookupResultsFound()
+                    // Check that the result is not empty or null.
+                    if (it?.devices?.isEmpty() == false) {
+                        // RESULTS FOUND.
+                        // Switch fragment.
+                        listener!!.onDeviceslookupResultsFound()
+                    } else {
+                        // NO RESULTS FOUND.
+                        inputText.startAnimation(shakeView())
+                    }
                 }
             })
 
@@ -121,16 +130,24 @@ class SearchFragment : Fragment() {
      */
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(editable: Editable?) {
                 afterTextChanged.invoke(editable.toString())
             }
         })
+    }
+
+    /**
+     * Animation for making a view shake.
+     *
+     * @return
+     */
+    fun shakeView(): TranslateAnimation {
+        val shake = TranslateAnimation(0f, 10f, 0f, 0f)
+        shake.duration = 500
+        shake.interpolator = CycleInterpolator(7f)
+        return shake
     }
 
     /**

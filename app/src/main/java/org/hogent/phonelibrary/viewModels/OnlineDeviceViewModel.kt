@@ -2,6 +2,7 @@ package org.hogent.phonelibrary.viewModels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -68,6 +69,7 @@ class OnlineDeviceViewModel : BaseViewModel() {
                 isLoading.postValue(true)
             }
             .doOnTerminate {
+                // Doesn't work.
                 isLoading.postValue(false)
             }
             .subscribe({ result ->
@@ -87,9 +89,11 @@ class OnlineDeviceViewModel : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
+                Log.i("OnlineDeviceViewModel", "On subscribe called.")
                 isLoading.postValue(true)
             }
             .doOnTerminate {
+                Log.i("OnlineDeviceViewModel", "On terminate called.")
                 isLoading.postValue(false)
             }
             .subscribe({ result ->
@@ -103,6 +107,8 @@ class OnlineDeviceViewModel : BaseViewModel() {
         searchResult.postValue(SearchResult(result, null))
         // The data is new and therefore not yet handled.
         isDataHandled = false
+        // Reset loading status.
+        isLoading.value = false
 
         subscription?.dispose()
     }
