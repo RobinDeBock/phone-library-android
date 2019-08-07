@@ -22,36 +22,6 @@ class OnlineDeviceViewModel : BaseViewModel() {
     private var subscription: Disposable? = null
 
     /**
-     * Search devices by name.
-     *
-     * @param deviceName The name of the device.
-     */
-    fun searchDevicesByName(deviceName: String) {
-        subscription = deviceApi.fetchDevicesByName(deviceName)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                isLoading.postValue(true)
-            }
-            .doOnTerminate {
-                isLoading.postValue(false)
-            }
-            .subscribe({ result ->
-                searchResult.postValue(SearchResult(result, null))
-                // The data is new and therefore not yet handled.
-                isDataHandled = false
-
-                subscription?.dispose()
-            }, { error ->
-                searchResult.postValue(SearchResult(null, Exception(error)))
-                // The data is new and therefore not yet handled.
-                isDataHandled = false
-
-                subscription?.dispose()
-            })
-    }
-
-    /**
      * Get the result wrapper object. Contains either the devices or an error.
      *
      * @return The result wrapper object.
@@ -83,6 +53,66 @@ class OnlineDeviceViewModel : BaseViewModel() {
      */
     fun resultHandled() {
         isDataHandled = true
+    }
+
+    /**
+     * Search devices by name.
+     *
+     * @param deviceName The name of the device.
+     */
+    fun searchDevicesByName(deviceName: String) {
+        subscription = deviceApi.fetchDevicesByName(deviceName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                isLoading.postValue(true)
+            }
+            .doOnTerminate {
+                isLoading.postValue(false)
+            }
+            .subscribe({ result ->
+                handleResult(result)
+            }, { error ->
+                handleError(error)
+            })
+    }
+
+    /**
+     * Search devices by brand.
+     *
+     * @param brandName The name of the brand.
+     */
+    fun searchDevicesByBrand(brandName: String) {
+        subscription = deviceApi.fetchDevicesByBrand(brandName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                isLoading.postValue(true)
+            }
+            .doOnTerminate {
+                isLoading.postValue(false)
+            }
+            .subscribe({ result ->
+                handleResult(result)
+            }, { error ->
+                handleError(error)
+            })
+    }
+
+    private fun handleResult(result: Collection<Device>) {
+        searchResult.postValue(SearchResult(result, null))
+        // The data is new and therefore not yet handled.
+        isDataHandled = false
+
+        subscription?.dispose()
+    }
+
+    private fun handleError(error: Throwable) {
+        searchResult.postValue(SearchResult(null, Exception(error)))
+        // The data is new and therefore not yet handled.
+        isDataHandled = false
+
+        subscription?.dispose()
     }
 
     /**
