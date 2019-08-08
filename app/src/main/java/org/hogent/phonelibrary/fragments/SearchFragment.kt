@@ -73,11 +73,11 @@ class SearchFragment : Fragment() {
         // Add listener on button click.
         // Name
         view.search_name_button.setOnClickListener {
-            searchDeviceViewModel.searchDevices(view.inputText.text.toString(), SearchType.ByDEVICE)
+            searchDeviceViewModel.searchDevices(SearchType.ByDEVICE)
         }
         // Brand
         view.search_brand_button.setOnClickListener {
-            searchDeviceViewModel.searchDevices(view.inputText.text.toString(), SearchType.ByBRAND)
+            searchDeviceViewModel.searchDevices(SearchType.ByBRAND)
         }
 
         //Return the view.

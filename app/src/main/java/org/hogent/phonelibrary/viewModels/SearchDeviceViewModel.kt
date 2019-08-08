@@ -58,23 +58,22 @@ class SearchDeviceViewModel : BaseViewModel() {
         isDataHandled = true
     }
 
-    private lateinit var usedSearchTerm: String
     private lateinit var usedSearchType: SearchType
     /**
      * Search the devices by brand name or device name.
      *
-     * @param searchTerm The value.
      * @param searchType Search by brand or by device name.
      */
-    fun searchDevices(searchTerm: String, searchType: SearchType) {
+    fun searchDevices(searchType: SearchType) {
         // Store the used values.
-        this.usedSearchTerm = searchTerm
         this.usedSearchType = searchType
+        // Check that the value is not empty.
+        if (searchValue == null) return
         // Execute the query.
         if (searchType == SearchType.ByBRAND) {
-            searchDevicesByBrand(searchTerm)
+            searchDevicesByBrand(searchValue!!)
         } else {
-            searchDevicesByName(searchTerm)
+            searchDevicesByName(searchValue!!)
         }
     }
 
@@ -126,7 +125,7 @@ class SearchDeviceViewModel : BaseViewModel() {
     }
 
     private fun handleResult(result: Collection<Device>) {
-        searchResult.postValue(SuccessResult(result, usedSearchTerm, usedSearchType))
+        searchResult.postValue(SuccessResult(result, searchValue!!, usedSearchType))
         // The data is new and therefore not yet handled.
         isDataHandled = false
         // Reset loading status.
@@ -136,7 +135,7 @@ class SearchDeviceViewModel : BaseViewModel() {
     }
 
     private fun handleError(error: Throwable) {
-        searchResult.postValue(ErrorResult(Exception(error), usedSearchTerm, usedSearchType))
+        searchResult.postValue(ErrorResult(Exception(error), searchValue!!, usedSearchType))
         // The data is new and therefore not yet handled.
         isDataHandled = false
         // Reset loading status.
