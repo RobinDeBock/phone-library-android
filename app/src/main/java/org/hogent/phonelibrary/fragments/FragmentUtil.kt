@@ -61,7 +61,7 @@ class FragmentUtil {
                     val clearIcon = if ((inputView as EditText).text.isNotBlank()) R.drawable.ic_clear else 0
                     setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
 
-                    if (event.rawX >= (this.right - this.compoundPaddingRight)) {
+                    if (event.x >= (this.right - this.compoundPaddingRight)) {
                         this.setText("")
                         return@OnTouchListener true
                     }
