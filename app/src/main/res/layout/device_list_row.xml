@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:paddingStart="20dp"
+                                             android:paddingEnd="20dp"
+                                             android:paddingTop="8dp"
+                                             android:paddingBottom="8dp"
+>
+
+    <TextView
+            android:text="@string/name_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deviceNameTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textSize="24sp"
+            android:textStyle="bold"/>
+    <TextView
+            android:text="@string/brand_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/brandNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/deviceNameTextView"
+            app:layout_constraintStart_toStartOf="@+id/deviceNameTextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textSize="20sp"/>
+
+</android.support.constraint.ConstraintLayout>
