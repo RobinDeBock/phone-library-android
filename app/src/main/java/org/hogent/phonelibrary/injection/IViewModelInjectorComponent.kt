@@ -5,8 +5,8 @@ import org.hogent.phonelibrary.viewModels.SearchDeviceViewModel
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DeviceApiModule::class])
-interface ViewModelInjectorComponent {
+@Component(modules = [DeviceRepositoryModule::class])
+interface IViewModelInjectorComponent {
     //Inject into the specified class.
-    fun inject(metarViewModel: SearchDeviceViewModel)
+    fun inject(searchDeviceViewModel: SearchDeviceViewModel)
 }

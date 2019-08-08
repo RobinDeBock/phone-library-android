@@ -7,13 +7,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.hogent.phonelibrary.domain.models.Device
+import org.hogent.phonelibrary.domain.repository.DeviceRepository
 import org.hogent.phonelibrary.domain.repository.network.IDeviceApi
 
 import javax.inject.Inject
 
 class SearchDeviceViewModel : BaseViewModel() {
     @Inject
-    lateinit var deviceApi: IDeviceApi
+    lateinit var deviceApi: DeviceRepository
 
     private var subscription: Disposable? = null
 
