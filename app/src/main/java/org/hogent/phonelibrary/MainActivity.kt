@@ -7,11 +7,15 @@ import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import org.hogent.phonelibrary.fragments.*
+import org.hogent.phonelibrary.viewModels.SuccessResult
+import java.lang.Exception
 
 private const val BACK_STACK_ROOT_TAG = "root_fragment"
 
-class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragment.OnDevicesLookupResultsListener {
+class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListener,
+    SearchFragment.OnDevicesLookupResultsListener {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val fragmentToSwitchTo: Fragment =
@@ -30,14 +34,18 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         return@OnNavigationItemSelectedListener true
     }
 
-    override fun onDeviceslookupResultsFound() {
+    override fun onDevicesLookupResultsFound(successResult : SuccessResult) {
         //Load the favorites fragment.
-        switchFragment(DeviceListFragment.newInstance(), false)
+        switchFragment(DeviceListFragment.newInstance(successResult), false)
     }
 
     override fun onDeviceSelection() {
         //Switch to the detail fragment.
         switchFragment(DeviceDetailFragment.newInstance(), false)
+    }
+
+    override fun showToast(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +56,9 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
+        // Update the visibility of the back button in the action bar.
+        updateActionBarBackButton()
+
         //Check if bundle is empty, meaning this is the first time the activity was launched.
         if (savedInstanceState == null) {
             //Set the org.hogent.phonelibrary.fragments.SearchFragment as the default fragment on startup.
@@ -57,13 +68,13 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //If the back stack has no fragments, close the activity.
+        // If the back stack has no fragments, close the activity.
         if (supportFragmentManager.backStackEntryCount < 1) {
             Log.i(
                 "Empty back stack",
                 "Closing back stack due to pressing back while the back stack is empty."
             )
-            //Close the activity.
+            // Close the activity.
             this.finish()
         }
         updateActionBarBackButton()
@@ -72,14 +83,14 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                //Call parent function to go back.
+                // Call parent function to go back.
                 super.onBackPressed()
-                //Back button in action bar was pressed.
+                // Back button in action bar was pressed.
                 updateActionBarBackButton()
                 return true
             }
         }
-        //Else call parent.
+        // Else call parent.
         return super.onOptionsItemSelected(item)
     }
 
@@ -97,31 +108,37 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
             "Switching to fragment ${fragment::class.simpleName}. IsNavigationalRoot: $isNavigationalRoot"
         )
 
-        //Check whether or not it's a root fragment.
-        if (isNavigationalRoot) {
-            //It is a root fragment.
+        try {
+            // Check whether or not it's a root fragment.
+            if (isNavigationalRoot) {
+                // It is a root fragment.
 
-            //Completely Clear back stack, including the root fragment.
-            supportFragmentManager.popBackStack(BACK_STACK_ROOT_TAG, POP_BACK_STACK_INCLUSIVE)
+                // Completely Clear back stack, including the root fragment.
+                supportFragmentManager.popBackStack(BACK_STACK_ROOT_TAG, POP_BACK_STACK_INCLUSIVE)
 
-            //Show fragment.
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(BACK_STACK_ROOT_TAG)
-                .commit()
-        } else {
-            //It's not a root fragment.
-            //Show back option and add fragment to fragment back stack.
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+                // Show fragment.
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(BACK_STACK_ROOT_TAG)
+                    .commit()
+            } else {
+                // It's not a root fragment.
+
+                // Add fragment to fragment back stack.
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+            // Force execution of transactions for back stack on main thread.
+            // Necessary to calculate the amount of items of the back stack,
+            // adjusting the back button in the activity's action bar.
+            supportFragmentManager.executePendingTransactions()
+        } catch (ex: Exception) {
+            Log.e("Switch fragment", ex.message)
         }
-
-        //Force execution of transactions for back stack on main thread.
-        supportFragmentManager.executePendingTransactions()
         updateActionBarBackButton()
     }
 
@@ -144,4 +161,13 @@ class MainActivity : AppCompatActivity(), OnDeviceSelectedListener, SearchFragme
         //Not a root fragment, show the back button.
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
+}
+
+interface ParentActivity {
+    /**
+     * Helper function for showing a toast.
+     *
+     * @param text The text to show.
+     */
+    fun showToast(text: String)
 }

@@ -1,27 +1,42 @@
 package org.hogent.phonelibrary.fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
-import kotlinx.android.synthetic.main.fragment_favorites.view.*
-
 import org.hogent.phonelibrary.R
-import org.hogent.phonelibrary.domain.repository.network.DeviceApi
+import org.hogent.phonelibrary.viewModels.SuccessResult
+
+private const val ARG_SUCCESS_RESULT = "successResult"
 
 //todo fix DeviceListFragment class documentation
 class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
-    private var subscription: Disposable? = null
+    private lateinit var searchResult: SuccessResult
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //Check that parent activity implements required interface.
+        if (context is OnDeviceSelectedListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Fetch the search result.
+        arguments?.let {
+            searchResult = it.getSerializable(ARG_SUCCESS_RESULT) as SuccessResult
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,54 +54,26 @@ class DeviceListFragment : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        checkForValidApiKey()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //Check that parent activity implements required interface.
-        if (context is OnDeviceSelectedListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        //Cancel subscription to observable, as updates won't have access to the view anymore.
-        subscription?.dispose()
-    }
-
-    private fun checkForValidApiKey() {
-        subscription = DeviceApi.newInstance().fetchDevicesByName("xiaomi")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                device_list_detail_button.text = "fetching..."
-            }
-            .doOnTerminate{
-                device_list_detail_button.text = "done fetching"
-            }
-            .subscribe({ result ->
-                device_list_detail_button.text = result.count().toString()
-                subscription?.dispose()
-            }, { error ->
-                device_list_detail_button.text = error.message
-                subscription?.dispose()
-            })
+        // Show devices.
+        device_list_detail_button.text = searchResult.devices.count().toString()
     }
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment.
+         *
+         * @param successResult The successful search results.
          */
         @JvmStatic
-        fun newInstance() = DeviceListFragment()
+        fun newInstance(successResult: SuccessResult) =
+            DeviceListFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_SUCCESS_RESULT, successResult)
+                }
+            }
     }
 }

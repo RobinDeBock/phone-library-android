@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'org.jetbrains.dokka-android'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -26,6 +28,10 @@ android {
     dokka {
         outputFormat = 'html'
         outputDirectory = "doc"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -49,7 +55,24 @@ dependencies {
     implementation("com.squareup.moshi:moshi:$mochi_version")
 
     //RxAndroid: observables
-    implementation "io.reactivex.rxjava2:rxandroid:${rxandroid_version}"
-    implementation "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    //Dependency injection.
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+
+    // Adds the annotation processor dependency to the annotation processor classpath.
+    // Android Studio by default will not allow you to navigate to generated Dagger 2
+    // code as legitimate classes because they are not normally added to the source path.
+    // Adding the annotationProcessor plugin will add these files into the IDE classpath
+    // and enable you to have more visibility .
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    //Layout
+    implementation "com.android.support:support-core-utils:$supportLibrary_version"
 
 }
