@@ -45,8 +45,11 @@ class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Load view model.
-        searchDeviceViewModel = ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
+        // Load view model. Linked to the activity so when a new instance of this fragment is made.
+        // The input field information isn't lost.
+        searchDeviceViewModel = activity?.run {
+            ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
+        } ?: throw Exception("Invalid Activity.")
     }
 
     override fun onCreateView(
@@ -96,14 +99,17 @@ class SearchFragment : Fragment() {
         // Observe the result.
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
-                if (it is ErrorResult) {
-                    handleErrorResult(it)
-                }
                 // Check that the result has not been handled yet.
-                // Otherwise it would instantly try to switch fragments after recreation (after going back).
-                else if (!searchDeviceViewModel.isResultHandled()) {
-                    handleSuccessResult(it as SuccessResult)
+                // Otherwise it would instantly try to switch fragments after recreation (after going back) or show the error message.
+                if(!searchDeviceViewModel.isResultHandled()){
+                    if (it is ErrorResult) {
+                        handleErrorResult(it)
+                    }
+                    else {
+                        handleSuccessResult(it as SuccessResult)
+                    }
                 }
+
             })
 
         // Observe the loading status.
@@ -149,6 +155,13 @@ class SearchFragment : Fragment() {
     private fun updateButtonEnableStatus() {
         search_name_button.isEnabled = inputText.text.isNotBlank()
         search_brand_button.isEnabled = inputText.text.isNotBlank()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Remove the observers on the result.
+        searchDeviceViewModel.getResult().removeObservers(this)
     }
 
     override fun onDetach() {

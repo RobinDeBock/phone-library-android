@@ -48,7 +48,7 @@ class FragmentUtil {
         fun EditText.setupClearButtonWithAction() {
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(editable: Editable?) {
-                    val clearIcon = if (editable?.isNotEmpty() == true) R.drawable.ic_clear else 0
+                    val clearIcon = if (editable?.isNotBlank() == true) R.drawable.ic_clear else 0
                     setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
                 }
 
@@ -56,9 +56,12 @@ class FragmentUtil {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
             })
 
-            setOnTouchListener(View.OnTouchListener { _, event ->
+            setOnTouchListener(View.OnTouchListener { inputView, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
-                    if (event.rawX >= (this.right - this.compoundPaddingRight)) {
+                    val clearIcon = if ((inputView as EditText).text.isNotBlank()) R.drawable.ic_clear else 0
+                    setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
+
+                    if (event.x >= (this.right - this.compoundPaddingRight)) {
                         this.setText("")
                         return@OnTouchListener true
                     }
