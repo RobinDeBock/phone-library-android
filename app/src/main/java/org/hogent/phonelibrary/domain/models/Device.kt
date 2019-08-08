@@ -1,10 +1,12 @@
 package org.hogent.phonelibrary.domain.models
 
+import java.io.Serializable
+
 /**
  * A device. All values are optional.
  *
  */
-class Device {
+class Device : Serializable{
     var name:String?=null
     var brand:String?=null
     //Main specs

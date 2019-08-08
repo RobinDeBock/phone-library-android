@@ -2,11 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
+                                             android:layout_height="wrap_content"
                                              android:paddingStart="20dp"
                                              android:paddingEnd="20dp"
                                              android:paddingTop="8dp"
                                              android:paddingBottom="8dp"
+                                             android:id="@+id/device_row"
 >
 
     <TextView
@@ -22,7 +23,7 @@
     <TextView
             android:text="@string/brand_placeholder"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/brandNameTextView"
+            android:layout_height="wrap_content" android:id="@+id/deviceBrandTextView"
             app:layout_constraintTop_toBottomOf="@+id/deviceNameTextView"
             app:layout_constraintStart_toStartOf="@+id/deviceNameTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textSize="20sp"/>

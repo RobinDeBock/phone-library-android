@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
 import org.hogent.phonelibrary.fragments.*

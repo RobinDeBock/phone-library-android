@@ -3,12 +3,15 @@ package org.hogent.phonelibrary.fragments
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
+import org.hogent.phonelibrary.recyclerViewAdapters.DevicesAdapter
 import org.hogent.phonelibrary.viewModels.SuccessResult
 
 private const val ARG_SUCCESS_RESULT = "successResult"
@@ -45,20 +48,11 @@ class DeviceListFragment : Fragment() {
         // Inflate the layout for this fragment.
         val view = inflater.inflate(R.layout.fragment_device_list, container, false)
 
-        //Add listener on button click.
-        view.device_list_detail_button.setOnClickListener {
-            listener!!.onDeviceSelection()
-        }
+        view.devicesRecyclerView.adapter = DevicesAdapter(searchResult.devices.toList(), listener!!)
+        view.devicesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
         //Return the view.
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Show devices.
-        device_list_detail_button.text = searchResult.devices.count().toString()
     }
 
     companion object {
