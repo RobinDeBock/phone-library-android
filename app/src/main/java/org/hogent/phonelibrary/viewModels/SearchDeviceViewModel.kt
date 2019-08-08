@@ -130,8 +130,6 @@ class SearchDeviceViewModel : BaseViewModel() {
         isDataHandled = false
         // Reset loading status.
         isLoading.value = false
-
-        subscription?.dispose()
     }
 
     private fun handleError(error: Throwable) {
@@ -140,8 +138,6 @@ class SearchDeviceViewModel : BaseViewModel() {
         isDataHandled = false
         // Reset loading status.
         isLoading.value = false
-
-        subscription?.dispose()
     }
 
     /**

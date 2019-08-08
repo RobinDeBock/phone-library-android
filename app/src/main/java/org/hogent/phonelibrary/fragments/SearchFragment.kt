@@ -97,31 +97,12 @@ class SearchFragment : Fragment() {
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
                 if (it is ErrorResult) {
-                    // ERROR FOUND.
-                    // Check if error is from invalid API token.
-                    if (it.error.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
-                        // If so, show token.
-                        listener?.showToast("Invalid API key.") //todo set as string resource
-                    } else {
-                        // If not, show other token message.
-                        listener?.showToast("Could not load devices. Please try again.") //todo set as string resource
-                    }
+                    handleErrorResult(it)
                 }
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back).
                 else if (!searchDeviceViewModel.isResultHandled()) {
-                    // Check that the result is not empty.
-                    if (!(it as SuccessResult).devices.isEmpty()) {
-                        // RESULTS FOUND.
-                        // Switch fragment.
-                        listener?.onDevicesLookupResultsFound(it)
-                    } else {
-                        // NO RESULTS FOUND.
-                        // Shake input field
-                        inputText.startAnimation(shakeView())
-                        // Show toast.
-                        listener?.showToast("No devices found.") //todo set as string resource
-                    }
+                    handleSuccessResult(it as SuccessResult)
                 }
             })
 
@@ -136,6 +117,33 @@ class SearchFragment : Fragment() {
                     search_name_button.isEnabled = (it ?: false) != true
                 }
             })
+    }
+
+    private fun handleErrorResult(errorResult: ErrorResult) {
+        // ERROR FOUND.
+        // Check if error is from invalid API token.
+        if (errorResult.error.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
+            // If so, show token.
+            listener?.showToast("Invalid API key.") //todo set as string resource
+        } else {
+            // If not, show other token message.
+            listener?.showToast("Could not load devices. Please try again.") //todo set as string resource
+        }
+    }
+
+    private fun handleSuccessResult(successResult: SuccessResult) {
+        // Check that the result is not empty.
+        if (!successResult.devices.isEmpty()) {
+            // RESULTS FOUND.
+            // Switch fragment.
+            listener?.onDevicesLookupResultsFound(successResult)
+        } else {
+            // NO RESULTS FOUND.
+            // Shake input field
+            inputText.startAnimation(shakeView())
+            // Show toast.
+            listener?.showToast("No devices found.") //todo set as string resource
+        }
     }
 
     private fun updateButtonEnableStatus() {
@@ -154,7 +162,7 @@ class SearchFragment : Fragment() {
      *
      */
     interface OnDevicesLookupResultsListener : ParentActivity {
-        fun onDevicesLookupResultsFound(successResult:SuccessResult)
+        fun onDevicesLookupResultsFound(successResult: SuccessResult)
     }
 
     companion object {
