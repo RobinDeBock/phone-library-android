@@ -151,6 +151,13 @@ class SearchFragment : Fragment() {
         search_brand_button.isEnabled = inputText.text.isNotBlank()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Remove the observers on the result.
+        searchDeviceViewModel.getResult().removeObservers(this)
+    }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
