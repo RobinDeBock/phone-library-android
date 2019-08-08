@@ -21,7 +21,7 @@ abstract class BaseViewModel: ViewModel(){
      */
     private fun inject () {
         when ( this ) {
-            is OnlineDeviceViewModel -> component.inject (
+            is SearchDeviceViewModel -> component.inject (
                 this )
         }
     }

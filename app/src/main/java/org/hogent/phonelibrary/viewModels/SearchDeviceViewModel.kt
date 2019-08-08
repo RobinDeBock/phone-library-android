@@ -11,7 +11,7 @@ import org.hogent.phonelibrary.domain.repository.network.IDeviceApi
 
 import javax.inject.Inject
 
-class OnlineDeviceViewModel : BaseViewModel() {
+class SearchDeviceViewModel : BaseViewModel() {
     @Inject
     lateinit var deviceApi: IDeviceApi
 
@@ -58,12 +58,32 @@ class OnlineDeviceViewModel : BaseViewModel() {
         isDataHandled = true
     }
 
+    private lateinit var usedSearchTerm: String
+    private lateinit var usedSearchType: SearchType
+    /**
+     * Search the devices by brand name or device name.
+     *
+     * @param searchTerm The value.
+     * @param searchType Search by brand or by device name.
+     */
+    fun searchDevices(searchTerm: String, searchType: SearchType) {
+        // Store the used values.
+        this.usedSearchTerm = searchTerm
+        this.usedSearchType = searchType
+        // Execute the query.
+        if (searchType == SearchType.ByBRAND) {
+            searchDevicesByBrand(searchTerm)
+        } else {
+            searchDevicesByName(searchTerm)
+        }
+    }
+
     /**
      * Search devices by name.
      *
      * @param deviceName The name of the device.
      */
-    fun searchDevicesByName(deviceName: String) {
+    private fun searchDevicesByName(deviceName: String) {
         subscription = deviceApi.fetchDevicesByName(deviceName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -86,16 +106,16 @@ class OnlineDeviceViewModel : BaseViewModel() {
      *
      * @param brandName The name of the brand.
      */
-    fun searchDevicesByBrand(brandName: String) {
+    private fun searchDevicesByBrand(brandName: String) {
         subscription = deviceApi.fetchDevicesByBrand(brandName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                Log.i("OnlineDeviceViewModel", "On subscribe called.")
+                Log.i("SearchDeviceViewModel", "On subscribe called.")
                 isLoading.postValue(true)
             }
             .doOnTerminate {
-                Log.i("OnlineDeviceViewModel", "On terminate called.")
+                Log.i("SearchDeviceViewModel", "On terminate called.")
                 isLoading.postValue(false)
             }
             .subscribe({ result ->
@@ -106,7 +126,7 @@ class OnlineDeviceViewModel : BaseViewModel() {
     }
 
     private fun handleResult(result: Collection<Device>) {
-        searchResult.postValue(SearchResult(result, null))
+        searchResult.postValue(SuccessResult(result, usedSearchTerm, usedSearchType))
         // The data is new and therefore not yet handled.
         isDataHandled = false
         // Reset loading status.
@@ -116,7 +136,7 @@ class OnlineDeviceViewModel : BaseViewModel() {
     }
 
     private fun handleError(error: Throwable) {
-        searchResult.postValue(SearchResult(null, Exception(error)))
+        searchResult.postValue(ErrorResult(Exception(error), usedSearchTerm, usedSearchType))
         // The data is new and therefore not yet handled.
         isDataHandled = false
         // Reset loading status.
@@ -135,11 +155,3 @@ class OnlineDeviceViewModel : BaseViewModel() {
         subscription?.dispose()
     }
 }
-
-/**
- * The result wrapper class. Contains either the devices or the error.
- *
- * @property devices The devices.
- * @property error The error.
- */
-data class SearchResult(var devices: Collection<Device>? = null, var error: Exception? = null)

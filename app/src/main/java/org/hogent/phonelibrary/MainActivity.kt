@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import org.hogent.phonelibrary.fragments.*
+import org.hogent.phonelibrary.viewModels.SuccessResult
 import java.lang.Exception
 
 private const val BACK_STACK_ROOT_TAG = "root_fragment"
@@ -33,9 +34,9 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         return@OnNavigationItemSelectedListener true
     }
 
-    override fun onDeviceslookupResultsFound() {
+    override fun onDevicesLookupResultsFound(successResult : SuccessResult) {
         //Load the favorites fragment.
-        switchFragment(DeviceListFragment.newInstance(), false)
+        switchFragment(DeviceListFragment.newInstance(successResult), false)
     }
 
     override fun onDeviceSelection() {

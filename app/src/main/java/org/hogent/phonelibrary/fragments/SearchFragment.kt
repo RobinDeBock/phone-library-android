@@ -13,17 +13,23 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.hogent.phonelibrary.ParentActivity
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.repository.network.exceptions.InvalidApiTokenException
-import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
+import org.hogent.phonelibrary.viewModels.SearchDeviceViewModel
 import android.widget.TextView
 import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.shakeView
 import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.afterTextChanged
 import org.hogent.phonelibrary.fragments.FragmentUtil.Companion.setupClearButtonWithAction
+import org.hogent.phonelibrary.viewModels.ErrorResult
+import org.hogent.phonelibrary.viewModels.SearchType
+import org.hogent.phonelibrary.viewModels.SuccessResult
 
-// todo SearchFragment class documentation
+/**
+ * Fragment to search devices.
+ *
+ */
 class SearchFragment : Fragment() {
     private var listener: OnDevicesLookupResultsListener? = null
 
-    private lateinit var onlineDeviceViewModel: OnlineDeviceViewModel
+    private lateinit var searchDeviceViewModel: SearchDeviceViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,9 +45,7 @@ class SearchFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // Load view model.
-        onlineDeviceViewModel = activity?.run {
-            ViewModelProviders.of(this)[OnlineDeviceViewModel::class.java]
-        } ?: throw Exception("Invalid Activity")
+        searchDeviceViewModel = ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -52,14 +56,14 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
         // Fill input text with value from view model.
-        view.inputText.setText(onlineDeviceViewModel.searchValue, TextView.BufferType.EDITABLE)
+        view.inputText.setText(searchDeviceViewModel.searchValue, TextView.BufferType.EDITABLE)
 
         // Add listener to input text.
         view.inputText.afterTextChanged {
             // Update enable status of buttons if there's text entered.
             updateButtonEnableStatus()
             // Set the value in the view model.
-            onlineDeviceViewModel.searchValue = view.inputText.text.toString()
+            searchDeviceViewModel.searchValue = view.inputText.text.toString()
         }
 
         // Add clear button to edit text.
@@ -68,11 +72,11 @@ class SearchFragment : Fragment() {
         // Add listener on button click.
         // Name
         view.search_name_button.setOnClickListener {
-            onlineDeviceViewModel.searchDevicesByName(view.inputText.text.toString())
+            searchDeviceViewModel.searchDevices(view.inputText.text.toString(), SearchType.ByDEVICE)
         }
         // Brand
         view.search_brand_button.setOnClickListener {
-            onlineDeviceViewModel.searchDevicesByBrand(view.inputText.text.toString())
+            searchDeviceViewModel.searchDevices(view.inputText.text.toString(), SearchType.ByBRAND)
         }
 
         //Return the view.
@@ -86,38 +90,41 @@ class SearchFragment : Fragment() {
         updateButtonEnableStatus()
 
         // Observe the result.
-        onlineDeviceViewModel.getResult()
+        searchDeviceViewModel.getResult()
             .observe(this, Observer {
-                if (it?.error != null) {
+                if (it is ErrorResult) {
                     // ERROR FOUND.
                     // Check if error is from invalid API token.
-                    if (it.error?.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
+                    if (it.error.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
                         // If so, show token.
-                        listener!!.showToast("Invalid API key.")
+                        listener?.showToast("Invalid API key.") //todo set as string resource
                     } else {
                         // If not, show other token message.
-                        listener!!.showToast("Could not load devices. Please try again.")
+                        listener?.showToast("Could not load devices. Please try again.") //todo set as string resource
                     }
                 }
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back).
-                else if (!onlineDeviceViewModel.isResultHandled()) {
+                else if (!searchDeviceViewModel.isResultHandled()) {
                     // Result gets handled.
-                    onlineDeviceViewModel.resultHandled()
-                    // Check that the result is not empty or null.
-                    if (it?.devices?.isEmpty() == false) {
+                    searchDeviceViewModel.resultHandled()
+                    // Check that the result is not empty.
+                    if (!(it as SuccessResult).devices.isEmpty()) {
                         // RESULTS FOUND.
                         // Switch fragment.
-                        listener!!.onDeviceslookupResultsFound()
+                        listener?.onDevicesLookupResultsFound(it)
                     } else {
                         // NO RESULTS FOUND.
+                        // Shake input field
                         inputText.startAnimation(shakeView())
+                        // Show toast.
+                        listener?.showToast("No devices found.") //todo set as string resource
                     }
                 }
             })
 
         // Observe the loading status.
-        onlineDeviceViewModel.isLoading()
+        searchDeviceViewModel.isLoading()
             .observe(this, Observer {
                 // Enable controls if not loading. (Null counts as false)
                 inputText.isEnabled = (it ?: false) != true
@@ -129,7 +136,7 @@ class SearchFragment : Fragment() {
             })
     }
 
-    private fun updateButtonEnableStatus(){
+    private fun updateButtonEnableStatus() {
         search_name_button.isEnabled = inputText.text.isNotBlank()
         search_brand_button.isEnabled = inputText.text.isNotBlank()
     }
@@ -145,7 +152,7 @@ class SearchFragment : Fragment() {
      *
      */
     interface OnDevicesLookupResultsListener : ParentActivity {
-        fun onDeviceslookupResultsFound()
+        fun onDevicesLookupResultsFound(successResult:SuccessResult)
     }
 
     companion object {

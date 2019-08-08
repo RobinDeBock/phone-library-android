@@ -1,7 +1,5 @@
 package org.hogent.phonelibrary.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,13 +9,15 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
-import org.hogent.phonelibrary.viewModels.OnlineDeviceViewModel
+import org.hogent.phonelibrary.viewModels.SuccessResult
+
+private const val ARG_SUCCESS_RESULT = "successResult"
 
 //todo fix DeviceListFragment class documentation
 class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
-    private lateinit var onlineDeviceViewModel: OnlineDeviceViewModel
+    private lateinit var searchResult: SuccessResult
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -32,9 +32,10 @@ class DeviceListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        onlineDeviceViewModel = activity?.run {
-            ViewModelProviders.of(this)[OnlineDeviceViewModel::class.java]
-        } ?: throw Exception("Invalid Activity")
+        // Fetch the search result.
+        arguments?.let {
+            searchResult = it.getSerializable(ARG_SUCCESS_RESULT) as SuccessResult
+        }
     }
 
     override fun onCreateView(
@@ -56,20 +57,23 @@ class DeviceListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onlineDeviceViewModel.getResult()
-            .observe(this, Observer {
-                if (it != null) {
-                    device_list_detail_button.text = it.devices?.count().toString()
-                }
-            })
+        // Show devices.
+        device_list_detail_button.text = searchResult.devices.count().toString()
     }
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment.
+         *
+         * @param successResult The successful search results.
          */
         @JvmStatic
-        fun newInstance() = DeviceListFragment()
+        fun newInstance(successResult: SuccessResult) =
+            DeviceListFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_SUCCESS_RESULT, successResult)
+                }
+            }
     }
 }
