@@ -56,6 +56,9 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
+        // Update the visibility of the back button in the action bar.
+        updateActionBarBackButton()
+
         //Check if bundle is empty, meaning this is the first time the activity was launched.
         if (savedInstanceState == null) {
             //Set the org.hogent.phonelibrary.fragments.SearchFragment as the default fragment on startup.
