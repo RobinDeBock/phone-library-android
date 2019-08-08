@@ -89,6 +89,9 @@ class SearchFragment : Fragment() {
         // Update button enable status.
         updateButtonEnableStatus()
 
+        // Result gets handled.
+        searchDeviceViewModel.resultHandled()
+
         // Observe the result.
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
@@ -106,8 +109,6 @@ class SearchFragment : Fragment() {
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back).
                 else if (!searchDeviceViewModel.isResultHandled()) {
-                    // Result gets handled.
-                    searchDeviceViewModel.resultHandled()
                     // Check that the result is not empty.
                     if (!(it as SuccessResult).devices.isEmpty()) {
                         // RESULTS FOUND.
