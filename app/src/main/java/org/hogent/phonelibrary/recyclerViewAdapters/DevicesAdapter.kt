@@ -13,13 +13,21 @@ import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 
 class DevicesAdapter(
     private val onDeviceSelectedListener: OnDeviceSelectedListener
-) :
-    RecyclerView.Adapter<DevicesAdapter.DeviceHolder>() {
+) : RecyclerView.Adapter<DevicesAdapter.DeviceHolder>() {
 
     private var devices: List<Device> = ArrayList()
 
+    private val onClickListener: View.OnClickListener
+
+    init {
+        onClickListener = View.OnClickListener { view ->
+            // Get the device and send to activity.
+            val device = view.tag as Device
+            onDeviceSelectedListener.onDeviceSelection(device)
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceHolder {
-        Log.i("TEST", "TEST")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.device_list_row, parent, false)
 
@@ -29,16 +37,16 @@ class DevicesAdapter(
     override fun getItemCount(): Int = devices.count()
 
     override fun onBindViewHolder(deviceHolder: DeviceHolder, index: Int) {
-        Log.i("TEST", "TEST 2")
         val device = devices[index]
         // Set values of holder.
         deviceHolder.name.text = device.name ?: ""
         deviceHolder.brand.text = device.brand ?: ""
 
         with(deviceHolder.itemView) {
-            // Save the device.
+            // Store the device.
             tag = device
-            // todo on click listener
+            // Set on click listener.
+            setOnClickListener(onClickListener)
         }
     }
 
@@ -47,7 +55,7 @@ class DevicesAdapter(
      *
      * @param devices
      */
-    fun setDevices(devices: List<Device>){
+    fun setDevices(devices: List<Device>) {
         this.devices = devices
         notifyDataSetChanged()
     }
