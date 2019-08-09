@@ -4,7 +4,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragments.DeviceListFragment"
-             android:id="@+id/frameLayout4">
+             android:id="@+id/frameLayout4"
+>
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/devicesRecyclerView"
@@ -12,5 +13,6 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/device_list_row"
             android:scrollbars="vertical"
-            android:paddingTop="4dp"/>
+            android:paddingTop="4dp"
+    />
 </FrameLayout>

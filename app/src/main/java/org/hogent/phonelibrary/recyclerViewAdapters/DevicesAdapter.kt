@@ -1,7 +1,6 @@
 package org.hogent.phonelibrary.recyclerViewAdapters
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +55,25 @@ class DevicesAdapter(
      * @param devices
      */
     fun setDevices(devices: List<Device>) {
-        this.devices = devices
+        this.devices = devices.sortedWith(Comparator { device1, device2 ->
+            // Sort by brand, null brand has precedence.
+            if (!(device1.brand == null && device2.brand == null)) {
+                if (device1.brand == null) {
+                    // Device 1 brand is null.
+                    return@Comparator -1
+                } else if (device2.brand == null) {
+                    // Device 2 brand is null.
+                    return@Comparator 1
+                }
+                // Brands are not null.
+                val compareResult = device1.brand!!.compareTo(device2.brand!!)
+                // If not equal, return result.
+                if (compareResult != 0) return@Comparator compareResult
+            }
+
+            // Brands are equals. Compare by display name (the 'name' property contains the brand).
+            return@Comparator device1.displayName().compareTo(device2.displayName())
+        })
         notifyDataSetChanged()
     }
 
