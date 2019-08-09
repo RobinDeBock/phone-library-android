@@ -1,4 +1,4 @@
-package org.hogent.phonelibrary.recyclerViewAdapters
+package org.hogent.phonelibrary.fragments.recyclerViewAdapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

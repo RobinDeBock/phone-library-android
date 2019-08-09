@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,7 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
-import org.hogent.phonelibrary.domain.models.Device
-import org.hogent.phonelibrary.recyclerViewAdapters.DevicesAdapter
+import org.hogent.phonelibrary.fragments.recyclerViewAdapters.DevicesAdapter
 import org.hogent.phonelibrary.viewModels.*
 
 //todo fix DeviceListFragment class documentation
