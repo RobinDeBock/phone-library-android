@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
 
     override fun onDeviceSelection(device : Device) {
         //Switch to the detail fragment.
-        switchFragment(DeviceDetailFragment.newInstance(), false)
+        switchFragment(DeviceDetailFragment.newInstance(device), false)
     }
 
     override fun showToast(text: String) {
