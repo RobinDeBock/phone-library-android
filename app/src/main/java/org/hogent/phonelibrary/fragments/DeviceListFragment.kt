@@ -1,5 +1,6 @@
 package org.hogent.phonelibrary.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
@@ -15,13 +16,10 @@ import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.recyclerViewAdapters.DevicesAdapter
-import org.hogent.phonelibrary.viewModels.SearchDeviceViewModel
-import org.hogent.phonelibrary.viewModels.SearchResult
-import org.hogent.phonelibrary.viewModels.SearchType
-import org.hogent.phonelibrary.viewModels.SuccessResult
+import org.hogent.phonelibrary.viewModels.*
 
 //todo fix DeviceListFragment class documentation
-class DeviceListFragment : Fragment(), OnSearchResultHandler {
+class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
     private lateinit var searchDeviceViewModel: SearchDeviceViewModel
@@ -59,16 +57,19 @@ class DeviceListFragment : Fragment(), OnSearchResultHandler {
         return view
     }
 
-    override fun handleDevices(devices: List<Device>) {
-        // Change the adapter's search result.
-        if (devicesRecyclerView?.adapter != null) {
-            (devicesRecyclerView.adapter as DevicesAdapter).setDevices(devices)
-        } else {
-            Log.e(
-                "Device list",
-                "Can't set the devices for this adapter when the adapter or view is not yet initialised."
-            )
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Observe the result.
+        searchDeviceViewModel.getResult()
+            .observe(this, Observer {
+                // Load the result into the adapter.
+                if (!searchDeviceViewModel.isResultHandled()) {
+                    if (it is SuccessResult) {
+                        (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
+                    }
+                }
+            })
     }
 
     companion object {
@@ -80,8 +81,4 @@ class DeviceListFragment : Fragment(), OnSearchResultHandler {
         @JvmStatic
         fun newInstance() = DeviceListFragment()
     }
-}
-
-interface OnSearchResultHandler {
-    fun handleDevices(devices: List<Device>)
 }

@@ -34,11 +34,9 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         return@OnNavigationItemSelectedListener true
     }
 
-    override fun onDevicesLookupResultsFound(successResult : SuccessResult) {
+    override fun onDevicesLookupResultsFound(successResult: SuccessResult) {
         //Load the favorites fragment.
-        val fragment = DeviceListFragment.newInstance(successResult.searchTerm, successResult.searchType)
-        switchFragment(fragment, false)
-        fragment.handleDevices(successResult.devices)
+        switchFragment(DeviceListFragment.newInstance(), false)
     }
 
     override fun onDeviceSelection() {
