@@ -12,10 +12,11 @@ import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 
 class DevicesAdapter(
-    private val devices: List<Device>,
     private val onDeviceSelectedListener: OnDeviceSelectedListener
 ) :
     RecyclerView.Adapter<DevicesAdapter.DeviceHolder>() {
+
+    private var devices: List<Device> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceHolder {
         Log.i("TEST", "TEST")
@@ -39,6 +40,16 @@ class DevicesAdapter(
             tag = device
             // todo on click listener
         }
+    }
+
+    /**
+     * Set the devices and update the recycler view.
+     *
+     * @param devices
+     */
+    fun setDevices(devices: List<Device>){
+        this.devices = devices
+        notifyDataSetChanged()
     }
 
     inner class DeviceHolder(view: View) : RecyclerView.ViewHolder(view) {

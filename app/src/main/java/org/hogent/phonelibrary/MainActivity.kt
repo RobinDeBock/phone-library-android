@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
 
     override fun onDevicesLookupResultsFound(successResult : SuccessResult) {
         //Load the favorites fragment.
-        switchFragment(DeviceListFragment.newInstance(successResult), false)
+        val fragment = DeviceListFragment.newInstance(successResult.searchTerm, successResult.searchType)
+        switchFragment(fragment, false)
+        fragment.handleDevices(successResult.devices)
     }
 
     override fun onDeviceSelection() {

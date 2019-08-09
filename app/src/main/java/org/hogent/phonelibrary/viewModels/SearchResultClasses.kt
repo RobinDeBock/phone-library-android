@@ -20,7 +20,7 @@ abstract class SearchResult(var searchTerm: String, var searchType: SearchType) 
  * @param searchTerm The name of the device or brand name used to search with.
  * @param searchType If there was searched by device name or brand name.
  */
-class SuccessResult(var devices: Collection<Device>, searchTerm: String, searchType: SearchType) :
+class SuccessResult(var devices: List<Device>, searchTerm: String, searchType: SearchType) :
     SearchResult(searchTerm, searchType)
 
 /**
