@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.*
 import org.hogent.phonelibrary.viewModels.SuccessResult
 import java.lang.Exception
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         switchFragment(DeviceListFragment.newInstance(), false)
     }
 
-    override fun onDeviceSelection() {
+    override fun onDeviceSelection(device : Device) {
         //Switch to the detail fragment.
         switchFragment(DeviceDetailFragment.newInstance(), false)
     }

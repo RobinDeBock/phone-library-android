@@ -34,6 +34,11 @@ class Device : Serializable{
     //--Software
     var os:String?=null
 
+    fun displayName() : String{
+        if (brand != null && name != null) return name!!.replace("$brand ", "")
+        return name ?: ""
+    }
+
     override fun toString(): String {
         return "Device: $name, Brand: $brand"
     }

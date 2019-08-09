@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_favorites.view.*
 
 import org.hogent.phonelibrary.R
+import org.hogent.phonelibrary.domain.models.Device
 
 // todo FavoritesFragment class documentation
 class FavoritesFragment : Fragment() {
@@ -23,7 +24,7 @@ class FavoritesFragment : Fragment() {
 
         //Add listener on button click.
         view.favorites_detail_button.setOnClickListener{
-            listener!!.onDeviceSelection()
+            listener!!.onDeviceSelection(Device())
         }
 
         //Return the view.

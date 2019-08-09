@@ -39,7 +39,7 @@ class DevicesAdapter(
     override fun onBindViewHolder(deviceHolder: DeviceHolder, index: Int) {
         val device = devices[index]
         // Set values of holder.
-        deviceHolder.name.text = device.name ?: ""
+        deviceHolder.name.text = device.displayName()
         deviceHolder.brand.text = device.brand ?: ""
 
         with(deviceHolder.itemView) {

@@ -10,5 +10,7 @@
             android:id="@+id/devicesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/device_list_row"/>
+            tools:listitem="@layout/device_list_row"
+            android:scrollbars="vertical"
+            android:paddingTop="4dp"/>
 </FrameLayout>
