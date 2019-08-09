@@ -24,6 +24,5 @@ enum class DeviceSpecEnum {
     SIMTYPE,
     CARDSLOT,
     //--SOFTWARE
-    OS,
-    UNDEFINED
+    OS
 }
