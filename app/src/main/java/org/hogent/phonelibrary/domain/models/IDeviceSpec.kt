@@ -1,5 +1,5 @@
 package org.hogent.phonelibrary.domain.models
 
-interface IDeviceSpec {
+interface IDeviceSpec: IStringResourceDisplayable {
     fun getType(): DeviceSpecEnum
 }
