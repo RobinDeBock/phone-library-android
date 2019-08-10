@@ -13,12 +13,11 @@
             android:layout_marginBottom="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:maxLines="2"
-    />
+            android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/textViewDeviceSpecValue"
