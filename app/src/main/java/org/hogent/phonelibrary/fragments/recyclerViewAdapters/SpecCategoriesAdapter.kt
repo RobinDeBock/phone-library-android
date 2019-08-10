@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.TEXT_ALIGNMENT_VIEW_END
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -39,38 +40,15 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
         // Clear the specs container. Contains a placeholder for xml preview.
         categoryHolder.specsContainer.removeAllViewsInLayout()
 
-        // Fetch the context.
-        val context = categoryHolder.categoryName.context
-
         // Make a spec view for every spec.
         specCategory.specs.forEach {
-            // Make a view for a spec, set the values and add to the container.
-            val view = makeSpecLayoutItemParent(context)
             // Decide what type of spec it is.
             if (it is StringSpec) {
-                addStringSpecLayoutItem(it, view)
+                addStringSpecLayoutItem(it, categoryHolder.specsContainer)
             } else {
                 Log.e("Spec view", "Spec of type ${it.getType().name} is not supported for visualization.")
             }
-            categoryHolder.specsContainer.addView(view)
         }
-    }
-
-    /**
-     * Makes the layout in which the spec items get placed.
-     *
-     * @param context
-     * @return
-     */
-    private fun makeSpecLayoutItemParent(context: Context): ViewGroup {
-        val layout = RelativeLayout(context)
-        // Params for width and height.
-        layout.layoutParams = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        val inflater = LayoutInflater.from(context)
-        return inflater.inflate(R.layout.device_category_list_row, null) as ViewGroup
     }
 
     /**
@@ -84,7 +62,7 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
         val ct = parent.context
 
         val inflater = LayoutInflater.from(ct)
-        val specItemGroup = inflater.inflate(R.layout.device_spec_item, parent) as ViewGroup
+        val specItemGroup = inflater.inflate(R.layout.device_spec_item, parent, false) as ViewGroup
 
         // Set text values.
         specItemGroup.textViewDeviceSpecName.text = stringSpec.getDisplayName()
@@ -93,6 +71,8 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
         // Set width values. Max width is half of the screen.
         specItemGroup.textViewDeviceSpecName.maxWidth = screenWidth / 2
         specItemGroup.textViewDeviceSpecValue.maxWidth = screenWidth / 2
+
+        parent.specsContainer.addView(specItemGroup)
     }
 
     /**
