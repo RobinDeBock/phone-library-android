@@ -1,5 +1,6 @@
 package org.hogent.phonelibrary.domain.mappers
 
+import android.util.Log
 import org.hogent.phonelibrary.domain.models.*
 import org.hogent.phonelibrary.domain.models.specs.BooleanSpec
 import org.hogent.phonelibrary.domain.models.specs.StringSpec
@@ -61,9 +62,10 @@ class DeviceSpecMapper {
     ) {
         // Null values are ignored.
         if (value == null) return
-        when (Any::class) {
+        when (value::class) {
             String::class -> addSpecToHashMap(StringSpec(value as String, specType), specCategory, specsPerCategory)
             Boolean::class -> addSpecToHashMap(BooleanSpec(value as Boolean, specType), specCategory, specsPerCategory)
+            else -> Log.e("Spec mapper", "Unsupported type present in the spec mapper: ${Any::class}")
         }
     }
 
