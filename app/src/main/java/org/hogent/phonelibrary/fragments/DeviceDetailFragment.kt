@@ -12,7 +12,6 @@ import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.viewModels.DeviceDetailViewModel
 import org.hogent.phonelibrary.viewModels.DeviceDetailViewModelFactory
-import org.hogent.phonelibrary.viewModels.SearchDeviceViewModel
 
 private const val ARG_DEVICE = "deviceParam"
 
@@ -50,8 +49,7 @@ class DeviceDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textView.text = deviceDetailViewModel.counter.toString()
-        deviceDetailViewModel.counter += 1
+        textView.text = deviceDetailViewModel.getCategories().count().toString()
     }
 
     companion object {

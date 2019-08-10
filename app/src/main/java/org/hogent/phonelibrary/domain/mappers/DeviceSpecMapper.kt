@@ -5,7 +5,7 @@ import org.hogent.phonelibrary.domain.models.specs.BooleanSpec
 import org.hogent.phonelibrary.domain.models.specs.StringSpec
 import kotlin.collections.HashMap
 
-class SpecMapper {
+class DeviceSpecMapper {
 
     /**
      * Converts the device to a list of spec categories.
