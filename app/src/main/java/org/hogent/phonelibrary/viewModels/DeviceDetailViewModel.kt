@@ -22,7 +22,7 @@ class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
         // Check if not buffered before.
         if (specCategories.isEmpty()) {
             // Map the device.
-            specCategories = deviceSpecMapper.convertDevice(device)
+            specCategories = deviceSpecMapper.convertDevice(device).sortedWith(SpecCategory)
         }
         return specCategories
     }
