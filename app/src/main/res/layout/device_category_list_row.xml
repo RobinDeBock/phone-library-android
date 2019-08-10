@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/categoryTextView"
             android:id="@+id/specsContainer">
-        <include layout="@layout/device_spec_item"
+
         />
     </LinearLayout>
 

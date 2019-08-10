@@ -12,9 +12,11 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.device_category_list_row.view.*
+import kotlinx.android.synthetic.main.device_spec_item.view.*
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.SpecCategory
 import org.hogent.phonelibrary.domain.models.specs.StringSpec
+
 
 class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.CategoryHolder>() {
 
@@ -67,7 +69,8 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
-        return layout
+        val inflater = LayoutInflater.from(context)
+        return inflater.inflate(R.layout.device_category_list_row, null) as ViewGroup
     }
 
     /**
@@ -79,50 +82,17 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
     private fun addStringSpecLayoutItem(stringSpec: StringSpec, parent: ViewGroup) {
         val screenWidth = parent.context.resources.displayMetrics.widthPixels
         val ct = parent.context
-        // Left text view.
-        val textViewLeft = TextView(parent.context)
-        textViewLeft.text = stringSpec.getDisplayName()
-        val paramsLeft = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.WRAP_CONTENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        paramsLeft.setMargins(dpToPx(20, ct), dpToPx(20, ct), dpToPx(20, ct), dpToPx(20, ct))
-        paramsLeft.addRule(RelativeLayout.ALIGN_PARENT_START)
-        paramsLeft.addRule(RelativeLayout.CENTER_VERTICAL)
-        textViewLeft.layoutParams = paramsLeft
-        parent.addView(textViewLeft)
-        // Right text view.
-        val textViewRight = TextView(parent.context)
-        textViewRight.text = stringSpec.getValue()
-        val paramsRight = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.WRAP_CONTENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        paramsRight.setMargins(dpToPx(20, ct), 0, dpToPx(20, ct), 0) // Left and right margin.
-        paramsRight.addRule(RelativeLayout.ALIGN_PARENT_END) // Align right.
-        paramsRight.addRule(RelativeLayout.CENTER_VERTICAL) // Center vertically.
-        textViewRight.maxWidth =  screenWidth/ 2 // Max width is half of screen, needed to start new line.
-        textViewRight.layoutParams = paramsRight // Set the layout parameters.
-        textViewRight.maxLines = 2 // Max lines.
-        textViewRight.textAlignment = TEXT_ALIGNMENT_VIEW_END // Align text right.
-        parent.addView(textViewRight)
-    }
 
+        val inflater = LayoutInflater.from(ct)
+        val specItemGroup = inflater.inflate(R.layout.device_spec_item, parent) as ViewGroup
 
+        // Set text values.
+        specItemGroup.textViewDeviceSpecName.text = stringSpec.getDisplayName()
+        specItemGroup.textViewDeviceSpecValue.text = stringSpec.getValue()
 
-    /**
-     * Convert dp value to pixels.
-     * Based on source: https://medium.com/@euryperez/android-pearls-set-size-to-a-view-in-dp-programatically-71d22eed7fc0
-     *
-     * @param dp The dp.
-     * @param context
-     * @return The pixel value.
-     */
-    fun dpToPx(dp: Int, context:Context): Int {
-        val density = context.resources
-            .displayMetrics
-            .density
-        return Math.round(dp.toFloat() * density)
+        // Set width values. Max width is half of the screen.
+        specItemGroup.textViewDeviceSpecName.maxWidth = screenWidth / 2
+        specItemGroup.textViewDeviceSpecValue.maxWidth = screenWidth / 2
     }
 
     /**
