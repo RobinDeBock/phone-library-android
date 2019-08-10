@@ -1,23 +1,26 @@
 package org.hogent.phonelibrary.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
-import org.hogent.phonelibrary.viewModels.SuccessResult
-
-private const val ARG_SUCCESS_RESULT = "successResult"
+import org.hogent.phonelibrary.fragments.recyclerViewAdapters.DevicesAdapter
+import org.hogent.phonelibrary.viewModels.*
 
 //todo fix DeviceListFragment class documentation
 class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
-    private lateinit var searchResult: SuccessResult
+    private lateinit var searchDeviceViewModel: SearchDeviceViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -32,10 +35,10 @@ class DeviceListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Fetch the search result.
-        arguments?.let {
-            searchResult = it.getSerializable(ARG_SUCCESS_RESULT) as SuccessResult
-        }
+        // Load activity linked view model. This contains the search result.
+        searchDeviceViewModel = activity?.run {
+            ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
+        } ?: throw Exception("Invalid Activity.")
     }
 
     override fun onCreateView(
@@ -45,10 +48,8 @@ class DeviceListFragment : Fragment() {
         // Inflate the layout for this fragment.
         val view = inflater.inflate(R.layout.fragment_device_list, container, false)
 
-        //Add listener on button click.
-        view.device_list_detail_button.setOnClickListener {
-            listener!!.onDeviceSelection()
-        }
+        view.devicesRecyclerView.adapter = DevicesAdapter(listener!!)
+        view.devicesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
         //Return the view.
         return view
@@ -57,8 +58,16 @@ class DeviceListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Show devices.
-        device_list_detail_button.text = searchResult.devices.count().toString()
+        // Observe the result.
+        searchDeviceViewModel.getResult()
+            .observe(this, Observer {
+                // Load the result into the adapter.
+                if (!searchDeviceViewModel.isResultHandled()) {
+                    if (it is SuccessResult) {
+                        (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
+                    }
+                }
+            })
     }
 
     companion object {
@@ -66,14 +75,8 @@ class DeviceListFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment.
          *
-         * @param successResult The successful search results.
          */
         @JvmStatic
-        fun newInstance(successResult: SuccessResult) =
-            DeviceListFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ARG_SUCCESS_RESULT, successResult)
-                }
-            }
+        fun newInstance() = DeviceListFragment()
     }
 }

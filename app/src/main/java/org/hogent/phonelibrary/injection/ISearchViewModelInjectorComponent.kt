@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [DeviceRepositoryModule::class])
-interface IViewModelInjectorComponent {
+interface ISearchViewModelInjectorComponent {
     //Inject into the specified class.
     fun inject(searchDeviceViewModel: SearchDeviceViewModel)
 }

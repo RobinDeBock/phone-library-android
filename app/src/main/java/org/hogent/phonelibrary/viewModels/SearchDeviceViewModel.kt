@@ -125,7 +125,7 @@ class SearchDeviceViewModel : BaseViewModel() {
             })
     }
 
-    private fun handleResult(result: Collection<Device>) {
+    private fun handleResult(result: List<Device>) {
         searchResult.postValue(SuccessResult(result, searchValue!!, usedSearchType))
         // The data is new and therefore not yet handled.
         isDataHandled = false

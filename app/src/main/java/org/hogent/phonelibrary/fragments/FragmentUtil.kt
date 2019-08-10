@@ -42,7 +42,8 @@ class FragmentUtil {
 
         /**
          * Help function to show or hide a clear button on the edit text.
-         * Source: https://stackoverflow.com/questions/6355096/how-to-create-edittext-with-crossx-button-at-end-of-it
+         * Based on source: https://stackoverflow.com/questions/6355096/how-to-create-edittext-with-crossx-button-at-end-of-it
+         * Updated the calculation from 'event.rawX >= (this.right - this.compoundPaddingRight)' to '(this.width - this.compoundPaddingRight) < event.x'
          *
          */
         fun EditText.setupClearButtonWithAction() {
@@ -58,13 +59,12 @@ class FragmentUtil {
 
             setOnTouchListener(View.OnTouchListener { inputView, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
-                    val clearIcon = if ((inputView as EditText).text.isNotBlank()) R.drawable.ic_clear else 0
-                    setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
-
-                    if (event.x >= (this.right - this.compoundPaddingRight)) {
+                    if ((this.width - this.compoundPaddingRight) < event.x) {
                         this.setText("")
                         return@OnTouchListener true
                     }
+                    val clearIcon = if ((inputView as EditText).text.isNotBlank()) R.drawable.ic_clear else 0
+                    setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
                 }
                 return@OnTouchListener false
             })

@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Toast
+import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.*
 import org.hogent.phonelibrary.viewModels.SuccessResult
 import java.lang.Exception
@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         return@OnNavigationItemSelectedListener true
     }
 
-    override fun onDevicesLookupResultsFound(successResult : SuccessResult) {
+    override fun onDevicesLookupResultsFound(successResult: SuccessResult) {
         //Load the favorites fragment.
-        switchFragment(DeviceListFragment.newInstance(successResult), false)
+        switchFragment(DeviceListFragment.newInstance(), false)
     }
 
-    override fun onDeviceSelection() {
+    override fun onDeviceSelection(device : Device) {
         //Switch to the detail fragment.
-        switchFragment(DeviceDetailFragment.newInstance(), false)
+        switchFragment(DeviceDetailFragment.newInstance(device), false)
     }
 
     override fun showToast(text: String) {

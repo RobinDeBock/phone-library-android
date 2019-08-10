@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/ic_smartphone"
             app:layout_constraintTop_toBottomOf="@+id/imageTopGuideline"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
             android:adjustViewBounds="true"
     />
 
@@ -29,7 +29,14 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline"
+            android:id="@+id/guidelineBottom"
+            app:layout_constraintGuide_percent="0.35"/>
+
+    <android.support.constraint.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guidelineHalfScreen"
             app:layout_constraintGuide_percent="0.40"/>
 
     <EditText
@@ -37,12 +44,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/device_brand_name"
+            android:hint="@string/edit_text_placeholder"
             android:ems="10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:maxLength="20"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineHalfScreen"
             android:importantForAutofill="no" tools:targetApi="o"
     />
 
@@ -53,7 +60,7 @@
             android:id="@+id/search_name_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintTop_toBottomOf="@+id/inputText"
     />
 
@@ -64,7 +71,6 @@
             android:id="@+id/search_brand_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/search_name_button"
     />
 

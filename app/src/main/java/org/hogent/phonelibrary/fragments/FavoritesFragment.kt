@@ -1,16 +1,15 @@
 package org.hogent.phonelibrary.fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_favorites.view.*
 
 import org.hogent.phonelibrary.R
+import org.hogent.phonelibrary.domain.models.Device
 
 // todo FavoritesFragment class documentation
 class FavoritesFragment : Fragment() {
@@ -25,7 +24,7 @@ class FavoritesFragment : Fragment() {
 
         //Add listener on button click.
         view.favorites_detail_button.setOnClickListener{
-            listener!!.onDeviceSelection()
+            listener!!.onDeviceSelection(Device())
         }
 
         //Return the view.

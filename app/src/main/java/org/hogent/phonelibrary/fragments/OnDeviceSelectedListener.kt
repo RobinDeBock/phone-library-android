@@ -1,10 +1,12 @@
 package org.hogent.phonelibrary.fragments
 
+import org.hogent.phonelibrary.domain.models.Device
+
 interface OnDeviceSelectedListener {
     /**
      * Functionality of an Activity which can handle the selection of a device.
-     * TODO include the device as a parameter.
      *
+     * @param device The selected device.
      */
-    fun onDeviceSelection()
+    fun onDeviceSelection(device : Device)
 }
