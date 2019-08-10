@@ -60,7 +60,7 @@ class DeviceDetailFragment : Fragment() {
 
         deviceNameTextView.text = device.name
         // Load the spec categories.
-        (specCategoriesRecyclerView.adapter as SpecCategoriesAdapter).SpecCategories(deviceDetailViewModel.getCategories())
+        (specCategoriesRecyclerView.adapter as SpecCategoriesAdapter).setSpecCategories(deviceDetailViewModel.getCategories())
     }
 
     companion object {

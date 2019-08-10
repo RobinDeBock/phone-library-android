@@ -11,6 +11,18 @@
             android:id="@+id/categoryTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/categoryTextView"
+            android:id="@+id/specsContainer">
+        <include layout="@layout/device_spec_item"
+        />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
