@@ -70,6 +70,13 @@ class DeviceListFragment : Fragment() {
             })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Remove the observers on the result.
+        searchDeviceViewModel.getResult().removeObservers(this)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
