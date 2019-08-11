@@ -4,7 +4,7 @@ import android.app.Application
 import org.hogent.phonelibrary.injection.DaggerIDeviceDetailViewModelInjectorComponent
 import org.hogent.phonelibrary.injection.DeviceSpecMapperModule
 import org.hogent.phonelibrary.injection.IDeviceDetailViewModelInjectorComponent
-import org.hogent.phonelibrary.injection.OtherMapperModule
+import org.hogent.phonelibrary.injection.DisplayNameLoaderModule
 
 class App : Application(){
     companion object{
@@ -15,7 +15,7 @@ class App : Application(){
         super.onCreate()
         component = DaggerIDeviceDetailViewModelInjectorComponent
             .builder()
-            .otherMapperModule(OtherMapperModule(this))
+            .displayNameLoaderModule(DisplayNameLoaderModule(this))
             .deviceSpecMapperModule(DeviceSpecMapperModule)
             .build()
     }

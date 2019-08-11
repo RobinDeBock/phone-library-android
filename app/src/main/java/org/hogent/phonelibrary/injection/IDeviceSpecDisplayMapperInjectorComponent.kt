@@ -1,9 +1,9 @@
 package org.hogent.phonelibrary.injection
 
 import dagger.Component
-import org.hogent.phonelibrary.domain.mappers.OtherMapper
+import org.hogent.phonelibrary.domain.mappers.DisplayNameLoader
 
-@Component(modules = [OtherMapperModule::class])
+@Component(modules = [DisplayNameLoaderModule::class])
 interface IDeviceSpecDisplayMapperInjectorComponent {
-    fun inject(otherMapper: OtherMapper)
+    fun inject(displayNameLoader: DisplayNameLoader)
 }

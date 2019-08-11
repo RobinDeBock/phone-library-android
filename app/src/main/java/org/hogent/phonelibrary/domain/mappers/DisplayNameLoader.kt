@@ -4,7 +4,7 @@ import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.*
 
-class OtherMapper(val app: App) {
+class DisplayNameLoader(val app: App) {
     /**
      * Loads display names into the spec categories and specs. The string value is gotten from the string resource.
      *
