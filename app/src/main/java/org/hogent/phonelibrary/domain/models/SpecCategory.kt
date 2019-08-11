@@ -1,7 +1,7 @@
 package org.hogent.phonelibrary.domain.models
 
 data class SpecCategory(val identifier: SpecCategoryEnum, val specs: List<IDeviceSpec>) : IStringResourceDisplayable,
-    Comparable<SpecCategoryEnum> {
+    Iterable<IDeviceSpec> {
     private var displayName: String? = null
 
     override fun setDisplayName(displayName: String) {
@@ -18,8 +18,13 @@ data class SpecCategory(val identifier: SpecCategoryEnum, val specs: List<IDevic
         return displayName ?: identifier.toString()
     }
 
-    override fun compareTo(other: SpecCategoryEnum): Int {
-        return identifier.ordinal - other.ordinal
+    /**
+     * Get the iterator to iterate over the device specs.
+     *
+     * @return The iterator for the device specs.
+     */
+    override fun iterator(): Iterator<IDeviceSpec> {
+        return specs.iterator()
     }
 
     companion object : Comparator<SpecCategory> {

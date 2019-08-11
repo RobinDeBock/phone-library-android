@@ -35,7 +35,7 @@ class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.Categor
     override fun onBindViewHolder(categoryHolder: CategoryHolder, index: Int) {
         val specCategory = specCategories[index]
         // Set values of holder.
-        categoryHolder.categoryName.text = specCategory.identifier.toString()
+        categoryHolder.categoryName.text = specCategory.getDisplayName()
 
         // Clear the specs container. Contains a placeholder for xml preview.
         categoryHolder.specsContainer.removeAllViewsInLayout()

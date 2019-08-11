@@ -32,8 +32,10 @@ class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
         if (specCategories.isEmpty()) {
             // Map the device.
             specCategories = deviceSpecMapper.convertDevice(device).sortedWith(SpecCategory)
+            // Load the display values with other mapper.
+            otherMapper.loadWithDisplayNames(specCategories)
         }
-        return otherMapper.getList(specCategories)
+        return specCategories
     }
 }
 
