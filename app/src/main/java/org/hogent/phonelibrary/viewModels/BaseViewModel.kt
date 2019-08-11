@@ -1,6 +1,7 @@
 package org.hogent.phonelibrary.viewModels
 
 import android.arch.lifecycle.ViewModel
+import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.injection.*
 
 abstract class BaseViewModel : ViewModel() {
@@ -8,12 +9,6 @@ abstract class BaseViewModel : ViewModel() {
         DaggerISearchViewModelInjectorComponent
             .builder()
             .deviceRepositoryModule(DeviceRepositoryModule)
-            .build()
-
-    private val deviceDetailComponent: IDeviceDetailViewModelInjectorComponent =
-        DaggerIDeviceDetailViewModelInjectorComponent
-            .builder()
-            .deviceSpecMapperModule(DeviceSpecMapperModule)
             .build()
 
     init {
@@ -28,7 +23,6 @@ abstract class BaseViewModel : ViewModel() {
             is SearchDeviceViewModel -> searchDeviceComponent.inject(
                 this
             )
-            is DeviceDetailViewModel -> deviceDetailComponent.inject(this)
         }
     }
 }

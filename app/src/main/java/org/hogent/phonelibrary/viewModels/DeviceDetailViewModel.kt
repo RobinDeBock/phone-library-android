@@ -2,7 +2,9 @@ package org.hogent.phonelibrary.viewModels
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.domain.mappers.DeviceSpecMapper
+import org.hogent.phonelibrary.domain.mappers.DisplayNameLoader
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.models.SpecCategory
 import javax.inject.Inject
@@ -10,6 +12,13 @@ import javax.inject.Inject
 class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
     @Inject
     lateinit var deviceSpecMapper: DeviceSpecMapper
+
+    @Inject
+    lateinit var displayNameLoader: DisplayNameLoader
+
+    init {
+        App.component.inject(this)
+    }
 
     private var specCategories: List<SpecCategory> = emptyList()
 
@@ -22,7 +31,9 @@ class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
         // Check if not buffered before.
         if (specCategories.isEmpty()) {
             // Map the device.
-            specCategories = deviceSpecMapper.convertDevice(device)
+            specCategories = deviceSpecMapper.convertDevice(device).sortedWith(SpecCategory)
+            // Load the display values with other mapper.
+            displayNameLoader.loadWithDisplayNames(specCategories)
         }
         return specCategories
     }

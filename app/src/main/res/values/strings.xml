@@ -21,4 +21,32 @@
     <string name="edit_text_placeholder">e.g. Xiaomi, Galaxy S10</string>
     <string name="name_placeholder">Name</string>
     <string name="brand_placeholder">Brand</string>
+    <string name="test_placeholder">TEST</string>
+
+    <!-- Spec category display names -->
+    <string name="spec_category_display_name_main">Main</string>
+    <string name="spec_category_display_name_release">Release</string>
+    <string name="spec_category_display_name_physical">Physical</string>
+    <string name="spec_category_display_name_hardware">Hardware</string>
+    <string name="spec_category_display_name_software">Software</string>
+
+    <!-- Spec display names -->
+    <string name="spec_display_name_cpu">CPU</string>
+    <string name="spec_display_name_screenresolution">Screen resolution</string>
+    <string name="spec_display_name_ram">RAM</string>
+    <string name="spec_display_name_batteryshort">Battery</string>
+    <string name="spec_display_name_rearcamera">Rear camera</string>
+    <string name="spec_display_name_frontcamera">Front camera</string>
+    <string name="spec_display_name_announceddate">Announced</string>
+    <string name="spec_display_name_releasestatus">Released</string>
+    <string name="spec_display_name_screensize">Screen size</string>
+    <string name="spec_display_name_dimensions">Dimensions</string>
+    <string name="spec_display_name_weight">Weight</string>
+    <string name="spec_display_name_gpu">GPU</string>
+    <string name="spec_display_name_chipset">Chipset</string>
+    <string name="spec_display_name_headphonejack">Headphone jack</string>
+    <string name="spec_display_name_usb">USB</string>
+    <string name="spec_display_name_simtype">SIM type</string>
+    <string name="spec_display_name_cardslot">Card slot</string>
+    <string name="spec_display_name_os">OS</string>
 </resources>
