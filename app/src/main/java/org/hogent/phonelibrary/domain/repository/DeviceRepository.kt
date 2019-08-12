@@ -2,26 +2,24 @@ package org.hogent.phonelibrary.domain.repository
 
 import android.support.annotation.WorkerThread
 import io.reactivex.Observable
+import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.domain.models.Device
+import org.hogent.phonelibrary.domain.repository.localStorage.DeviceDao
 import org.hogent.phonelibrary.domain.repository.network.IDeviceApi
 import org.hogent.phonelibrary.injection.components.DaggerRepositoryComponent
 import org.hogent.phonelibrary.injection.modules.DeviceApiModule
 import org.hogent.phonelibrary.injection.components.RepositoryComponent
 import javax.inject.Inject
 
-class DeviceRepository : IDeviceApi {
+class DeviceRepository: IDeviceApi {
     @Inject
     lateinit var deviceApi: IDeviceApi
 
-    // Dagger injection.
-    private val component: RepositoryComponent =
-        DaggerRepositoryComponent
-            .builder()
-            .deviceApiModule(DeviceApiModule)
-            .build()
+    @Inject
+    lateinit var deviceDao: DeviceDao
 
     init {
-        component.inject(this)
+        App.repositoryComponent.inject(this)
     }
 
     // val devices: LiveData<List<Device>> = deviceDao.getAllDevices()
