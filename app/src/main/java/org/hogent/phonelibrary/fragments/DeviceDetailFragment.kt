@@ -1,5 +1,6 @@
 package org.hogent.phonelibrary.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -28,6 +29,10 @@ class DeviceDetailFragment : Fragment() {
     private lateinit var device: Device
 
     private lateinit var deviceDetailViewModel: DeviceDetailViewModel
+
+    // Keeps track whether or not the current device is favorite.
+    // Used to choose correct method (unfavorite/favorite) when image view is pressed.
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +68,38 @@ class DeviceDetailFragment : Fragment() {
 
         // Click listener on like 'button' image view.
         view.favoriteImageView.setOnClickListener {
-            deviceDetailViewModel.favoritiseDevice(device)
+            // Animation needs to be stopped if quickly pressed.
+            favoriteImageView.clearAnimation()
+
+            if (isFavorite) {
+                // Device is favorite.
+                deviceDetailViewModel.unFavoritiseDevice(device)
+            } else {
+                // Device is not yet favorite.
+                deviceDetailViewModel.favoritiseDevice(device)
+                // Play animation.
+                favoriteImageView.startAnimation(FragmentUtil.growAnimation())
+            }
         }
 
         //Return the view.
         return view
+    }
+
+    private fun updateFavoriteStatus() {
+        deviceDetailViewModel.favoriteDevices.observe(this, Observer {
+            if (it != null) {
+                // Check if current device is a favorite.
+                // Not using equals or something because it can be a different instance.
+                isFavorite = it.find { favoriteDevice -> device.name == favoriteDevice.name } != null
+                if (isFavorite) {
+                    // Current device is favorite.
+                    favoriteImageView.setImageResource(R.drawable.ic_favorite_favoritised_24dp)
+                } else {
+                    favoriteImageView.setImageResource(R.drawable.ic_favorite_black)
+                }
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,6 +108,8 @@ class DeviceDetailFragment : Fragment() {
         deviceNameTextView.text = device.name
         // Load the spec categories.
         (specCategoriesRecyclerView.adapter as SpecCategoriesAdapter).setSpecCategories(deviceDetailViewModel.getCategories())
+        // Update favorite image view.
+        updateFavoriteStatus()
     }
 
     companion object {

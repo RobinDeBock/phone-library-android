@@ -46,4 +46,5 @@ class Device : Serializable {
     override fun toString(): String {
         return "Device: $name, Brand: $brand"
     }
+
 }
