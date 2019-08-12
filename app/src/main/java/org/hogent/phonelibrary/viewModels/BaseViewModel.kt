@@ -22,6 +22,7 @@ abstract class BaseViewModel : ViewModel() {
             .builder()
             .deviceSpecMapperModule(DeviceSpecMapperModule)
             .displayNameLoaderModule(DisplayNameLoaderModule)
+            .deviceRepositoryModule(DeviceRepositoryModule)
             .build()
 
     init {

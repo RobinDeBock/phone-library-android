@@ -17,7 +17,7 @@ class DeviceDetailViewModel(device: Device) : BaseViewModel() {
     @Inject
     lateinit var displayNameLoader: DisplayNameLoader
 
-    //@Inject
+    @Inject
     lateinit var repository: DeviceRepository
 
     private var specCategories: List<SpecCategory> = emptyList()

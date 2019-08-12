@@ -6,8 +6,10 @@ import org.hogent.phonelibrary.injection.modules.DeviceRepositoryModule
 import org.hogent.phonelibrary.injection.modules.DeviceSpecMapperModule
 import org.hogent.phonelibrary.injection.modules.DisplayNameLoaderModule
 import org.hogent.phonelibrary.viewModels.DeviceDetailViewModel
+import javax.inject.Singleton
 
-@Component(modules = [DeviceSpecMapperModule::class, DisplayNameLoaderModule::class])
+@Singleton
+@Component(modules = [DeviceRepositoryModule::class, DeviceSpecMapperModule::class, DisplayNameLoaderModule::class])
 interface DeviceDetailVMComponent {
     //Inject into the specified class.
     fun inject(deviceDetailViewModel: DeviceDetailViewModel)
