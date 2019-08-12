@@ -12,7 +12,7 @@ import org.hogent.phonelibrary.injection.modules.DeviceApiModule
 import org.hogent.phonelibrary.injection.components.RepositoryComponent
 import javax.inject.Inject
 
-class DeviceRepository: IDeviceApi {
+class DeviceRepository : IDeviceApi {
     @Inject
     lateinit var deviceApi: IDeviceApi
 
@@ -23,7 +23,7 @@ class DeviceRepository: IDeviceApi {
         App.repositoryComponent.inject(this)
     }
 
-     val devices: LiveData<List<Device>> = deviceDao.getAllDevices()
+    val savedDevices: LiveData<List<Device>> = deviceDao.getAllDevices()
 
     @WorkerThread
     fun saveDevice(device: Device) {

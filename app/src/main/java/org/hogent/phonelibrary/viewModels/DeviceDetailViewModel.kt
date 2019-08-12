@@ -1,5 +1,6 @@
 package org.hogent.phonelibrary.viewModels
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import org.hogent.phonelibrary.App
@@ -8,6 +9,7 @@ import org.hogent.phonelibrary.domain.mappers.DisplayNameLoader
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.models.SpecCategory
 import org.hogent.phonelibrary.domain.repository.DeviceRepository
+import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 class DeviceDetailViewModel(device: Device) : BaseViewModel() {
@@ -21,6 +23,8 @@ class DeviceDetailViewModel(device: Device) : BaseViewModel() {
     lateinit var repository: DeviceRepository
 
     private var specCategories: List<SpecCategory> = emptyList()
+
+    val favoriteDevices : LiveData<List<Device>> = repository.savedDevices
 
     /**
      * Get a list of spec categories and their specs, of the device.
@@ -38,7 +42,15 @@ class DeviceDetailViewModel(device: Device) : BaseViewModel() {
     }
 
     fun favoritiseDevice(device: Device) {
-        repository.saveDevice(device)
+        doAsync {
+            repository.saveDevice(device)
+        }
+    }
+
+    fun unFavoritiseDevice(device: Device) {
+        doAsync {
+            repository.unsaveDevice(device)
+        }
     }
 }
 
