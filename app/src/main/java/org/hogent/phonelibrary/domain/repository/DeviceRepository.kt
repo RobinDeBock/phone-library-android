@@ -1,5 +1,6 @@
 package org.hogent.phonelibrary.domain.repository
 
+import android.arch.lifecycle.LiveData
 import android.support.annotation.WorkerThread
 import io.reactivex.Observable
 import org.hogent.phonelibrary.App
@@ -22,16 +23,16 @@ class DeviceRepository: IDeviceApi {
         App.repositoryComponent.inject(this)
     }
 
-    // val devices: LiveData<List<Device>> = deviceDao.getAllDevices()
+     val devices: LiveData<List<Device>> = deviceDao.getAllDevices()
 
     @WorkerThread
     fun saveDevice(device: Device) {
-        //  deviceDao.addDevice(device)
+        deviceDao.addDevice(device)
     }
 
     @WorkerThread
     fun unsaveDevice(device: Device) {
-        // deviceDao.removeDevice(device)
+        deviceDao.removeDevice(device)
     }
 
     override fun fetchDevicesByBrand(brandName: String): Observable<List<Device>> {

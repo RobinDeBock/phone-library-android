@@ -7,14 +7,18 @@ import org.hogent.phonelibrary.domain.mappers.DeviceSpecMapper
 import org.hogent.phonelibrary.domain.mappers.DisplayNameLoader
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.models.SpecCategory
+import org.hogent.phonelibrary.domain.repository.DeviceRepository
 import javax.inject.Inject
 
-class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
+class DeviceDetailViewModel(device: Device) : BaseViewModel() {
     @Inject
     lateinit var deviceSpecMapper: DeviceSpecMapper
 
     @Inject
     lateinit var displayNameLoader: DisplayNameLoader
+
+    //@Inject
+    lateinit var repository: DeviceRepository
 
     private var specCategories: List<SpecCategory> = emptyList()
 
@@ -24,14 +28,17 @@ class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
      * @return The list of spec categories.
      */
     fun getCategories(): List<SpecCategory> {
-        // Check if not buffered before.
-        if (specCategories.isEmpty()) {
-            // Map the device.
-            specCategories = deviceSpecMapper.convertDevice(device).sortedWith(SpecCategory)
-            // Load the display values with other mapper.
-            displayNameLoader.loadWithDisplayNames(specCategories)
-        }
         return specCategories
+    }
+
+    init {
+        specCategories = deviceSpecMapper.convertDevice(device).sortedWith(SpecCategory)
+        // Load the display values with other mapper.
+        displayNameLoader.loadWithDisplayNames(specCategories)
+    }
+
+    fun favoritiseDevice(device: Device) {
+        repository.saveDevice(device)
     }
 }
 

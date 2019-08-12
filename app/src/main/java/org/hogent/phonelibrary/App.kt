@@ -1,27 +1,21 @@
 package org.hogent.phonelibrary
 
 import android.app.Application
-import org.hogent.phonelibrary.injection.components.DaggerDeviceDetailVMComponent
-import org.hogent.phonelibrary.injection.components.DaggerRepositoryComponent
-import org.hogent.phonelibrary.injection.components.DeviceDetailVMComponent
-import org.hogent.phonelibrary.injection.components.RepositoryComponent
-import org.hogent.phonelibrary.injection.modules.DatabaseModule
-import org.hogent.phonelibrary.injection.modules.DeviceApiModule
-import org.hogent.phonelibrary.injection.modules.DeviceSpecMapperModule
-import org.hogent.phonelibrary.injection.modules.DisplayNameLoaderModule
+import dagger.android.DaggerContentProvider
+import org.hogent.phonelibrary.injection.components.*
+import org.hogent.phonelibrary.injection.modules.*
 
 class App : Application() {
     companion object {
-        lateinit var component: DeviceDetailVMComponent
+        lateinit var contextProviderComponent: ContextProviderComponent
         lateinit var repositoryComponent: RepositoryComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerDeviceDetailVMComponent
+        contextProviderComponent = DaggerContextProviderComponent
             .builder()
-            .displayNameLoaderModule(DisplayNameLoaderModule(this))
-            .deviceSpecMapperModule(DeviceSpecMapperModule)
+            .contextProviderModule(ContextProviderModule(this))
             .build()
 
         repositoryComponent = DaggerRepositoryComponent

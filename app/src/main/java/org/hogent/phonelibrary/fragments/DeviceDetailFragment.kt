@@ -57,8 +57,14 @@ class DeviceDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_device_detail, container, false)
 
+        // Configure recycler view.
         view.specCategoriesRecyclerView.adapter = SpecCategoriesAdapter()
         view.specCategoriesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+
+        // Click listener on like 'button' image view.
+        view.favoriteImageView.setOnClickListener {
+            deviceDetailViewModel.favoritiseDevice(device)
+        }
 
         //Return the view.
         return view
