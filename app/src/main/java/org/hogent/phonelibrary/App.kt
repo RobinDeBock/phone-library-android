@@ -1,19 +1,18 @@
 package org.hogent.phonelibrary
 
 import android.app.Application
-import dagger.android.DaggerContentProvider
 import org.hogent.phonelibrary.injection.components.*
 import org.hogent.phonelibrary.injection.modules.*
 
 class App : Application() {
     companion object {
-        lateinit var contextProviderComponent: ContextProviderComponent
+        lateinit var displayNameLoader: DisplayNameLoaderComponent
         lateinit var repositoryComponent: RepositoryComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-        contextProviderComponent = DaggerContextProviderComponent
+        displayNameLoader = DaggerDisplayNameLoaderComponent
             .builder()
             .contextProviderModule(ContextProviderModule(this))
             .build()

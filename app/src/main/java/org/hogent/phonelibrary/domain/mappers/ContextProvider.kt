@@ -12,8 +12,4 @@ class ContextProvider(val app: App) {
     fun getContext(): Context {
         return app.applicationContext
     }
-
-    init {
-        App.contextProviderComponent.inject(this)
-    }
 }
