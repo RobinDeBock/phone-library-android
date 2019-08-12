@@ -70,9 +70,13 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
-    //Layout
-    implementation "com.android.support:support-core-utils:$supportLibrary_version"
+    // View model provider.
+    implementation "android.arch.lifecycle:extensions:$android_arch_version"
 
+    // Local storage.
+    // Room components.
+    implementation "android.arch.persistence.room:runtime:$android_arch_version"
+    kapt "android.arch.persistence.room:compiler:$android_arch_version"
+    androidTestImplementation "android.arch.persistence.room:testing:$android_arch_version"
 }
