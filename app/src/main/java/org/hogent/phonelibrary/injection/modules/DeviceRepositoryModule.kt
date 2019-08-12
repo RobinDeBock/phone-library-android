@@ -1,4 +1,4 @@
-package org.hogent.phonelibrary.injection
+package org.hogent.phonelibrary.injection.modules
 
 import dagger.Module
 import dagger.Provides
@@ -9,7 +9,8 @@ import javax.inject.Singleton
 object DeviceRepositoryModule{
     @Provides
     @Singleton
-    fun provideDeviceAPi(): DeviceRepository {
+    fun provideDeviceRepository(): DeviceRepository {
         return DeviceRepository()
     }
+
 }

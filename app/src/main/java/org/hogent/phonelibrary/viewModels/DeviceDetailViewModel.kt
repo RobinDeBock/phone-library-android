@@ -16,10 +16,6 @@ class DeviceDetailViewModel(private val device: Device) : BaseViewModel() {
     @Inject
     lateinit var displayNameLoader: DisplayNameLoader
 
-    init {
-        App.component.inject(this)
-    }
-
     private var specCategories: List<SpecCategory> = emptyList()
 
     /**

@@ -1,19 +1,19 @@
 package org.hogent.phonelibrary
 
 import android.app.Application
-import org.hogent.phonelibrary.injection.DaggerIDeviceDetailViewModelInjectorComponent
-import org.hogent.phonelibrary.injection.DeviceSpecMapperModule
-import org.hogent.phonelibrary.injection.IDeviceDetailViewModelInjectorComponent
-import org.hogent.phonelibrary.injection.DisplayNameLoaderModule
+import org.hogent.phonelibrary.injection.components.DaggerDeviceDetailVMComponent
+import org.hogent.phonelibrary.injection.components.DeviceDetailVMComponent
+import org.hogent.phonelibrary.injection.modules.DeviceSpecMapperModule
+import org.hogent.phonelibrary.injection.modules.DisplayNameLoaderModule
 
-class App : Application(){
-    companion object{
-        lateinit var component:IDeviceDetailViewModelInjectorComponent
+class App : Application() {
+    companion object {
+        lateinit var component: DeviceDetailVMComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerIDeviceDetailViewModelInjectorComponent
+        component = DaggerDeviceDetailVMComponent
             .builder()
             .displayNameLoaderModule(DisplayNameLoaderModule(this))
             .deviceSpecMapperModule(DeviceSpecMapperModule)

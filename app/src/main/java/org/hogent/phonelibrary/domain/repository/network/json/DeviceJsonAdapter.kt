@@ -9,7 +9,7 @@ internal class DeviceJsonAdapter {
     fun deviceFromJson(deviceJson: DeviceJson): Device {
         val device = Device()
 
-        device.name = deviceJson.DeviceName
+        device.name = deviceJson.DeviceName ?: "" // There is a very small chance the name is null. This only happens to one device or so.
         device.brand = deviceJson.Brand
         //Main specs
         deviceJson.cpu = "Octa-core (2x2.0 GHz Kryo 460 Gold & 6x1.7 GHz Kryo 460 Silver)"

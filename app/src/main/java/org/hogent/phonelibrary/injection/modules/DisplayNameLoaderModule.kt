@@ -1,4 +1,4 @@
-package org.hogent.phonelibrary.injection
+package org.hogent.phonelibrary.injection.modules
 
 import dagger.Module
 import dagger.Provides

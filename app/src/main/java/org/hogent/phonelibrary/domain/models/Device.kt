@@ -1,13 +1,17 @@
 package org.hogent.phonelibrary.domain.models
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import java.io.Serializable
 
 /**
  * A device. All values are optional.
  *
  */
+@Entity(tableName = "device_table")
 class Device : Serializable {
-    var name: String? = null
+    @PrimaryKey
+    var name: String = ""
     var brand: String? = null
     //Main specs
     var cpu: String? = null
@@ -34,10 +38,9 @@ class Device : Serializable {
     //--Software
     var os: String? = null
 
-    // Display name equals the name without the brand. If brand is null, return the name. Empty string if name is null.
+    // Display name equals the name without the brand. If brand is null, return the name.
     fun displayName(): String {
-        if (brand != null && name != null) return name!!.replace("$brand ", "")
-        return name ?: ""
+        return if (brand != null) name.replace("$brand ", "") else name
     }
 
     override fun toString(): String {

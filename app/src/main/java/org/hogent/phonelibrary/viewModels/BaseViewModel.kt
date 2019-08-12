@@ -2,11 +2,13 @@ package org.hogent.phonelibrary.viewModels
 
 import android.arch.lifecycle.ViewModel
 import org.hogent.phonelibrary.App
-import org.hogent.phonelibrary.injection.*
+import org.hogent.phonelibrary.injection.components.DaggerSearchVMComponent
+import org.hogent.phonelibrary.injection.components.SearchVMComponent
+import org.hogent.phonelibrary.injection.modules.DeviceRepositoryModule
 
 abstract class BaseViewModel : ViewModel() {
-    private val searchDeviceComponent: ISearchViewModelInjectorComponent =
-        DaggerISearchViewModelInjectorComponent
+    private val searchDeviceComponent: SearchVMComponent =
+        DaggerSearchVMComponent
             .builder()
             .deviceRepositoryModule(DeviceRepositoryModule)
             .build()
@@ -23,6 +25,7 @@ abstract class BaseViewModel : ViewModel() {
             is SearchDeviceViewModel -> searchDeviceComponent.inject(
                 this
             )
+            is DeviceDetailViewModel -> App.component.inject(this)
         }
     }
 }
