@@ -8,7 +8,7 @@ import org.hogent.phonelibrary.injection.modules.DisplayNameLoaderModule
 import org.hogent.phonelibrary.viewModels.DeviceDetailViewModel
 import javax.inject.Singleton
 
-@Singleton
+@Singleton // Needed when using the repository
 @Component(modules = [DeviceRepositoryModule::class, DeviceSpecMapperModule::class, DisplayNameLoaderModule::class])
 interface DeviceDetailVMComponent {
     //Inject into the specified class.

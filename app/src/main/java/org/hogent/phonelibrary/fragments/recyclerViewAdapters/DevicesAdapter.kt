@@ -48,7 +48,7 @@ class DevicesAdapter(
             // Check if the current device is a favorite device.
             val isFavorite = favoriteDevices.find { favoriteDevice -> device.name == favoriteDevice.name } != null
             // Hide the image view if it's not a favorite device.
-            deviceHolder.brand.visibility = if (isFavorite) View.VISIBLE else View.INVISIBLE
+            deviceHolder.favoriteIndicator.visibility = if (isFavorite) View.VISIBLE else View.INVISIBLE
         }
 
         with(deviceHolder.itemView) {

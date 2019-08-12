@@ -6,7 +6,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
     private lateinit var searchDeviceViewModel: SearchDeviceViewModel
+    private lateinit var deviceListViewModel: DeviceListViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,6 +40,8 @@ class DeviceListFragment : Fragment() {
         searchDeviceViewModel = activity?.run {
             ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
         } ?: throw Exception("Invalid Activity.")
+        // Load view model for this fragment only.
+        deviceListViewModel = ViewModelProviders.of(this).get(DeviceListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -72,6 +74,12 @@ class DeviceListFragment : Fragment() {
                     listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
                 }
             })
+        // Observe the favorite devices result.
+        deviceListViewModel.favoriteDevices.observe(this, Observer {
+            if (it != null) {
+                (devicesRecyclerView.adapter as DevicesAdapter).setFavoriteDevices(it)
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -79,6 +87,8 @@ class DeviceListFragment : Fragment() {
 
         // Remove the observers on the result.
         searchDeviceViewModel.getResult().removeObservers(this)
+        // Remove observer from favorite devices.
+        deviceListViewModel.favoriteDevices.removeObservers(this)
     }
 
     override fun onDetach() {

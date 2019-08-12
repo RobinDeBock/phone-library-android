@@ -64,6 +64,7 @@
                     android:layout_marginEnd="10dp"
                     android:adjustViewBounds="true"
                     android:visibility="invisible"
+                    android:animateLayoutChanges="true"
             />
 
         </android.support.constraint.ConstraintLayout>
