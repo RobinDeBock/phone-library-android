@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.device_list_row.view.*
 import org.hogent.phonelibrary.R
@@ -15,6 +16,8 @@ class DevicesAdapter(
 ) : RecyclerView.Adapter<DevicesAdapter.DeviceHolder>() {
 
     private var devices: List<Device> = ArrayList()
+
+    private var favoriteDevices: List<Device> = ArrayList()
 
     private val onClickListener: View.OnClickListener
 
@@ -40,6 +43,13 @@ class DevicesAdapter(
         // Set values of holder.
         deviceHolder.name.text = device.displayName()
         deviceHolder.brand.text = device.brand ?: ""
+        // Check if there are any favorite devices.
+        if (favoriteDevices.isNotEmpty()){
+            // Check if the current device is a favorite device.
+            val isFavorite = favoriteDevices.find { favoriteDevice -> device.name == favoriteDevice.name } != null
+            // Hide the image view if it's not a favorite device.
+            deviceHolder.brand.visibility = if (isFavorite) View.VISIBLE else View.INVISIBLE
+        }
 
         with(deviceHolder.itemView) {
             // Store the device.
@@ -77,8 +87,19 @@ class DevicesAdapter(
         notifyDataSetChanged()
     }
 
+    /**
+     * Set the list of favorite devices and update the recycler view.
+     *
+     * @param devices
+     */
+    fun setFavoriteDevices(devices: List<Device>) {
+        favoriteDevices = devices
+        notifyDataSetChanged()
+    }
+
     inner class DeviceHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.deviceNameTextView
         val brand: TextView = view.deviceBrandTextView
+        val favoriteIndicator: ImageView = view.favoriteIndicatorImageView
     }
 }

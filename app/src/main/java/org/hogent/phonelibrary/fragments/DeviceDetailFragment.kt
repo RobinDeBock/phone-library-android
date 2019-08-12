@@ -115,6 +115,13 @@ class DeviceDetailFragment : Fragment() {
         updateFavoriteStatus()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Remove observer from favorite devices.
+        deviceDetailViewModel.favoriteDevices.removeObservers(this)
+    }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
