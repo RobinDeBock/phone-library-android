@@ -27,6 +27,8 @@ class DeviceListFragment : Fragment() {
         //Check that parent activity implements required interface.
         if (context is OnDeviceSelectedListener) {
             listener = context
+            // Update title.
+            listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
         } else {
             throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
         }

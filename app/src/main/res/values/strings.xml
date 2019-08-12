@@ -1,27 +1,32 @@
 <resources>
+    <!-- Application strings -->
     <string name="app_name">Phone library</string>
-    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Menu strings -->
     <string name="title_favorites">Favorites</string>
     <string name="title_search">Search</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_favorites_fragment">Hello favorites fragment</string>
-    <string name="hello_search_fragment">Hello search fragment</string>
-    <string name="hello_list_fragment">Hello list fragment</string>
+    <!-- Fragment -Activity titles -->
+    <string name="title_activity_main">Phone Library</string>
+    <string name="title_activity_fragment_list">Search results</string>
+    <string name="title_activity_fragment_detail">Detail</string>
+    <string name="title_activity_fragment_favorites">Favorites</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Placeholder text -->
+    <string name="hello_favorites_fragment">Hello favorites fragment</string>
     <string name="hello_detail_fragment">Hello detail fragment</string>
+
+    <!-- Search screen -->
     <string name="open_detail">Open detail</string>
     <string name="search_by_name">Search by name</string>
     <string name="search_by_brand">Search by brand</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="the_logo_of_the_app">The logo of the app</string>
     <string name="edit_text_placeholder">e.g. Xiaomi, Galaxy S10</string>
+
+    <!-- List screen -->
     <string name="name_placeholder">Name</string>
     <string name="brand_placeholder">Brand</string>
-    <string name="test_placeholder">TEST</string>
+    <string name="category_placeholder">Category</string>
 
     <!-- Spec category display names -->
     <string name="spec_category_display_name_main">Main</string>

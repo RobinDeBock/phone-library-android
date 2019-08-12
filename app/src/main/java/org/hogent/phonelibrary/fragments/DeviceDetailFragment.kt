@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_device_detail.*
 import kotlinx.android.synthetic.main.fragment_device_detail.view.*
+import org.hogent.phonelibrary.IParentActivity
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter
@@ -39,6 +40,14 @@ class DeviceDetailFragment : Fragment() {
         val viewModelFactory = DeviceDetailViewModelFactory(device)
         deviceDetailViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(DeviceDetailViewModel::class.java)
+
+        // Set the title.
+        //Check that parent activity implements required interface.
+        if (context is IParentActivity) {
+            (context!! as IParentActivity).updateTitle(getString(R.string.title_activity_fragment_detail))
+        } else {
+            throw RuntimeException("$context must implement ${IParentActivity::class.simpleName}")
+        }
     }
 
     override fun onCreateView(

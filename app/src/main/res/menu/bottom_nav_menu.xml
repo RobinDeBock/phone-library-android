@@ -4,12 +4,12 @@
     <!-- todo New icons on navigation items-->
     <item
             android:id="@+id/navigation_favorites"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_favorite_black"
             android:title="@string/title_favorites"/>
 
     <item
             android:id="@+id/navigation_search"
-            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:icon="@drawable/ic_search_black"
             android:title="@string/title_search"/>
 
 </menu>

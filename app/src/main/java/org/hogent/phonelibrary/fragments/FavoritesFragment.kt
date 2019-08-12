@@ -15,6 +15,18 @@ import org.hogent.phonelibrary.domain.models.Device
 class FavoritesFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // Check that parent activity implements required interface.
+        if (context is OnDeviceSelectedListener) {
+            listener = context
+            // Set the title.
+            listener!!.updateTitle(getString(R.string.title_activity_fragment_favorites))
+        } else {
+            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,23 +34,13 @@ class FavoritesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
 
-        //Add listener on button click.
+        // Add listener on button click.
         view.favorites_detail_button.setOnClickListener{
             listener!!.onDeviceSelection(Device())
         }
 
-        //Return the view.
+        // Return the view.
         return view
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //Check that parent activity implements required interface.
-        if (context is OnDeviceSelectedListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
-        }
     }
 
     override fun onDetach() {

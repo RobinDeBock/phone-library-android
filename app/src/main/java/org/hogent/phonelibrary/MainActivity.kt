@@ -15,7 +15,7 @@ import java.lang.Exception
 
 private const val BACK_STACK_ROOT_TAG = "root_fragment"
 
-class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListener,
+class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListener,
     SearchFragment.OnDevicesLookupResultsListener {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         switchFragment(DeviceListFragment.newInstance(), false)
     }
 
-    override fun onDeviceSelection(device : Device) {
+    override fun onDeviceSelection(device: Device) {
         //Switch to the detail fragment.
         switchFragment(DeviceDetailFragment.newInstance(device), false)
     }
@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
     }
 
     override fun onBackPressed() {
+        resetActionBarTitle()
+
         super.onBackPressed()
         // If the back stack has no fragments, close the activity.
         if (supportFragmentManager.backStackEntryCount < 1) {
@@ -95,6 +97,10 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         return super.onOptionsItemSelected(item)
     }
 
+    override fun updateTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
     /**
      * Helper function to show a new fragment on the screen.
      * If the fragment is a root fragment. Pressing the back button will close the activity.
@@ -108,6 +114,8 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
             "Switch fragment",
             "Switching to fragment ${fragment::class.simpleName}. IsNavigationalRoot: $isNavigationalRoot"
         )
+
+        resetActionBarTitle()
 
         try {
             // Check whether or not it's a root fragment.
@@ -162,13 +170,28 @@ class MainActivity : AppCompatActivity(), ParentActivity, OnDeviceSelectedListen
         //Not a root fragment, show the back button.
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
+
+    /**
+     * Sets the title of the action bar back to it's default.
+     *
+     */
+    private fun resetActionBarTitle() {
+        updateTitle(getString(R.string.title_activity_main))
+    }
 }
 
-interface ParentActivity {
+interface IParentActivity {
     /**
      * Helper function for showing a toast.
      *
      * @param text The text to show.
      */
     fun showToast(text: String)
+
+    /**
+     * Updates the title in the action bar.
+     *
+     * @param title The new title.
+     */
+    fun updateTitle(title: String)
 }
