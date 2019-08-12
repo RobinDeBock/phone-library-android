@@ -86,10 +86,8 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                // Call parent function to go back.
-                super.onBackPressed()
-                // Back button in action bar was pressed.
-                updateActionBarBackButton()
+                // Call function to go back.
+                onBackPressed()
                 return true
             }
         }

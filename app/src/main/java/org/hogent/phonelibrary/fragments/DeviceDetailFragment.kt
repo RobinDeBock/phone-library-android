@@ -30,6 +30,8 @@ class DeviceDetailFragment : Fragment() {
 
     private lateinit var deviceDetailViewModel: DeviceDetailViewModel
 
+    private var listener : IParentActivity? = null
+
     // Keeps track whether or not the current device is favorite.
     // Used to choose correct method (unfavorite/favorite) when image view is pressed.
     private var isFavorite: Boolean = false
@@ -49,7 +51,8 @@ class DeviceDetailFragment : Fragment() {
         // Set the title.
         //Check that parent activity implements required interface.
         if (context is IParentActivity) {
-            (context!! as IParentActivity).updateTitle(getString(R.string.title_activity_fragment_detail))
+            listener = context as IParentActivity
+            listener!!.updateTitle(getString(R.string.title_activity_fragment_detail))
         } else {
             throw RuntimeException("$context must implement ${IParentActivity::class.simpleName}")
         }
@@ -110,6 +113,11 @@ class DeviceDetailFragment : Fragment() {
         (specCategoriesRecyclerView.adapter as SpecCategoriesAdapter).setSpecCategories(deviceDetailViewModel.getCategories())
         // Update favorite image view.
         updateFavoriteStatus()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 
     companion object {

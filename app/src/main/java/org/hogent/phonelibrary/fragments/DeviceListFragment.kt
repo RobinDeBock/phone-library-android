@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +28,6 @@ class DeviceListFragment : Fragment() {
         //Check that parent activity implements required interface.
         if (context is OnDeviceSelectedListener) {
             listener = context
-            // Update title.
-            listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
         } else {
             throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
         }
@@ -64,10 +63,13 @@ class DeviceListFragment : Fragment() {
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
                 // Load the result into the adapter.
-                if (!searchDeviceViewModel.isResultHandled()) {
-                    if (it is SuccessResult) {
-                        (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
-                    }
+                if (it is SuccessResult) {
+                    (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
+                    // Update fragment title.
+                    listener!!.updateTitle("${getString(R.string.title_activity_fragment_list)} (${it.devices.count()})")
+                } else {
+                    // Update title. Putting in the OnAttach overwrites a successful result.
+                    listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
                 }
             })
     }
@@ -77,6 +79,11 @@ class DeviceListFragment : Fragment() {
 
         // Remove the observers on the result.
         searchDeviceViewModel.getResult().removeObservers(this)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 
     companion object {
