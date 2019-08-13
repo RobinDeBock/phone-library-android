@@ -33,6 +33,8 @@
         <item>Sort by name</item>
         <item>Sort by brand</item>
     </string-array>
+    <string name="no_favorite_devices_text">No favorite devices yet</string>
+    <string name="no_favorite_devices_subtext">Go add some!</string>
 
     <!-- Spec category display names -->
     <string name="spec_category_display_name_main">Main</string>
