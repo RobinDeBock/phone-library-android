@@ -47,4 +47,46 @@ class Device : Serializable {
         return "Device: $name, Brand: $brand"
     }
 
+    companion object {
+        fun giveDeviceByBrandComparator(): Comparator<Device> = Comparator { device1, device2 ->
+            // Sort by brand, null brand has precedence.
+            if (!(device1.brand == null && device2.brand == null)) {
+                if (device1.brand == null) {
+                    // Device 1 brand is null.
+                    return@Comparator -1
+                } else if (device2.brand == null) {
+                    // Device 2 brand is null.
+                    return@Comparator 1
+                }
+                // Brands are not null.
+                val compareResult = device1.brand!!.compareTo(device2.brand!!)
+                // If not equal, return result.
+                if (compareResult != 0) return@Comparator compareResult
+            }
+
+            // Brands are equals. Compare by display name (the 'name' property contains the brand).
+            return@Comparator device1.displayName().compareTo(device2.displayName())
+        }
+
+        fun giveDeviceByNameComparator(): Comparator<Device> = Comparator { device1, device2 ->
+            // Compare by display name (the 'name' property contains the brand).
+            val compareResult = device1.displayName().compareTo(device2.displayName())
+            // If not equal, return result.
+            if (compareResult != 0) return@Comparator compareResult
+
+            if (!(device1.brand == null && device2.brand == null)) {
+                if (device1.brand == null) {
+                    // Device 1 brand is null.
+                    return@Comparator -1
+                } else if (device2.brand == null) {
+                    // Device 2 brand is null.
+                    return@Comparator 1
+                }
+                // Brands are not null.
+                return@Comparator device1.brand!!.compareTo(device2.brand!!)
+            }
+            // Brands are both null and thus equal.
+            return@Comparator 0
+        }
+    }
 }

@@ -69,7 +69,7 @@ class FavoritesFragment : Fragment() {
                 // Load the result into the adapter.
                 if (it != null && it.count() > 0) {
                     // Push devices to adapter.
-                    (favoritesRecyclerView.adapter as FavoriteDevicesAdapter).setFavoriteDevices(it)
+                    (favoritesRecyclerView.adapter as FavoriteDevicesAdapter).setFavoriteDevices(it, true)
                     // Update fragment title.
                     listener!!.updateTitle("${getString(R.string.title_activity_fragment_favorites)} (${it.count()})")
                 } else {

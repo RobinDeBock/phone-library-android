@@ -57,8 +57,12 @@ class FavoriteDevicesAdapter(
      *
      * @param devices
      */
-    fun setFavoriteDevices(devices: List<Device>) {
-        favoriteDevices = devices
+    fun setFavoriteDevices(devices: List<Device>, sortByBrand: Boolean) {
+        if (sortByBrand) {
+            this.favoriteDevices = devices.sortedWith(Device.giveDeviceByBrandComparator())
+        } else {
+            this.favoriteDevices = devices.sortedWith(Device.giveDeviceByNameComparator())
+        }
         notifyDataSetChanged()
     }
 
