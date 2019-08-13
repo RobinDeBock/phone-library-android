@@ -1,10 +1,10 @@
 package org.hogent.phonelibrary.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,21 +92,19 @@ class SearchFragment : Fragment() {
         // Update button enable status.
         updateButtonEnableStatus()
 
-        // Result gets handled.
-        searchDeviceViewModel.resultHandled()
-
         // Observe the result.
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
                 // Check that the result has not been handled yet.
                 // Otherwise it would instantly try to switch fragments after recreation (after going back) or show the error message.
-                if(!searchDeviceViewModel.isResultHandled()){
+                if (!searchDeviceViewModel.isResultHandled()) {
                     if (it is ErrorResult) {
                         handleErrorResult(it)
-                    }
-                    else {
+                    } else {
                         handleSuccessResult(it as SuccessResult)
                     }
+                    // Result was handled.
+                    searchDeviceViewModel.resultHandled()
                 }
 
             })
@@ -114,13 +112,18 @@ class SearchFragment : Fragment() {
         // Observe the loading status.
         searchDeviceViewModel.isLoading()
             .observe(this, Observer {
+                // Only disable buttons and such if loading and the result has not been handled yet.
+                // Otherwise the controls will become available right before result is handled.
+                val showLoading = (it == true)
                 // Enable controls if not loading. (Null counts as false)
-                inputText.isEnabled = (it ?: false) != true
+                inputText.isEnabled = !showLoading
                 // If input field is empty, no updates are applied to button visibility.
                 if (inputText.text.isNotEmpty()) {
-                    search_brand_button.isEnabled = (it ?: false) != true
-                    search_name_button.isEnabled = (it ?: false) != true
+                    search_brand_button.isEnabled = !showLoading
+                    search_name_button.isEnabled = !showLoading
                 }
+                // Show or hide progress bar.
+                progressBar.visibility = if (showLoading) View.VISIBLE else View.GONE
             })
     }
 
@@ -138,7 +141,7 @@ class SearchFragment : Fragment() {
 
     private fun handleSuccessResult(successResult: SuccessResult) {
         // Check that the result is not empty.
-        if (!successResult.devices.isEmpty()) {
+        if (successResult.devices.isNotEmpty()) {
             // RESULTS FOUND.
             // Switch fragment.
             listener?.onDevicesLookupResultsFound(successResult)

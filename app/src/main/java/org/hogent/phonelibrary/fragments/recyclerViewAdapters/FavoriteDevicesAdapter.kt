@@ -6,17 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import kotlinx.android.synthetic.main.device_list_row.view.*
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 
-class DevicesAdapter(
+class FavoriteDevicesAdapter(
     private val onDeviceSelectedListener: OnDeviceSelectedListener
-) : RecyclerView.Adapter<DevicesAdapter.DeviceHolder>(), RecyclerViewFastScroller.OnPopupTextUpdate {
-
-    private var devices: List<Device> = ArrayList()
+) : RecyclerView.Adapter<FavoriteDevicesAdapter.DeviceHolder>() {
 
     private var favoriteDevices: List<Device> = ArrayList()
 
@@ -37,20 +34,15 @@ class DevicesAdapter(
         return DeviceHolder(view)
     }
 
-    override fun getItemCount(): Int = devices.count()
+    override fun getItemCount(): Int = favoriteDevices.count()
 
     override fun onBindViewHolder(deviceHolder: DeviceHolder, index: Int) {
-        val device = devices[index]
+        val device = favoriteDevices[index]
         // Set values of holder.
         deviceHolder.name.text = device.displayName()
         deviceHolder.brand.text = device.brand ?: ""
-        // Check if there are any favorite devices.
-        if (favoriteDevices.isNotEmpty()) {
-            // Check if the current device is a favorite device.
-            val isFavorite = favoriteDevices.find { favoriteDevice -> device.name == favoriteDevice.name } != null
-            // Hide the image view if it's not a favorite device.
-            deviceHolder.favoriteIndicator.visibility = if (isFavorite) View.VISIBLE else View.INVISIBLE
-        }
+        // Always hide image, takes in no space on the screen now.
+        deviceHolder.favoriteIndicator.visibility = View.GONE
 
         with(deviceHolder.itemView) {
             // Store the device.
@@ -61,40 +53,34 @@ class DevicesAdapter(
     }
 
     /**
-     * Provides the text for the section title.
-     *
-     * @param position The position in the recycler view.
-     * @return The first word of the device display name.
-     */
-    override fun onChange(position: Int): CharSequence {
-        // Get the display name.
-        val displayName = devices[position].displayName().trim()
-        // Check if there are multiple words in the display name.
-        val index = devices[position].displayName().indexOf(" ")
-
-        // If no space was found, return the full display name (which is one word).
-        if (index == -1) return displayName
-        // Otherwise return the first word.
-        return displayName.substring(0, index).trim()
-    }
-
-    /**
-     * Set the devices and update the recycler view.
-     *
-     * @param devices
-     */
-    fun setDevices(devices: List<Device>) {
-        this.devices = devices.sortedWith(Device.giveDeviceByNameComparator())
-        notifyDataSetChanged()
-    }
-
-    /**
      * Set the list of favorite devices and update the recycler view.
      *
      * @param devices
      */
-    fun setFavoriteDevices(devices: List<Device>) {
-        favoriteDevices = devices
+    fun setFavoriteDevices(devices: List<Device>, sortByBrand: Boolean) {
+        if (sortByBrand) {
+            this.favoriteDevices = devices.sortedWith(Device.giveDeviceByBrandComparator())
+        } else {
+            this.favoriteDevices = devices.sortedWith(Device.giveDeviceByNameComparator())
+        }
+        notifyDataSetChanged()
+    }
+
+    /**
+     * Change the sorting on the list.
+     *
+     * @param sortByBrand
+     */
+    fun updateSorting(sortByBrand: Boolean){
+        // Do nothing if list of devices is empty.
+        if (this.favoriteDevices.isEmpty()) return
+
+        // Not empty, sort the list.
+        if (sortByBrand) {
+            this.favoriteDevices = this.favoriteDevices.sortedWith(Device.giveDeviceByBrandComparator())
+        } else {
+            this.favoriteDevices = this.favoriteDevices.sortedWith(Device.giveDeviceByNameComparator())
+        }
         notifyDataSetChanged()
     }
 

@@ -4,6 +4,7 @@ import android.util.Log
 import org.hogent.phonelibrary.domain.models.*
 import org.hogent.phonelibrary.domain.models.specs.BooleanSpec
 import org.hogent.phonelibrary.domain.models.specs.StringSpec
+import javax.inject.Inject
 import kotlin.collections.HashMap
 
 class DeviceSpecMapper {

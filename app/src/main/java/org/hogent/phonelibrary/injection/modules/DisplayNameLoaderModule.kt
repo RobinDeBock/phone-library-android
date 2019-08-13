@@ -1,14 +1,15 @@
-package org.hogent.phonelibrary.injection
+package org.hogent.phonelibrary.injection.modules
 
 import dagger.Module
 import dagger.Provides
 import org.hogent.phonelibrary.App
+import org.hogent.phonelibrary.domain.mappers.ContextProvider
 import org.hogent.phonelibrary.domain.mappers.DisplayNameLoader
 
 @Module
-class DisplayNameLoaderModule(val app: App) {
+object DisplayNameLoaderModule{
     @Provides
     fun provideDisplayNameLoader(): DisplayNameLoader {
-        return DisplayNameLoader(app)
+        return DisplayNameLoader()
     }
 }

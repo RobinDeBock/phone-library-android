@@ -1,4 +1,4 @@
-package org.hogent.phonelibrary.injection
+package org.hogent.phonelibrary.injection.modules
 
 import dagger.Module
 import javax.inject.Singleton
@@ -17,7 +17,7 @@ object DeviceApiModule{
 
     @Provides
     @Named("baseUrl")
-    fun providebaseUrl(): String {
+    fun provideBaseUrl(): String {
         return "https://fonoapi.freshpixl.com/v1/"
     }
 }

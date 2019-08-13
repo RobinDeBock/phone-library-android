@@ -28,6 +28,14 @@
     <string name="brand_placeholder">Brand</string>
     <string name="category_placeholder">Category</string>
 
+    <!-- Favorites screen -->
+    <string-array name="device_sort_options">
+        <item>Sort by name</item>
+        <item>Sort by brand</item>
+    </string-array>
+    <string name="no_favorite_devices_text">No favorite devices yet</string>
+    <string name="no_favorite_devices_subtext">Go add some!</string>
+
     <!-- Spec category display names -->
     <string name="spec_category_display_name_main">Main</string>
     <string name="spec_category_display_name_release">Release</string>
@@ -54,4 +62,5 @@
     <string name="spec_display_name_simtype">SIM type</string>
     <string name="spec_display_name_cardslot">Card slot</string>
     <string name="spec_display_name_os">OS</string>
+
 </resources>

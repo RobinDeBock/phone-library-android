@@ -4,7 +4,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Animation
 import android.view.animation.CycleInterpolator
+import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import android.widget.EditText
 import org.hogent.phonelibrary.R
@@ -36,8 +38,20 @@ class FragmentUtil {
         fun shakeView(): TranslateAnimation {
             val shake = TranslateAnimation(0f, 10f, 0f, 0f)
             shake.duration = 500
-            shake.interpolator = CycleInterpolator(7f)
+            shake.interpolator = CycleInterpolator(5f)
             return shake
+        }
+
+        /**
+         * Animation for making a view grow and then scale back.
+         *
+         * @return
+         */
+        fun growView() : ScaleAnimation{
+            val grow = ScaleAnimation(1f, 1.3f, 1f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            grow.duration = 300
+            grow.interpolator = CycleInterpolator(2f)
+            return grow
         }
 
         /**

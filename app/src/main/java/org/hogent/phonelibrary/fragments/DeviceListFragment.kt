@@ -1,11 +1,11 @@
 package org.hogent.phonelibrary.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,14 +21,13 @@ class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
     private lateinit var searchDeviceViewModel: SearchDeviceViewModel
+    private lateinit var deviceListViewModel: DeviceListViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         //Check that parent activity implements required interface.
         if (context is OnDeviceSelectedListener) {
             listener = context
-            // Update title.
-            listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
         } else {
             throw RuntimeException("$context must implement ${OnDeviceSelectedListener::class.simpleName}")
         }
@@ -41,6 +40,8 @@ class DeviceListFragment : Fragment() {
         searchDeviceViewModel = activity?.run {
             ViewModelProviders.of(this)[SearchDeviceViewModel::class.java]
         } ?: throw Exception("Invalid Activity.")
+        // Load view model for this fragment only.
+        deviceListViewModel = ViewModelProviders.of(this).get(DeviceListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -51,7 +52,8 @@ class DeviceListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_device_list, container, false)
 
         view.devicesRecyclerView.adapter = DevicesAdapter(listener!!)
-        view.devicesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+        view.devicesRecyclerView.layoutManager =
+            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
         //Return the view.
         return view
@@ -64,12 +66,21 @@ class DeviceListFragment : Fragment() {
         searchDeviceViewModel.getResult()
             .observe(this, Observer {
                 // Load the result into the adapter.
-                if (!searchDeviceViewModel.isResultHandled()) {
-                    if (it is SuccessResult) {
-                        (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
-                    }
+                if (it is SuccessResult) {
+                    (devicesRecyclerView.adapter as DevicesAdapter).setDevices(it.devices)
+                    // Update fragment title.
+                    listener!!.updateTitle("${getString(R.string.title_activity_fragment_list)} (${it.devices.count()})")
+                } else {
+                    // Update title. Putting in the OnAttach overwrites a successful result.
+                    listener!!.updateTitle(getString(R.string.title_activity_fragment_list))
                 }
             })
+        // Observe the favorite devices result.
+        deviceListViewModel.favoriteDevices.observe(this, Observer {
+            if (it != null) {
+                (devicesRecyclerView.adapter as DevicesAdapter).setFavoriteDevices(it)
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -77,6 +88,13 @@ class DeviceListFragment : Fragment() {
 
         // Remove the observers on the result.
         searchDeviceViewModel.getResult().removeObservers(this)
+        // Remove observer from favorite devices.
+        deviceListViewModel.favoriteDevices.removeObservers(this)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 
     companion object {

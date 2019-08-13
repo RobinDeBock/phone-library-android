@@ -11,7 +11,7 @@ import com.squareup.moshi.Types
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.repository.network.json.DeviceJsonAdapter
 
-private const val MAX_RESULTS: Int = 20
+private const val MAX_RESULTS: Int = 100
 
 class DeviceApi(private val BASE_URL: String) : IDeviceApi {
 
