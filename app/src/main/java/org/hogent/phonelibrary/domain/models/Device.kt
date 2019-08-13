@@ -58,8 +58,8 @@ class Device : Serializable {
                     // Device 2 brand is null.
                     return@Comparator 1
                 }
-                // Brands are not null.
-                val compareResult = device1.brand!!.compareTo(device2.brand!!)
+                // Brands are not null. Lowercase comes after upper case otherwise. This way casing gets ignored.
+                val compareResult = device1.brand!!.toUpperCase().compareTo(device2.brand!!.toUpperCase())
                 // If not equal, return result.
                 if (compareResult != 0) return@Comparator compareResult
             }
@@ -82,8 +82,8 @@ class Device : Serializable {
                     // Device 2 brand is null.
                     return@Comparator 1
                 }
-                // Brands are not null.
-                return@Comparator device1.brand!!.compareTo(device2.brand!!)
+                // Brands are not null. Lowercase comes after upper case otherwise. This way casing gets ignored.
+                return@Comparator device1.brand!!.toUpperCase().compareTo(device2.brand!!.toUpperCase())
             }
             // Brands are both null and thus equal.
             return@Comparator 0

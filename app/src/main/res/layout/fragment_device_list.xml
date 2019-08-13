@@ -10,13 +10,16 @@
     <com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
             android:id="@+id/fastScroller"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/devicesRecyclerView"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/device_list_row"
-            android:paddingTop="4dp"
-    />
+            android:paddingTop="6dp"
+            android:paddingBottom="4dp"
+    >
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/devicesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/device_list_row"
+                android:layout_marginEnd="17dp"
+        />
     </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>
 </FrameLayout>

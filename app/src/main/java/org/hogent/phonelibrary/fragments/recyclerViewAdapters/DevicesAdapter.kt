@@ -84,7 +84,7 @@ class DevicesAdapter(
      * @param devices
      */
     fun setDevices(devices: List<Device>) {
-        this.devices = devices.sortedWith(Device.giveDeviceByBrandComparator())
+        this.devices = devices.sortedWith(Device.giveDeviceByNameComparator())
         notifyDataSetChanged()
     }
 
