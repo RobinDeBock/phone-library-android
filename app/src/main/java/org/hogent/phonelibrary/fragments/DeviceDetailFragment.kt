@@ -6,6 +6,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,19 +77,28 @@ class DeviceDetailFragment : Fragment() {
         view.specCategoriesRecyclerView.adapter = SpecCategoriesAdapter()
         view.specCategoriesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
-        // Click listener on like 'button' image view.
-        view.favoriteImageView.setOnClickListener {
-            // Animation needs to be stopped if quickly pressed.
-            favoriteImageView.clearAnimation()
+        // Add scroll listener onto the recycler view.
+        view.specCategoriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy <= 0){
+                    // Scrolling up.
+                    animateFavoriteButtonVisibility(true)
+                }else{
+                    // Scrolling down.
+                    animateFavoriteButtonVisibility(false)
+                }
+            }
+        })
 
+        // Click listener on like 'button' image view.
+        view.favoriteFloatingActionButton.setOnClickListener {
             if (isFavorite) {
                 // Device is favorite.
                 deviceDetailViewModel.unFavoritiseDevice(device)
             } else {
                 // Device is not yet favorite.
                 deviceDetailViewModel.favoritiseDevice(device)
-                // Play animation.
-                favoriteImageView.startAnimation(FragmentUtil.growView())
             }
         }
 
@@ -95,20 +106,18 @@ class DeviceDetailFragment : Fragment() {
         return view
     }
 
-    private fun updateFavoriteStatus() {
-        deviceDetailViewModel.favoriteDevices.observe(this, Observer {
-            if (it != null) {
-                // Check if current device is a favorite.
-                // Not using equals or something because it can be a different instance.
-                isFavorite = it.find { favoriteDevice -> device.name == favoriteDevice.name } != null
-                if (isFavorite) {
-                    // Current device is favorite.
-                    favoriteImageView.setImageResource(R.drawable.ic_favorite_full_24dp)
-                } else {
-                    favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp)
-                }
-            }
-        })
+    /**
+     * Slide the action button in or out of the screen.
+     *
+     * @param show Whether or not the button needs to be shown.
+     */
+    private fun animateFavoriteButtonVisibility(show: Boolean) {
+        // Only run commands when not already visible or invisible.
+        if(show && favoriteFloatingActionButton.isOrWillBeHidden){
+            favoriteFloatingActionButton.show()
+        }else if(!show && favoriteFloatingActionButton.isOrWillBeShown){
+            favoriteFloatingActionButton.hide()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,7 +127,27 @@ class DeviceDetailFragment : Fragment() {
         // Load the spec categories.
         (specCategoriesRecyclerView.adapter as SpecCategoriesAdapter).setSpecCategories(deviceDetailViewModel.getCategories())
         // Update favorite image view.
-        updateFavoriteStatus()
+        autoUpdateFavoriteStatus()
+    }
+
+    /**
+     * Observe the favorite devices and set the favorite status. Also update the icon inside the floating action button.
+     *
+     */
+    private fun autoUpdateFavoriteStatus() {
+        deviceDetailViewModel.favoriteDevices.observe(this, Observer {
+            if (it != null) {
+                // Check if current device is a favorite.
+                // Not using equals or something because it can be a different instance.
+                isFavorite = it.find { favoriteDevice -> device.name == favoriteDevice.name } != null
+                if (isFavorite) {
+                    // Current device is favorite.
+                    favoriteFloatingActionButton.setImageResource(R.drawable.ic_favorite_full_24dp)
+                } else {
+                    favoriteFloatingActionButton.setImageResource(R.drawable.ic_favorite_border_24dp)
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
