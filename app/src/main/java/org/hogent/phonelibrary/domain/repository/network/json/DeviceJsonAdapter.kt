@@ -40,21 +40,21 @@ internal class DeviceJsonAdapter {
         ).find(deviceJson.secondary!!)?.value else null
         //Additional specs
         //--Release
-        device.announcedDate = deviceJson.announced
-        device.releaseStatus = deviceJson.status
+        device.announcedDate = invalidEqualsNull(deviceJson.announced)
+        device.releaseStatus = invalidEqualsNull(deviceJson.status)
         //--Physical
-        device.screenSize = deviceJson.size
-        device.dimensions = deviceJson.dimensions
-        device.weight = deviceJson.weight
+        device.screenSize = invalidEqualsNull(deviceJson.size)
+        device.dimensions = invalidEqualsNull(deviceJson.dimensions)
+        device.weight = invalidEqualsNull(deviceJson.weight)
         //--Hardware
-        device.gpu = deviceJson.gpu
-        device.chipset = deviceJson.chipset
+        device.gpu = invalidEqualsNull(deviceJson.gpu)
+        device.chipset = invalidEqualsNull(deviceJson.chipset)
         device.headphoneJack = fromTextToBoolean(deviceJson._3_5mm_jack_)
-        device.usb = deviceJson.usb
-        device.simType = deviceJson.sim
-        device.cardSlot = deviceJson.card_slot
+        device.usb = invalidEqualsNull(deviceJson.usb)
+        device.simType = invalidEqualsNull(deviceJson.sim)
+        device.cardSlot = invalidEqualsNull(deviceJson.card_slot)
         //--Software
-        device.os = deviceJson.os
+        device.os = invalidEqualsNull(deviceJson.os)
 
         return device
     }
@@ -76,6 +76,24 @@ internal class DeviceJsonAdapter {
                 null
             }
         }
+    }
+
+    /**
+     * If the text is null or 'No' or '-' return null.
+     *
+     * @param jsonValue
+     * @return
+     */
+    private fun invalidEqualsNull(jsonValue: String?): String? {
+        // Return null if value is null.
+        if (jsonValue == null) return null
+        // Check if it equals 'No' or  'Yes'.
+        if (jsonValue.equals("No", true)) return null
+        if (jsonValue.equals("Yes", true)) return null
+        // Check if it equals '-'.
+        if (jsonValue.equals("-", true)) return null
+        // Valid text.
+        return jsonValue
     }
 
 }
