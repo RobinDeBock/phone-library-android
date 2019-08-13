@@ -47,8 +47,8 @@ class FragmentUtil {
          *
          * @return
          */
-        fun growAnimation() : ScaleAnimation{
-            val grow = ScaleAnimation(1f, 1.15f, 1f, 1.15f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        fun growView() : ScaleAnimation{
+            val grow = ScaleAnimation(1f, 1.3f, 1f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             grow.duration = 300
             grow.interpolator = CycleInterpolator(2f)
             return grow

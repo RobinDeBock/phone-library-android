@@ -81,7 +81,7 @@ class DeviceDetailFragment : Fragment() {
                 // Device is not yet favorite.
                 deviceDetailViewModel.favoritiseDevice(device)
                 // Play animation.
-                favoriteImageView.startAnimation(FragmentUtil.growAnimation())
+                favoriteImageView.startAnimation(FragmentUtil.growView())
             }
         }
 
@@ -97,9 +97,9 @@ class DeviceDetailFragment : Fragment() {
                 isFavorite = it.find { favoriteDevice -> device.name == favoriteDevice.name } != null
                 if (isFavorite) {
                     // Current device is favorite.
-                    favoriteImageView.setImageResource(R.drawable.ic_favorite_favoritised_24dp)
+                    favoriteImageView.setImageResource(R.drawable.ic_favorite_full_24dp)
                 } else {
-                    favoriteImageView.setImageResource(R.drawable.ic_favorite_black)
+                    favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp)
                 }
             }
         })
