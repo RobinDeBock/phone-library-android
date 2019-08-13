@@ -31,7 +31,7 @@ class Device : Serializable {
     //--Hardware
     var gpu: String? = null
     var chipset: String? = null
-    var headphoneJack: String? = null
+    var headphoneJack: Boolean? = null
     var usb: String? = null
     var simType: String? = null
     var cardSlot: String? = null
