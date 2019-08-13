@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_height="match_parent"
+                                             android:layout_width="match_parent"
+                                             android:elevation="2dp"
+                                             tools:targetApi="lollipop"
+                                             android:background="@color/colorBackground"
+>
+    <android.support.constraint.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guidelineTop"
+            app:layout_constraintGuide_percent="0.15"
+    />
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:srcCompat="@drawable/ic_favorite_border_grey_24dp"
+            android:id="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+            app:layout_constraintBottom_toTopOf="@+id/middleGuideline"
+            android:adjustViewBounds="true"
+    />
+    <android.support.constraint.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/middleGuideline"
+            app:layout_constraintGuide_percent="0.45"
+    />
+
+    <TextView
+            android:text="No favorite devices yet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewNoFavorites"
+            app:layout_constraintTop_toBottomOf="@+id/middleGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="25sp"/>
+    <TextView
+            android:text="Go add some!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewGoAddSome"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNoFavorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="17dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp"
+    />
+</android.support.constraint.ConstraintLayout>

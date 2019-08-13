@@ -115,6 +115,8 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
      * @param devices
      */
     private fun handleFavoriteDevices(devices: List<Device>) {
+        // Hide placeholder for no devices.
+        noFavoritesPlaceholder.visibility = View.GONE
         // Push devices to adapter. Check what option was selected in the sort choice spinner.
         (favoritesRecyclerView.adapter as FavoriteDevicesAdapter).setFavoriteDevices(
             devices,
@@ -129,7 +131,8 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
      *
      */
     private fun handleNoFavoriteDevices() {
-        // todo placeholder for no devices.
+        // Placeholder for no devices.
+        noFavoritesPlaceholder.visibility = View.VISIBLE
         // Update title. Putting in the OnAttach overwrites a successful result.
         listener!!.updateTitle(getString(R.string.title_activity_fragment_favorites))
     }
