@@ -24,6 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sortChoice"
             android:layout_marginTop="15dp"
+            android:scrollbars="vertical"
     >
     </android.support.v7.widget.RecyclerView>
     <include layout="@layout/no_favorites_placeholder"
