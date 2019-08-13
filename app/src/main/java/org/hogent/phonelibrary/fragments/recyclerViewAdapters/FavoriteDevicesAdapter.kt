@@ -66,6 +66,24 @@ class FavoriteDevicesAdapter(
         notifyDataSetChanged()
     }
 
+    /**
+     * Change the sorting on the list.
+     *
+     * @param sortByBrand
+     */
+    fun updateSorting(sortByBrand: Boolean){
+        // Do nothing if list of devices is empty.
+        if (this.favoriteDevices.isEmpty()) return
+
+        // Not empty, sort the list.
+        if (sortByBrand) {
+            this.favoriteDevices = this.favoriteDevices.sortedWith(Device.giveDeviceByBrandComparator())
+        } else {
+            this.favoriteDevices = this.favoriteDevices.sortedWith(Device.giveDeviceByNameComparator())
+        }
+        notifyDataSetChanged()
+    }
+
     inner class DeviceHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.deviceNameTextView
         val brand: TextView = view.deviceBrandTextView

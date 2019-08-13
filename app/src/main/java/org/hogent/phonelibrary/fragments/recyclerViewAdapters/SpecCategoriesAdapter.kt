@@ -1,16 +1,11 @@
 package org.hogent.phonelibrary.fragments.recyclerViewAdapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_VIEW_END
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.device_category_list_row.view.*
 import kotlinx.android.synthetic.main.device_spec_item.view.*
