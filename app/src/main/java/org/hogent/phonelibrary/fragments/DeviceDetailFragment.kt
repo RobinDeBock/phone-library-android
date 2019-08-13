@@ -76,7 +76,7 @@ class DeviceDetailFragment : Fragment() {
         // Configure recycler view.
         view.specCategoriesRecyclerView.adapter = SpecCategoriesAdapter()
         view.specCategoriesRecyclerView.layoutManager =
-            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+            LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
 
         // Add scroll listener onto the recycler view.
         view.specCategoriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -141,12 +141,17 @@ class DeviceDetailFragment : Fragment() {
                 // Check if current device is a favorite.
                 // Not using equals or something because it can be a different instance.
                 isFavorite = it.find { favoriteDevice -> device.name == favoriteDevice.name } != null
+                // Hide, change icon and then show. It's a bug with floating action buttons, which fails to display the new icon.
+                // This discussion confirms: https://stackoverflow.com/questions/49587945/setimageresourceint-doesnt-work-after-setbackgroundtintcolorlistcolorstateli
+                favoriteFloatingActionButton.hide()
                 if (isFavorite) {
                     // Current device is favorite.
                     favoriteFloatingActionButton.setImageResource(R.drawable.ic_favorite_full_24dp)
                 } else {
                     favoriteFloatingActionButton.setImageResource(R.drawable.ic_favorite_border_24dp)
                 }
+                // Re-enable the floating action button.
+                favoriteFloatingActionButton.show()
             }
         })
     }

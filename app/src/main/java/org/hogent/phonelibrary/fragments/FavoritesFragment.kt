@@ -19,6 +19,7 @@ import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter
 import org.hogent.phonelibrary.viewModels.FavoriteDevicesViewModel
 import android.content.SharedPreferences
+import androidx.recyclerview.widget.RecyclerView
 import org.hogent.phonelibrary.domain.models.Device
 
 
@@ -67,7 +68,7 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
         // Set the adapter and layout manager of the recycler view.
         view.favoritesRecyclerView.adapter = FavoriteDevicesAdapter(listener!!)
         view.favoritesRecyclerView.layoutManager =
-            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+            LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
 
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter.createFromResource(
@@ -89,8 +90,7 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        showLoader(true)
+        
         // Observe the favorites.
         favoriteDevicesViewModel.favoriteDevices
             .observe(this, Observer {
@@ -104,10 +104,6 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Add listener to spinner.
         sortChoice.onItemSelectedListener = this
-    }
-
-    private fun showLoader(visible: Boolean) {
-
     }
 
     /**
