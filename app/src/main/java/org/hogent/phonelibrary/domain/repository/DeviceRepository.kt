@@ -1,7 +1,7 @@
 package org.hogent.phonelibrary.domain.repository
 
-import android.arch.lifecycle.LiveData
-import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
 import io.reactivex.Observable
 import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.domain.models.Device

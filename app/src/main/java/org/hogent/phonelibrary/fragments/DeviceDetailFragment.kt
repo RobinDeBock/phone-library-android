@@ -1,12 +1,12 @@
 package org.hogent.phonelibrary.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +33,13 @@ class DeviceDetailFragment : Fragment() {
 
     private lateinit var deviceDetailViewModel: DeviceDetailViewModel
 
-    private var listener : IParentActivity? = null
+    private var listener: IParentActivity? = null
 
     // Keeps track whether or not the current device is favorite.
     // Used to choose correct method (unfavorite/favorite) when image view is pressed.
     private var isFavorite: Boolean = false
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         //Check that parent activity implements required interface.
@@ -75,16 +75,17 @@ class DeviceDetailFragment : Fragment() {
 
         // Configure recycler view.
         view.specCategoriesRecyclerView.adapter = SpecCategoriesAdapter()
-        view.specCategoriesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+        view.specCategoriesRecyclerView.layoutManager =
+            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
         // Add scroll listener onto the recycler view.
         view.specCategoriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if(dy <= 0){
+                if (dy <= 0) {
                     // Scrolling up.
                     animateFavoriteButtonVisibility(true)
-                }else{
+                } else {
                     // Scrolling down.
                     animateFavoriteButtonVisibility(false)
                 }
@@ -113,9 +114,9 @@ class DeviceDetailFragment : Fragment() {
      */
     private fun animateFavoriteButtonVisibility(show: Boolean) {
         // Only run commands when not already visible or invisible.
-        if(show && favoriteFloatingActionButton.isOrWillBeHidden){
+        if (show && favoriteFloatingActionButton.isOrWillBeHidden) {
             favoriteFloatingActionButton.show()
-        }else if(!show && favoriteFloatingActionButton.isOrWillBeShown){
+        } else if (!show && favoriteFloatingActionButton.isOrWillBeShown) {
             favoriteFloatingActionButton.hide()
         }
     }

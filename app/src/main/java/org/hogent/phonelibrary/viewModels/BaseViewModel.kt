@@ -1,6 +1,6 @@
 package org.hogent.phonelibrary.viewModels
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import org.hogent.phonelibrary.App
 import org.hogent.phonelibrary.injection.components.*
 import org.hogent.phonelibrary.injection.modules.DeviceRepositoryModule

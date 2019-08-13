@@ -1,6 +1,6 @@
 package org.hogent.phonelibrary.viewModels
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.repository.DeviceRepository
 import javax.inject.Inject

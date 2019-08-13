@@ -1,11 +1,12 @@
 package org.hogent.phonelibrary.fragments.recyclerViewAdapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
 import kotlinx.android.synthetic.main.device_list_row.view.*
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
@@ -13,7 +14,7 @@ import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 
 class DevicesAdapter(
     private val onDeviceSelectedListener: OnDeviceSelectedListener
-) : RecyclerView.Adapter<DevicesAdapter.DeviceHolder>() {
+) : RecyclerView.Adapter<DevicesAdapter.DeviceHolder>(), RecyclerViewFastScroller.OnPopupTextUpdate {
 
     private var devices: List<Device> = ArrayList()
 
@@ -44,7 +45,7 @@ class DevicesAdapter(
         deviceHolder.name.text = device.displayName()
         deviceHolder.brand.text = device.brand ?: ""
         // Check if there are any favorite devices.
-        if (favoriteDevices.isNotEmpty()){
+        if (favoriteDevices.isNotEmpty()) {
             // Check if the current device is a favorite device.
             val isFavorite = favoriteDevices.find { favoriteDevice -> device.name == favoriteDevice.name } != null
             // Hide the image view if it's not a favorite device.
@@ -57,6 +58,24 @@ class DevicesAdapter(
             // Set on click listener.
             setOnClickListener(onClickListener)
         }
+    }
+
+    /**
+     * Provides the text for the section title.
+     *
+     * @param position The position in the recycler view.
+     * @return The first word of the device display name.
+     */
+    override fun onChange(position: Int): CharSequence {
+        // Get the display name.
+        val displayName = devices[position].displayName().trim()
+        // Check if there are multiple words in the display name.
+        val index = devices[position].displayName().indexOf(" ")
+
+        // If no space was found, return the full display name (which is one word).
+        if (index == -1) return displayName
+        // Otherwise return the first word.
+        return displayName.substring(0, index).trim()
     }
 
     /**

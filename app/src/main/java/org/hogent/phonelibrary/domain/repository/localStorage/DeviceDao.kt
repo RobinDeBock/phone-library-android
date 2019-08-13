@@ -1,7 +1,7 @@
 package org.hogent.phonelibrary.domain.repository.localStorage
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import org.hogent.phonelibrary.domain.models.Device
 
 @Dao

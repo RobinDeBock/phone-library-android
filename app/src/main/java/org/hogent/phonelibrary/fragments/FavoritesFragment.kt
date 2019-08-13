@@ -1,11 +1,11 @@
 package org.hogent.phonelibrary.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -66,7 +66,8 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Set the adapter and layout manager of the recycler view.
         view.favoritesRecyclerView.adapter = FavoriteDevicesAdapter(listener!!)
-        view.favoritesRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+        view.favoritesRecyclerView.layoutManager =
+            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
 
         // Create an ArrayAdapter using the string array and a default spinner layout.
         ArrayAdapter.createFromResource(
