@@ -28,6 +28,12 @@ abstract class BaseViewModel : ViewModel() {
             .deviceRepositoryModule(DeviceRepositoryModule)
             .build()
 
+    private val favoriteDevicesVMComponent : FavoriteDevicesVMComponent=
+        DaggerFavoriteDevicesVMComponent
+            .builder()
+            .deviceRepositoryModule(DeviceRepositoryModule)
+            .build()
+
     init {
         inject()
     }
@@ -40,6 +46,7 @@ abstract class BaseViewModel : ViewModel() {
             is SearchDeviceViewModel -> searchDeviceComponent.inject(this)
             is DeviceDetailViewModel -> deviceDetailComponent.inject(this)
             is DeviceListViewModel -> deviceListViewModel.inject(this)
+            is FavoriteDevicesViewModel -> favoriteDevicesVMComponent.inject(this)
         }
     }
 }

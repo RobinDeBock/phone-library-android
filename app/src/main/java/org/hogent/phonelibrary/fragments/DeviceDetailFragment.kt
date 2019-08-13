@@ -2,6 +2,7 @@ package org.hogent.phonelibrary.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -36,6 +37,17 @@ class DeviceDetailFragment : Fragment() {
     // Used to choose correct method (unfavorite/favorite) when image view is pressed.
     private var isFavorite: Boolean = false
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        //Check that parent activity implements required interface.
+        if (context is IParentActivity) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement ${IParentActivity::class.simpleName}")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get the device from the bundle.
@@ -49,13 +61,7 @@ class DeviceDetailFragment : Fragment() {
             .get(DeviceDetailViewModel::class.java)
 
         // Set the title.
-        //Check that parent activity implements required interface.
-        if (context is IParentActivity) {
-            listener = context as IParentActivity
-            listener!!.updateTitle(getString(R.string.title_activity_fragment_detail))
-        } else {
-            throw RuntimeException("$context must implement ${IParentActivity::class.simpleName}")
-        }
+        listener!!.updateTitle(getString(R.string.title_activity_fragment_detail))
     }
 
     override fun onCreateView(
