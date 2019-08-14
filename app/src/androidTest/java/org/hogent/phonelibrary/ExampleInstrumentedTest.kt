@@ -1,8 +1,7 @@
 package org.hogent.phonelibrary
 
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -18,7 +17,6 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("org.hogent.phonelibrary", appContext.packageName)
+        assertEquals(4, 2 + 2)
     }
 }
