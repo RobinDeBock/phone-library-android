@@ -49,14 +49,14 @@ class Device : Serializable {
 
     companion object {
         fun giveDeviceByBrandComparator(): Comparator<Device> = Comparator { device1, device2 ->
-            // Sort by brand, null brand has precedence.
+            // Sort by brand, not null brand has precedence.
             if (!(device1.brand == null && device2.brand == null)) {
                 if (device1.brand == null) {
                     // Device 1 brand is null.
-                    return@Comparator -1
+                    return@Comparator 1
                 } else if (device2.brand == null) {
                     // Device 2 brand is null.
-                    return@Comparator 1
+                    return@Comparator -1
                 }
                 // Brands are not null. Lowercase comes after upper case otherwise. This way casing gets ignored.
                 val compareResult = device1.brand!!.toUpperCase().compareTo(device2.brand!!.toUpperCase())
