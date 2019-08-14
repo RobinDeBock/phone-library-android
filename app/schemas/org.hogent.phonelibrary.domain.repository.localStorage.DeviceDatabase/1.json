@@ -1,0 +1,148 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "fa04e5fee3ac39329ad5f304dde87ad1",
+    "entities": [
+      {
+        "tableName": "device_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `brand` TEXT, `cpu` TEXT, `screenResolution` TEXT, `ram` TEXT, `batteryShort` TEXT, `rearCamera` TEXT, `frontCamera` TEXT, `announcedDate` TEXT, `releaseStatus` TEXT, `screenSize` TEXT, `dimensions` TEXT, `weight` TEXT, `gpu` TEXT, `chipset` TEXT, `headphoneJack` INTEGER, `usb` TEXT, `simType` TEXT, `cardSlot` TEXT, `os` TEXT, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "brand",
+            "columnName": "brand",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cpu",
+            "columnName": "cpu",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenResolution",
+            "columnName": "screenResolution",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ram",
+            "columnName": "ram",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "batteryShort",
+            "columnName": "batteryShort",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rearCamera",
+            "columnName": "rearCamera",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "frontCamera",
+            "columnName": "frontCamera",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "announcedDate",
+            "columnName": "announcedDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseStatus",
+            "columnName": "releaseStatus",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenSize",
+            "columnName": "screenSize",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dimensions",
+            "columnName": "dimensions",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gpu",
+            "columnName": "gpu",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "chipset",
+            "columnName": "chipset",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "headphoneJack",
+            "columnName": "headphoneJack",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "usb",
+            "columnName": "usb",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "simType",
+            "columnName": "simType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cardSlot",
+            "columnName": "cardSlot",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "os",
+            "columnName": "os",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fa04e5fee3ac39329ad5f304dde87ad1')"
+    ]
+  }
+}

@@ -5,6 +5,7 @@
     <!--Internet Permission-->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+
     <application
             android:name=".App"
             android:allowBackup="true"
@@ -13,6 +14,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <!-- Testing framework -->
+        <uses-library android:name="android.test.runner" android:required="false"/>
         <activity
                 android:name=".MainActivity"
                 android:label="@string/title_activity_main">
