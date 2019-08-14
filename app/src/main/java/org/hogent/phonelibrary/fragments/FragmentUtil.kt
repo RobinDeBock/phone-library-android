@@ -9,6 +9,7 @@ import android.view.animation.CycleInterpolator
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatDrawableManager
 import org.hogent.phonelibrary.R
 
 class FragmentUtil {
@@ -47,8 +48,9 @@ class FragmentUtil {
          *
          * @return
          */
-        fun growView() : ScaleAnimation{
-            val grow = ScaleAnimation(1f, 1.3f, 1f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        fun growView(): ScaleAnimation {
+            val grow =
+                ScaleAnimation(1f, 1.3f, 1f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             grow.duration = 300
             grow.interpolator = CycleInterpolator(2f)
             return grow
@@ -63,8 +65,12 @@ class FragmentUtil {
         fun EditText.setupClearButtonWithAction() {
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(editable: Editable?) {
-                    val clearIcon = if (editable?.isNotBlank() == true) R.drawable.ic_clear else 0
-                    setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
+                    if (editable?.isNotBlank() == true) {
+                        val icon = AppCompatDrawableManager.get().getDrawable(context, R.drawable.ic_clear)
+                        setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null)
+                    } else {
+                        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                    }
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
