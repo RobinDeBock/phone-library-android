@@ -12,8 +12,8 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.not
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -22,14 +22,14 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SearchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest {
+class SearchFavoriteShowsIconInListTest {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun searchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest() {
+    fun searchFavoriteShowsIconInList_RemovingRemovesIconFromList() {
         val appCompatEditText = onView(
             allOf(
                 withId(R.id.inputText),
@@ -120,24 +120,9 @@ class SearchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest {
         )
         floatingActionButton.perform(click())
 
-        val bottomNavigationItemView = onView(
+        val appCompatImageButton = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.nav_view),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        bottomNavigationItemView.perform(click())
-
-        val textView = onView(
-            allOf(
-                withText("Favorites (1)"),
+                withContentDescription("Navigate up"),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -146,37 +131,37 @@ class SearchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest {
                             0
                         )
                     ),
-                    0
+                    2
                 ),
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Favorites (1)")))
+        appCompatImageButton.perform(click())
 
-        val textView2 = onView(
+        val imageView = onView(
             allOf(
-                withId(R.id.deviceNameTextView), withText("Black Shark"),
+                withId(R.id.favoriteIndicatorImageView),
                 childAtPosition(
                     childAtPosition(
                         IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
                         0
                     ),
-                    0
+                    2
                 ),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Black Shark")))
+        imageView.check(matches(isDisplayed()))
 
         val linearLayout2 = onView(
             allOf(
                 withId(R.id.device_row),
                 childAtPosition(
                     allOf(
-                        withId(R.id.favoritesRecyclerView),
+                        withId(R.id.devicesRecyclerView),
                         childAtPosition(
-                            withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                            1
+                            withId(R.id.fastScroller),
+                            0
                         )
                     ),
                     0
@@ -204,7 +189,7 @@ class SearchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest {
         )
         floatingActionButton2.perform(click())
 
-        val appCompatImageButton = onView(
+        val appCompatImageButton2 = onView(
             allOf(
                 withContentDescription("Navigate up"),
                 childAtPosition(
@@ -220,16 +205,8 @@ class SearchFavoriteShowsUpInFavorites_RemovingRemovesFromFavoritesTest {
                 isDisplayed()
             )
         )
-        appCompatImageButton.perform(click())
+        appCompatImageButton2.perform(click())
 
-        val textView3 = onView(
-            allOf(
-                withId(R.id.textViewNoFavorites), withText("No favorite devices yet"),
-                // Guidelines mess up index.
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("No favorite devices yet")))
     }
 
     private fun childAtPosition(
