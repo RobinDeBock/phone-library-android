@@ -78,6 +78,9 @@ class DeviceDetailFragment : Fragment() {
         view.specCategoriesRecyclerView.layoutManager =
             LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
 
+        // On Android 4.4.4, the floating action button always appears below the recycler view.
+        view.favoriteFloatingActionButton.bringToFront()
+
         // Add scroll listener onto the recycler view.
         view.specCategoriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

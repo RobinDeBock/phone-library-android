@@ -33,6 +33,14 @@
             android:textStyle="bold"
             android:maxLines="2"
     />
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/deviceNameTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/specCategoriesRecyclerView">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:srcCompat="@drawable/ic_favorite_border_24dp"
@@ -45,13 +53,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
     />
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/deviceNameTextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/specCategoriesRecyclerView">
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
