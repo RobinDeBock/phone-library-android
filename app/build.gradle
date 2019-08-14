@@ -90,4 +90,5 @@ dependencies {
 
     // RecyclerViewFastScroller
     implementation "com.quiph.ui:recyclerviewfastscroller:$fastscroller_version"
+    androidTestImplementation 'androidx.test:rules:1.3.0-alpha02'
 }
