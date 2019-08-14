@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
                 R.id.navigation_favorites -> {
                     FavoritesFragment.newInstance()
                 }
+                R.id.navigation_home -> {
+                    // todo home pressed.
+                    return@OnNavigationItemSelectedListener true
+                }
                 else ->
                     return@OnNavigationItemSelectedListener false
             }

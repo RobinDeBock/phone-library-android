@@ -3,8 +3,9 @@
     <string name="app_name">Phone library</string>
 
     <!-- Menu strings -->
-    <string name="title_favorites">Favorites</string>
-    <string name="title_search">Search</string>
+    <string name="bottom_nav_title_favorites">Favorites</string>
+    <string name="bottom_nav_title_search">Search</string>
+    <string name="bottom_nav_title_home">Home</string>
 
     <!-- Fragment -Activity titles -->
     <string name="title_activity_main">Phone Library</string>
