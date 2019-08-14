@@ -113,7 +113,7 @@ class SortingFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -218,7 +218,7 @@ class SortingFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -399,7 +399,7 @@ class SortingFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -468,7 +468,7 @@ class SortingFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )

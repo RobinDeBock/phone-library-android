@@ -113,7 +113,7 @@ class BackpressNavigationTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -186,7 +186,7 @@ class BackpressNavigationTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )

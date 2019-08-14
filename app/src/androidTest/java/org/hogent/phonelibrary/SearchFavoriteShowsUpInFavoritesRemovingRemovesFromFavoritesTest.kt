@@ -113,7 +113,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -197,7 +197,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
