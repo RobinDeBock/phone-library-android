@@ -87,7 +87,7 @@ class DeviceSpecMapper {
         val deviceSpecs = specsPerCategory[category]
 
         if (deviceSpecs == null) {
-            // List was not yet present. Add list with spec to hashmap.
+            // LIST was not yet present. Add list with spec to hashmap.
             specsPerCategory[category] = mutableListOf(deviceSpec)
         } else {
             // Was already present.
