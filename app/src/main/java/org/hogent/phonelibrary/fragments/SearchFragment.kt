@@ -132,10 +132,10 @@ class SearchFragment : Fragment() {
         // Check if error is from invalid API token.
         if (errorResult.error.message?.contains(InvalidApiTokenException::class.simpleName!!) == true) {
             // If so, show token.
-            listener?.showToast("Invalid API key.") //todo set as string resource
+            listener?.showToast(getString(R.string.invalid_api_key_message))
         } else {
             // If not, show other token message.
-            listener?.showToast("Could not load devices. Please try again.") //todo set as string resource
+            listener?.showToast(getString(R.string.no_devices_result_message))
         }
     }
 
@@ -150,7 +150,7 @@ class SearchFragment : Fragment() {
             // Shake input field
             inputText.startAnimation(shakeView())
             // Show toast.
-            listener?.showToast("No devices found.") //todo set as string resource
+            listener?.showToast(getString(R.string.no_devices_found_message))
         }
     }
 

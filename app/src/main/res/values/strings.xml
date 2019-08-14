@@ -22,6 +22,8 @@
     <string name="search_by_brand">Search by brand</string>
     <string name="the_logo_of_the_app">The logo of the app</string>
     <string name="edit_text_placeholder">e.g. Xiaomi, Galaxy S10</string>
+    <string name="invalid_api_key_message">Invalid API key.</string>
+    <string name="no_devices_result_message">Could not load devices. Please try again.</string>
 
     <!-- List screen -->
     <string name="name_placeholder">Name</string>
@@ -62,5 +64,6 @@
     <string name="spec_display_name_simtype">SIM type</string>
     <string name="spec_display_name_cardslot">Card slot</string>
     <string name="spec_display_name_os">OS</string>
+    <string name="no_devices_found_message">No devices found.</string>
 
 </resources>
