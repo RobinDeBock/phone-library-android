@@ -74,6 +74,7 @@ class Device : Serializable {
             // If not equal, return result.
             if (compareResult != 0) return@Comparator compareResult
 
+            // This shouldn't happen, as names are unique.
             if (!(device1.brand == null && device2.brand == null)) {
                 if (device1.brand == null) {
                     // Device 1 brand is null.
