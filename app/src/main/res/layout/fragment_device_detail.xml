@@ -52,6 +52,8 @@
             android:layout_margin="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:fabCustomSize="50dp"
+            app:maxImageSize="30dp"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
