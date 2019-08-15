@@ -1,6 +1,6 @@
 <resources>
     <!-- Application strings -->
-    <string name="app_name">Phone library</string>
+    <string name="app_name" translatable="false">Phone library</string>
 
     <!-- Menu strings -->
     <string name="bottom_nav_title_favorites">Favorites</string>
@@ -8,14 +8,14 @@
     <string name="bottom_nav_title_home">Home</string>
 
     <!-- Fragment -Activity titles -->
-    <string name="title_activity_main">Phone Library</string>
+    <string name="title_activity_main" translatable="false">Phone Library</string>
     <string name="title_activity_fragment_list">Search results</string>
     <string name="title_activity_fragment_detail">Detail</string>
     <string name="title_activity_fragment_favorites">Favorites</string>
 
     <!-- Placeholder text -->
-    <string name="hello_favorites_fragment">Hello favorites fragment</string>
-    <string name="hello_detail_fragment">Hello detail fragment</string>
+    <string name="hello_favorites_fragment" translatable="false">Hello favorites fragment</string>
+    <string name="hello_detail_fragment" translatable="false">Hello detail fragment</string>
 
     <!-- SEARCH screen -->
     <string name="open_detail">Open detail</string>
