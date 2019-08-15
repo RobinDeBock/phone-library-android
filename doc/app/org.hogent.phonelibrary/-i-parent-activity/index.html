@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IParentActivity - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary</a>&nbsp;/&nbsp;<a href="./index.html">IParentActivity</a><br/>
+<br/>
+<h1>IParentActivity</h1>
+<code><span class="keyword">interface </span><span class="identifier">IParentActivity</span></code>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="show-toast.html">showToast</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">showToast</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.IParentActivity$showToast(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Helper function for showing a toast.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-title.html">updateTitle</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">updateTitle</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.IParentActivity$updateTitle(kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Updates the title in the action bar.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-main-activity/index.html">MainActivity</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MainActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">IParentActivity</span></a><span class="symbol">, </span><a href="../../org.hogent.phonelibrary.fragments/-on-device-selected-listener/index.html"><span class="identifier">OnDeviceSelectedListener</span></a><span class="symbol">, </span><a href="../../org.hogent.phonelibrary.fragments/-search-fragment/-on-devices-lookup-results-listener/index.html"><span class="identifier">SearchFragment.OnDevicesLookupResultsListener</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../org.hogent.phonelibrary.fragments/-on-device-selected-listener/index.html">OnDeviceSelectedListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OnDeviceSelectedListener</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">IParentActivity</span></a></code>
+<p>Functionality of an Activity which can handle the selection of a device.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../org.hogent.phonelibrary.fragments/-search-fragment/-on-devices-lookup-results-listener/index.html">OnDevicesLookupResultsListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OnDevicesLookupResultsListener</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">IParentActivity</span></a></code>
+<p>Functionality of an Activity which can handle a collection of fetched devices.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

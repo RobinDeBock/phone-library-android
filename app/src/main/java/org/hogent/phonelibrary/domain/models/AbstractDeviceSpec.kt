@@ -1,5 +1,11 @@
 package org.hogent.phonelibrary.domain.models
 
+/**
+ * Base class for a device spec.
+ *
+ * @param T The type of spec.
+ * @property identifier The Enum identifier of the spec.
+ */
 abstract class AbstractDeviceSpec<T : Any>(private val identifier: DeviceSpecEnum) : IDeviceSpec {
     private var displayName: String? = null
 

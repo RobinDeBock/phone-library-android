@@ -5,6 +5,10 @@ import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.*
 import javax.inject.Inject
 
+/**
+ * Loads display names into the spec categories and specs. The string value is gotten from the string resource.
+ *
+ */
 class DisplayNameLoader {
     @Inject
     lateinit var contextProvider: ContextProvider

@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DeviceDetailViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.viewModels</a>&nbsp;/&nbsp;<a href="./index.html">DeviceDetailViewModel</a><br/>
+<br/>
+<h1>DeviceDetailViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">DeviceDetailViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-base-view-model/index.html"><span class="identifier">BaseViewModel</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">DeviceDetailViewModel</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.viewModels.DeviceDetailViewModel$<init>(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="device-spec-mapper.html">deviceSpecMapper</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">deviceSpecMapper</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.mappers/-device-spec-mapper/index.html"><span class="identifier">DeviceSpecMapper</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="display-name-loader.html">displayNameLoader</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">displayNameLoader</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.mappers/-display-name-loader/index.html"><span class="identifier">DisplayNameLoader</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="favorite-devices.html">favoriteDevices</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">favoriteDevices</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="repository.html">repository</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">repository</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.repository/-device-repository/index.html"><span class="identifier">DeviceRepository</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="favoritise-device.html">favoritiseDevice</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">favoritiseDevice</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.viewModels.DeviceDetailViewModel$favoritiseDevice(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Save a device as favorite.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-categories.html">getCategories</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getCategories</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-spec-category/index.html"><span class="identifier">SpecCategory</span></a><span class="symbol">&gt;</span></code>
+<p>Get a list of spec categories and their specs, of the device.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="un-favoritise-device.html">unFavoritiseDevice</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unFavoritiseDevice</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.viewModels.DeviceDetailViewModel$unFavoritiseDevice(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Remove the device from favorites.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SearchDeviceViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.viewModels</a>&nbsp;/&nbsp;<a href="./index.html">SearchDeviceViewModel</a><br/>
+<br/>
+<h1>SearchDeviceViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">SearchDeviceViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-base-view-model/index.html"><span class="identifier">BaseViewModel</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SearchDeviceViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="device-api.html">deviceApi</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">deviceApi</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.repository/-device-repository/index.html"><span class="identifier">DeviceRepository</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="search-value.html">searchValue</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">searchValue</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-result.html">getResult</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getResult</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="../-search-result/index.html"><span class="identifier">SearchResult</span></a><span class="symbol">&gt;</span></code>
+<p>Get the result wrapper object. Contains either the devices or an error.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-loading.html">isLoading</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isLoading</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code>
+<p>Check whether or not the data is still loading.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-result-handled.html">isResultHandled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isResultHandled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Check if the current result has already been handled.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-cleared.html">onCleared</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCleared</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>This method will be called when the parent ViewModel is no longer used and will be destroyed.
+Used to close the subscription to the observable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="result-handled.html">resultHandled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resultHandled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Used to indicate the current data result has already been handled.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="search-devices.html">searchDevices</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">searchDevices</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.viewModels.SearchDeviceViewModel$searchDevices(org.hogent.phonelibrary.viewModels.SearchType)/searchType">searchType</span><span class="symbol">:</span>&nbsp;<a href="../-search-type/index.html"><span class="identifier">SearchType</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>SEARCH the devices by brand name or device name.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

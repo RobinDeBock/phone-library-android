@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FragmentUtil - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.fragments</a>&nbsp;/&nbsp;<a href="./index.html">FragmentUtil</a><br/>
+<br/>
+<h1>FragmentUtil</h1>
+<code><span class="keyword">class </span><span class="identifier">FragmentUtil</span></code>
+<p>Utility class which can be used on controls/views of fragments.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">FragmentUtil</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Utility class which can be used on controls/views of fragments.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="after-text-changed.html">afterTextChanged</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="https://developer.android.com/reference/android/widget/EditText.html"><span class="identifier">EditText</span></a><span class="symbol">.</span><span class="identifier">afterTextChanged</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.FragmentUtil.Companion$afterTextChanged(android.widget.EditText, kotlin.Function1((kotlin.String, kotlin.Unit)))/afterTextChanged">afterTextChanged</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Help function for observing the text of an EditText by using a lambda expression.
+Source: https://stackoverflow.com/questions/40569436/kotlin-addtextchangelistener-lambda</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="setup-clear-button-with-action.html">setupClearButtonWithAction</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="https://developer.android.com/reference/android/widget/EditText.html"><span class="identifier">EditText</span></a><span class="symbol">.</span><span class="identifier">setupClearButtonWithAction</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Help function to show or hide a clear button on the edit text.
+Based on source: https://stackoverflow.com/questions/6355096/how-to-create-edittext-with-crossx-button-at-end-of-it
+Updated the calculation from 'event.rawX &gt;= (this.right - this.compoundPaddingRight)' to '(this.width - this.compoundPaddingRight) &lt; event.x'</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="shake-view.html">shakeView</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">shakeView</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/view/animation/TranslateAnimation.html"><span class="identifier">TranslateAnimation</span></a></code>
+<p>Animation for making a view shake.
+Source: https://stackoverflow.com/questions/15401658/vibration-of-edittext-in-android</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

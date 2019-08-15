@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DeviceRepository - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.domain.repository</a>&nbsp;/&nbsp;<a href="./index.html">DeviceRepository</a><br/>
+<br/>
+<h1>DeviceRepository</h1>
+<code><span class="keyword">class </span><span class="identifier">DeviceRepository</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.repository.network/-i-device-api/index.html"><span class="identifier">IDeviceApi</span></a></code>
+<p>Repository for fetching devices online or local stored devices.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">DeviceRepository</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Repository for fetching devices online or local stored devices.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="device-api.html">deviceApi</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">deviceApi</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.repository.network/-i-device-api/index.html"><span class="identifier">IDeviceApi</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="device-dao.html">deviceDao</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">deviceDao</span><span class="symbol">: </span><a href="../../org.hogent.phonelibrary.domain.repository.local-storage/-device-dao/index.html"><span class="identifier">DeviceDao</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="saved-devices.html">savedDevices</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">savedDevices</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="fetch-devices-by-brand.html">fetchDevicesByBrand</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchDevicesByBrand</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.domain.repository.DeviceRepository$fetchDevicesByBrand(kotlin.String)/brandName">brandName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Fetches the devices by brand name.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-devices-by-name.html">fetchDevicesByName</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchDevicesByName</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.domain.repository.DeviceRepository$fetchDevicesByName(kotlin.String)/deviceName">deviceName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Observable</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Fetches the device(s) by name.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="save-device.html">saveDevice</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">saveDevice</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.domain.repository.DeviceRepository$saveDevice(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="unsave-device.html">unsaveDevice</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unsaveDevice</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.domain.repository.DeviceRepository$unsaveDevice(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

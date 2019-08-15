@@ -11,6 +11,11 @@ import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.fragments.OnDeviceSelectedListener
 
+/**
+ * Adapter for displaying the favorite devices in a recycler view.
+ *
+ * @property onDeviceSelectedListener When clicked on a device, this listener gets called.
+ */
 class FavoriteDevicesAdapter(
     private val onDeviceSelectedListener: OnDeviceSelectedListener
 ) : RecyclerView.Adapter<FavoriteDevicesAdapter.DeviceHolder>() {

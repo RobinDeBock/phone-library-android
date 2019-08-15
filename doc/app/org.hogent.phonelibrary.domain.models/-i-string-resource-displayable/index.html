@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IStringResourceDisplayable - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.domain.models</a>&nbsp;/&nbsp;<a href="./index.html">IStringResourceDisplayable</a><br/>
+<br/>
+<h1>IStringResourceDisplayable</h1>
+<code><span class="keyword">interface </span><span class="identifier">IStringResourceDisplayable</span></code>
+<p>To support string values form a resource and display the new value.
+The display value can be loaded in form the string resource.
+If the new display value is not defined, a default implementation is required.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-display-name.html">getDisplayName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getDisplayName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Gets the display name. The default or the value from string resource.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-display-name.html">setDisplayName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setDisplayName</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.domain.models.IStringResourceDisplayable$setDisplayName(kotlin.String)/displayName">displayName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sets the display name, overrides the default.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-i-device-spec/index.html">IDeviceSpec</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">IDeviceSpec</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">IStringResourceDisplayable</span></a></code>
+<p>A device spec.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-spec-category/index.html">SpecCategory</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SpecCategory</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">IStringResourceDisplayable</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="../-i-device-spec/index.html"><span class="identifier">IDeviceSpec</span></a><span class="symbol">&gt;</span></code>
+<p>A spec category groups the specs.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

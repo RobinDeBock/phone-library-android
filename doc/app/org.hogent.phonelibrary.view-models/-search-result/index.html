@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SearchResult - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.viewModels</a>&nbsp;/&nbsp;<a href="./index.html">SearchResult</a><br/>
+<br/>
+<h1>SearchResult</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">SearchResult</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<p>A search result.</p>
+<h3>Parameters</h3>
+<p><a name="searchTerm"></a>
+<code>searchTerm</code> - The term used to search with.</p>
+<p><a name="searchType"></a>
+<code>searchType</code> - If there was searched by device name or brand name.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SearchResult</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.viewModels.SearchResult$<init>(kotlin.String, org.hogent.phonelibrary.viewModels.SearchType)/searchTerm">searchTerm</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.viewModels.SearchResult$<init>(kotlin.String, org.hogent.phonelibrary.viewModels.SearchType)/searchType">searchType</span><span class="symbol">:</span>&nbsp;<a href="../-search-type/index.html"><span class="identifier">SearchType</span></a><span class="symbol">)</span></code>
+<p>A search result.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="search-term.html">searchTerm</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">searchTerm</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>The term used to search with.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="search-type.html">searchType</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">searchType</span><span class="symbol">: </span><a href="../-search-type/index.html"><span class="identifier">SearchType</span></a></code>
+<p>If there was searched by device name or brand name.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-error-result/index.html">ErrorResult</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ErrorResult</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">SearchResult</span></a><span class="symbol">, </span><a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<p>An error result.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-success-result/index.html">SuccessResult</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SuccessResult</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">SearchResult</span></a></code>
+<p>A successful result.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

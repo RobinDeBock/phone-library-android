@@ -2,3 +2,16 @@ $dokka.format:html
 $dokka.linkExtension:html
 
 org.hogent.phonelibrary
+org.hogent.phonelibrary.domain.mappers
+org.hogent.phonelibrary.domain.models
+org.hogent.phonelibrary.domain.models.specs
+org.hogent.phonelibrary.domain.repository
+org.hogent.phonelibrary.domain.repository.localStorage
+org.hogent.phonelibrary.domain.repository.network
+org.hogent.phonelibrary.domain.repository.network.exceptions
+org.hogent.phonelibrary.domain.repository.network.json
+org.hogent.phonelibrary.fragments
+org.hogent.phonelibrary.fragments.recyclerViewAdapters
+org.hogent.phonelibrary.injection.components
+org.hogent.phonelibrary.injection.modules
+org.hogent.phonelibrary.viewModels

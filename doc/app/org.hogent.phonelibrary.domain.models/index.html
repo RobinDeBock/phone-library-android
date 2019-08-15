@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.hogent.phonelibrary.domain.models - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">org.hogent.phonelibrary.domain.models</a><br/>
+<br/>
+<h2>Package org.hogent.phonelibrary.domain.models</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-abstract-device-spec/index.html">AbstractDeviceSpec</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractDeviceSpec</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-i-device-spec/index.html"><span class="identifier">IDeviceSpec</span></a></code>
+<p>Base class for a device spec.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-device/index.html">Device</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Device</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<p>A device. All values are optional except the name, which is unique.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-device-spec-enum/index.html">DeviceSpecEnum</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">DeviceSpecEnum</span></code>
+<p>The Enum for identifying a spec.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-device-spec/index.html">IDeviceSpec</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">IDeviceSpec</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-i-string-resource-displayable/index.html"><span class="identifier">IStringResourceDisplayable</span></a></code>
+<p>A device spec.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-string-resource-displayable/index.html">IStringResourceDisplayable</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">IStringResourceDisplayable</span></code>
+<p>To support string values form a resource and display the new value.
+The display value can be loaded in form the string resource.
+If the new display value is not defined, a default implementation is required.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-spec-category/index.html">SpecCategory</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SpecCategory</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-i-string-resource-displayable/index.html"><span class="identifier">IStringResourceDisplayable</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="-i-device-spec/index.html"><span class="identifier">IDeviceSpec</span></a><span class="symbol">&gt;</span></code>
+<p>A spec category groups the specs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-spec-category-device-spec-iterator/index.html">SpecCategoryDeviceSpecIterator</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SpecCategoryDeviceSpecIterator</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span class="identifier">Iterator</span></a><span class="symbol">&lt;</span><a href="-i-device-spec/index.html"><span class="identifier">IDeviceSpec</span></a><span class="symbol">&gt;</span></code>
+<p>Iterator for the device specs from a list of spec categories.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-spec-category-enum/index.html">SpecCategoryEnum</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">SpecCategoryEnum</span></code>
+<p>The Enum for identifying a spec category.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

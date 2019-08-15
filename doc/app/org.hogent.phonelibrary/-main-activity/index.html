@@ -8,7 +8,19 @@
 <a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary</a>&nbsp;/&nbsp;<a href="./index.html">MainActivity</a><br/>
 <br/>
 <h1>MainActivity</h1>
-<code><span class="keyword">class </span><span class="identifier">MainActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span></code>
+<code><span class="keyword">class </span><span class="identifier">MainActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">, </span><a href="../-i-parent-activity/index.html"><span class="identifier">IParentActivity</span></a><span class="symbol">, </span><a href="../../org.hogent.phonelibrary.fragments/-on-device-selected-listener/index.html"><span class="identifier">OnDeviceSelectedListener</span></a><span class="symbol">, </span><a href="../../org.hogent.phonelibrary.fragments/-search-fragment/-on-devices-lookup-results-listener/index.html"><span class="identifier">SearchFragment.OnDevicesLookupResultsListener</span></a></code>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-fragment-names/index.html">FragmentNames</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">FragmentNames</span></code></td>
+</tr>
+</tbody>
+</table>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -26,11 +38,59 @@
 <tbody>
 <tr>
 <td>
+<p><a href="on-back-pressed.html">onBackPressed</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onBackPressed</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
 <p><a href="on-create.html">onCreate</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">onCreate</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$onCreate(android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Test documentation for the onCreate.</p>
+<code><span class="keyword">fun </span><span class="identifier">onCreate</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$onCreate(android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-device-selection.html">onDeviceSelection</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDeviceSelection</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$onDeviceSelection(org.hogent.phonelibrary.domain.models.Device)/device">device</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Functionality of an Activity which can handle the selection of a device.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-devices-lookup-results-found.html">onDevicesLookupResultsFound</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDevicesLookupResultsFound</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-options-item-selected.html">onOptionsItemSelected</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onOptionsItemSelected</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$onOptionsItemSelected(android.view.MenuItem)/item">item</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MenuItem.html"><span class="identifier">MenuItem</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Back press detection in action bar.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-toast.html">showToast</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showToast</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$showToast(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Helper function for showing a toast.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-title.html">updateTitle</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">updateTitle</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.MainActivity$updateTitle(kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Updates the title in the action bar.</p>
 </td>
 </tr>
 </tbody>

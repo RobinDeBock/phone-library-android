@@ -17,7 +17,10 @@ import org.hogent.phonelibrary.domain.models.SpecCategory
 import org.hogent.phonelibrary.domain.models.specs.BooleanSpec
 import org.hogent.phonelibrary.domain.models.specs.StringSpec
 
-
+/**
+ * Adapter for displaying the device categories in a recycler view.
+ *
+ */
 class SpecCategoriesAdapter : RecyclerView.Adapter<SpecCategoriesAdapter.CategoryHolder>() {
 
     // The list of categories.

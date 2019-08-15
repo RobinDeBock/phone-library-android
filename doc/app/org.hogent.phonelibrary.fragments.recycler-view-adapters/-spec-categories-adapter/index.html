@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SpecCategoriesAdapter - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.fragments.recyclerViewAdapters</a>&nbsp;/&nbsp;<a href="./index.html">SpecCategoriesAdapter</a><br/>
+<br/>
+<h1>SpecCategoriesAdapter</h1>
+<code><span class="keyword">class </span><span class="identifier">SpecCategoriesAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><a href="-category-holder/index.html"><span class="identifier">SpecCategoriesAdapter.CategoryHolder</span></a><span class="symbol">&gt;</span></code>
+<p>Adapter for displaying the device categories in a recycler view.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-category-holder/index.html">CategoryHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">inner</span> <span class="keyword">class </span><span class="identifier">CategoryHolder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SpecCategoriesAdapter</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Adapter for displaying the device categories in a recycler view.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-item-count.html">getItemCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-bind-view-holder.html">onBindViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter$onBindViewHolder(org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter.CategoryHolder, kotlin.Int)/categoryHolder">categoryHolder</span><span class="symbol">:</span>&nbsp;<a href="-category-holder/index.html"><span class="identifier">SpecCategoriesAdapter.CategoryHolder</span></a><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter$onBindViewHolder(org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter.CategoryHolder, kotlin.Int)/index">index</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-create-view-holder.html">onCreateViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/viewType">viewType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-category-holder/index.html"><span class="identifier">SpecCategoriesAdapter.CategoryHolder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="set-spec-categories.html">setSpecCategories</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setSpecCategories</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.SpecCategoriesAdapter$setSpecCategories(kotlin.collections.List((org.hogent.phonelibrary.domain.models.SpecCategory)))/specCategories">specCategories</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-spec-category/index.html"><span class="identifier">SpecCategory</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the spec categories. Not in constructor for optional async loading.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

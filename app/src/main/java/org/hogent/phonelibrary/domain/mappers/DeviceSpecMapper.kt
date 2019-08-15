@@ -7,6 +7,10 @@ import org.hogent.phonelibrary.domain.models.specs.StringSpec
 import javax.inject.Inject
 import kotlin.collections.HashMap
 
+/**
+ * Converts the device to a list of spec categories.
+ *
+ */
 class DeviceSpecMapper {
 
     /**

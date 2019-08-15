@@ -12,6 +12,10 @@ import org.hogent.phonelibrary.injection.modules.DeviceApiModule
 import org.hogent.phonelibrary.injection.components.RepositoryComponent
 import javax.inject.Inject
 
+/**
+ * Repository for fetching devices online or local stored devices.
+ *
+ */
 class DeviceRepository : IDeviceApi {
     @Inject
     lateinit var deviceApi: IDeviceApi

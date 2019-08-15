@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FavoriteDevicesAdapter - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">org.hogent.phonelibrary.fragments.recyclerViewAdapters</a>&nbsp;/&nbsp;<a href="./index.html">FavoriteDevicesAdapter</a><br/>
+<br/>
+<h1>FavoriteDevicesAdapter</h1>
+<code><span class="keyword">class </span><span class="identifier">FavoriteDevicesAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><a href="-device-holder/index.html"><span class="identifier">FavoriteDevicesAdapter.DeviceHolder</span></a><span class="symbol">&gt;</span></code>
+<p>Adapter for displaying the favorite devices in a recycler view.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-device-holder/index.html">DeviceHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">inner</span> <span class="keyword">class </span><span class="identifier">DeviceHolder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">FavoriteDevicesAdapter</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$<init>(org.hogent.phonelibrary.fragments.OnDeviceSelectedListener)/onDeviceSelectedListener">onDeviceSelectedListener</span><span class="symbol">:</span>&nbsp;<a href="../../org.hogent.phonelibrary.fragments/-on-device-selected-listener/index.html"><span class="identifier">OnDeviceSelectedListener</span></a><span class="symbol">)</span></code>
+<p>Adapter for displaying the favorite devices in a recycler view.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-item-count.html">getItemCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-bind-view-holder.html">onBindViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$onBindViewHolder(org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter.DeviceHolder, kotlin.Int)/deviceHolder">deviceHolder</span><span class="symbol">:</span>&nbsp;<a href="-device-holder/index.html"><span class="identifier">FavoriteDevicesAdapter.DeviceHolder</span></a><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$onBindViewHolder(org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter.DeviceHolder, kotlin.Int)/index">index</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-create-view-holder.html">onCreateViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/viewType">viewType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-device-holder/index.html"><span class="identifier">FavoriteDevicesAdapter.DeviceHolder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="set-favorite-devices.html">setFavoriteDevices</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setFavoriteDevices</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$setFavoriteDevices(kotlin.collections.List((org.hogent.phonelibrary.domain.models.Device)), kotlin.Boolean)/devices">devices</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.hogent.phonelibrary.domain.models/-device/index.html"><span class="identifier">Device</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$setFavoriteDevices(kotlin.collections.List((org.hogent.phonelibrary.domain.models.Device)), kotlin.Boolean)/sortByBrand">sortByBrand</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the list of favorite devices and update the recycler view.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-sorting.html">updateSorting</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">updateSorting</span><span class="symbol">(</span><span class="identifier" id="org.hogent.phonelibrary.fragments.recyclerViewAdapters.FavoriteDevicesAdapter$updateSorting(kotlin.Boolean)/sortByBrand">sortByBrand</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Change the sorting on the list.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
