@@ -43,4 +43,8 @@
     <string name="title_activity_fragment_favorites">Favorieten</string>
     <string name="title_activity_fragment_list">Zoekresultaten</string>
     <string name="action_bar_back_button_identifier">Omhoog navigeren</string>
+    <string-array name="device_sort_options">
+        <item>Sorteer op naam</item>
+        <item>Sorteer op merk</item>
+    </string-array>
 </resources>
