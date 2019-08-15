@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
             // Was or is two-pane.
             // Always reset the screens when going to or coming from a two-pane. Two-panes start on another navigation item.)
             navView.selectedItemId = if (isTwoPane) R.id.navigation_home else R.id.navigation_search
+            // Reset the title.
+            supportActionBar?.title = getString(R.string.title_activity_main)
         }
 
         // Update view model.
@@ -141,6 +143,7 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
     }
 
     override fun updateTitle(title: String) {
+        Log.i("Update Title", "$isTwoPane $title")
         if (!isTwoPane) {
             supportActionBar?.title = title
         }
