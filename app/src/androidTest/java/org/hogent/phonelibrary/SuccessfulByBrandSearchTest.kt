@@ -8,6 +8,7 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
@@ -70,7 +71,7 @@ class SuccessfulByBrandSearchTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_brand_button), withText("Search by brand"),
+                withId(R.id.search_brand_button), withText(R.string.search_by_brand),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -88,12 +89,23 @@ class SuccessfulByBrandSearchTest {
 
         val textView = onView(
             allOf(
-                withText("Search results (82)"),
+                withText("${getResourceString(R.string.title_activity_fragment_list)} (82)"),
                 // View index is messed up.
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Search results (82)")))
+        textView.check(matches(withText("${getResourceString(R.string.title_activity_fragment_list)} (82)")))
+    }
+
+    /**
+     * Helper function to get the string based on the string resource.
+     *
+     * @param id
+     * @return
+     */
+    private fun getResourceString(id: Int): String {
+        val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
+        return targetContext.resources.getString(id)
     }
 
     private fun childAtPosition(

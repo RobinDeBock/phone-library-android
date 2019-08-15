@@ -72,7 +72,7 @@ class BackpressNavigationTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_brand_button), withText("Search by brand"),
+                withId(R.id.search_brand_button), withText(R.string.search_by_brand),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -130,7 +130,7 @@ class BackpressNavigationTest {
 
         val textView = onView(
             allOf(
-                withText("Phone Library"),
+                withText(R.string.title_activity_main),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -144,11 +144,11 @@ class BackpressNavigationTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Phone Library")))
+        textView.check(matches(withText(R.string.title_activity_main)))
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
+                withId(R.id.navigation_favorites), withContentDescription(R.string.bottom_nav_title_favorites),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -201,7 +201,7 @@ class BackpressNavigationTest {
 
         val textView2 = onView(
             allOf(
-                withText("Favorites"),
+                withText(R.string.title_activity_fragment_favorites),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -215,7 +215,7 @@ class BackpressNavigationTest {
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Favorites")))
+        textView2.check(matches(withText(R.string.title_activity_fragment_favorites)))
     }
 
     private fun childAtPosition(

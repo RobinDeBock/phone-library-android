@@ -13,7 +13,6 @@ import androidx.test.runner.AndroidJUnit4
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.not
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -72,7 +71,7 @@ class SearchFavoriteShowsIconInListTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_name_button), withText("Search by name"),
+                withId(R.id.search_name_button), withText(R.string.search_by_name),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -126,7 +125,7 @@ class SearchFavoriteShowsIconInListTest {
 
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                withContentDescription(R.string.action_bar_back_button_identifier),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -195,7 +194,7 @@ class SearchFavoriteShowsIconInListTest {
 
         val appCompatImageButton2 = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                withContentDescription(R.string.action_bar_back_button_identifier),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),

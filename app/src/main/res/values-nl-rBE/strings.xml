@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_nav_title_favorites">Favorieten</string>
+    <string name="bottom_nav_title_home">Start</string>
+    <string name="bottom_nav_title_search">Zoek</string>
+    <string name="brand_placeholder">Merknaam</string>
+    <string name="category_placeholder">Categorie</string>
+    <string name="edit_text_placeholder">bv. Xiaomi, Galaxy S10</string>
+    <string name="invalid_api_key_message">Ongeldige API sleutel.</string>
+    <string name="name_placeholder">Naam</string>
+    <string name="no_devices_found_message">Geen apparaten gevonden.</string>
+    <string name="no_devices_result_message">Kon apparaten niet laden. Probeer opnieuw a.u.b.</string>
+    <string name="no_favorite_devices_subtext">Voeg er toe!</string>
+    <string name="no_favorite_devices_text">Nog geen favoriete apparaten</string>
+    <string name="open_detail">Open detail</string>
+    <string name="search_by_brand">Zoek op merk</string>
+    <string name="search_by_name">Zoek op naam</string>
+    <string name="spec_category_display_name_hardware">Hardware</string>
+    <string name="spec_category_display_name_main">Algemeen</string>
+    <string name="spec_category_display_name_physical">Fysiek</string>
+    <string name="spec_category_display_name_release">Beschikbaarheid</string>
+    <string name="spec_category_display_name_software">Software</string>
+    <string name="spec_display_name_announceddate">Aangekondigd</string>
+    <string name="spec_display_name_batteryshort">Batterij</string>
+    <string name="spec_display_name_cardslot">Kaartsleuf</string>
+    <string name="spec_display_name_chipset">Chipset</string>
+    <string name="spec_display_name_cpu">Processor</string>
+    <string name="spec_display_name_dimensions">Afmetingen</string>
+    <string name="spec_display_name_frontcamera">Camera vooraan</string>
+    <string name="spec_display_name_gpu">Grafische processor</string>
+    <string name="spec_display_name_headphonejack">Koptelefoon aansluiting</string>
+    <string name="spec_display_name_os">Besturingssysteem</string>
+    <string name="spec_display_name_ram">Werkgeheugen</string>
+    <string name="spec_display_name_rearcamera">Camera achteraan</string>
+    <string name="spec_display_name_releasestatus">Beschikbaar</string>
+    <string name="spec_display_name_screenresolution">Scherm resolutie</string>
+    <string name="spec_display_name_screensize">Scherm grootte</string>
+    <string name="spec_display_name_simtype">SIM type</string>
+    <string name="spec_display_name_usb">USB</string>
+    <string name="spec_display_name_weight">Gewicht</string>
+    <string name="the_logo_of_the_app">Het logo van de applicatie</string>
+    <string name="title_activity_fragment_detail">Details</string>
+    <string name="title_activity_fragment_favorites">Favorieten</string>
+    <string name="title_activity_fragment_list">Zoekresultaten</string>
+    <string name="action_bar_back_button_identifier">Omhoog navigeren</string>
+    <string-array name="device_sort_options">
+        <item>Sorteer op naam</item>
+        <item>Sorteer op merk</item>
+    </string-array>
+</resources>
