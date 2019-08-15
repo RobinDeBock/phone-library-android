@@ -113,7 +113,7 @@ class SearchFavoriteShowsIconInListTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )
@@ -182,7 +182,7 @@ class SearchFavoriteShowsIconInListTest {
                             0
                         )
                     ),
-                    2
+                    3
                 ),
                 isDisplayed()
             )

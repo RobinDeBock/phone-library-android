@@ -61,9 +61,9 @@ class SearchDeviceViewModel : BaseViewModel() {
 
     private lateinit var usedSearchType: SearchType
     /**
-     * Search the devices by brand name or device name.
+     * SEARCH the devices by brand name or device name.
      *
-     * @param searchType Search by brand or by device name.
+     * @param searchType SEARCH by brand or by device name.
      */
     fun searchDevices(searchType: SearchType) {
         // Store the used values.
@@ -79,7 +79,7 @@ class SearchDeviceViewModel : BaseViewModel() {
     }
 
     /**
-     * Search devices by name.
+     * SEARCH devices by name.
      *
      * @param deviceName The name of the device.
      */
@@ -102,7 +102,7 @@ class SearchDeviceViewModel : BaseViewModel() {
     }
 
     /**
-     * Search devices by brand.
+     * SEARCH devices by brand.
      *
      * @param brandName The name of the brand.
      */

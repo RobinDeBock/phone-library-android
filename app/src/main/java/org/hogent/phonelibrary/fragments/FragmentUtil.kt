@@ -9,6 +9,7 @@ import android.view.animation.CycleInterpolator
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatDrawableManager
 import org.hogent.phonelibrary.R
 
 class FragmentUtil {
@@ -43,18 +44,6 @@ class FragmentUtil {
         }
 
         /**
-         * Animation for making a view grow and then scale back.
-         *
-         * @return
-         */
-        fun growView() : ScaleAnimation{
-            val grow = ScaleAnimation(1f, 1.3f, 1f, 1.3f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-            grow.duration = 300
-            grow.interpolator = CycleInterpolator(2f)
-            return grow
-        }
-
-        /**
          * Help function to show or hide a clear button on the edit text.
          * Based on source: https://stackoverflow.com/questions/6355096/how-to-create-edittext-with-crossx-button-at-end-of-it
          * Updated the calculation from 'event.rawX >= (this.right - this.compoundPaddingRight)' to '(this.width - this.compoundPaddingRight) < event.x'
@@ -63,8 +52,10 @@ class FragmentUtil {
         fun EditText.setupClearButtonWithAction() {
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(editable: Editable?) {
-                    val clearIcon = if (editable?.isNotBlank() == true) R.drawable.ic_clear else 0
-                    setCompoundDrawablesWithIntrinsicBounds(0, 0, clearIcon, 0)
+                    val icon = if (editable?.isNotBlank() == true) {
+                        R.drawable.ic_clear
+                    } else 0
+                    setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit

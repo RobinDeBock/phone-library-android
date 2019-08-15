@@ -144,7 +144,7 @@ class SearchFragment : Fragment() {
         if (successResult.devices.isNotEmpty()) {
             // RESULTS FOUND.
             // Switch fragment.
-            listener?.onDevicesLookupResultsFound(successResult)
+            listener?.onDevicesLookupResultsFound()
         } else {
             // NO RESULTS FOUND.
             // Shake input field
@@ -177,7 +177,7 @@ class SearchFragment : Fragment() {
      *
      */
     interface OnDevicesLookupResultsListener : IParentActivity {
-        fun onDevicesLookupResultsFound(successResult: SuccessResult)
+        fun onDevicesLookupResultsFound()
     }
 
     companion object {

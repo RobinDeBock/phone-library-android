@@ -3,8 +3,9 @@
     <string name="app_name">Phone library</string>
 
     <!-- Menu strings -->
-    <string name="title_favorites">Favorites</string>
-    <string name="title_search">Search</string>
+    <string name="bottom_nav_title_favorites">Favorites</string>
+    <string name="bottom_nav_title_search">Search</string>
+    <string name="bottom_nav_title_home">Home</string>
 
     <!-- Fragment -Activity titles -->
     <string name="title_activity_main">Phone Library</string>
@@ -16,7 +17,7 @@
     <string name="hello_favorites_fragment">Hello favorites fragment</string>
     <string name="hello_detail_fragment">Hello detail fragment</string>
 
-    <!-- Search screen -->
+    <!-- SEARCH screen -->
     <string name="open_detail">Open detail</string>
     <string name="search_by_name">Search by name</string>
     <string name="search_by_brand">Search by brand</string>
@@ -25,12 +26,12 @@
     <string name="invalid_api_key_message">Invalid API key.</string>
     <string name="no_devices_result_message">Could not load devices. Please try again.</string>
 
-    <!-- List screen -->
+    <!-- LIST screen -->
     <string name="name_placeholder">Name</string>
     <string name="brand_placeholder">Brand</string>
     <string name="category_placeholder">Category</string>
 
-    <!-- Favorites screen -->
+    <!-- FAVORITES screen -->
     <string-array name="device_sort_options">
         <item>Sort by name</item>
         <item>Sort by brand</item>
@@ -65,5 +66,8 @@
     <string name="spec_display_name_cardslot">Card slot</string>
     <string name="spec_display_name_os">OS</string>
     <string name="no_devices_found_message">No devices found.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -10,13 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_device_list.*
 import kotlinx.android.synthetic.main.fragment_device_list.view.*
 import org.hogent.phonelibrary.R
 import org.hogent.phonelibrary.fragments.recyclerViewAdapters.DevicesAdapter
 import org.hogent.phonelibrary.viewModels.*
 
-//todo fix DeviceListFragment class documentation
+/**
+ * Fragment to show the devices from the search result.
+ *
+ */
 class DeviceListFragment : Fragment() {
     private var listener: OnDeviceSelectedListener? = null
 
@@ -53,7 +57,7 @@ class DeviceListFragment : Fragment() {
 
         view.devicesRecyclerView.adapter = DevicesAdapter(listener!!)
         view.devicesRecyclerView.layoutManager =
-            LinearLayoutManager(this.context, LinearLayout.VERTICAL, false)
+            LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
 
         //Return the view.
         return view
