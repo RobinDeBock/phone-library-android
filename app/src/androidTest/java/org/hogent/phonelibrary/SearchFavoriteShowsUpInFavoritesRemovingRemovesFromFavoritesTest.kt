@@ -1,6 +1,7 @@
 package org.hogent.phonelibrary
 
 
+import android.provider.Settings.Global.getString
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -19,6 +20,9 @@ import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.test.InstrumentationRegistry.getTargetContext
+import androidx.test.platform.app.InstrumentationRegistry
+
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -72,7 +76,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_name_button), withText("Search by name"),
+                withId(R.id.search_name_button), withText(R.string.search_by_name),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -126,7 +130,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
+                withId(R.id.navigation_favorites), withContentDescription(R.string.bottom_nav_title_favorites),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -141,7 +145,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
         val textView = onView(
             allOf(
-                withText("Favorites (1)"),
+                withText("${getResourceString(R.string.title_activity_fragment_favorites)} (1)"),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -155,7 +159,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Favorites (1)")))
+        textView.check(matches(withText("${getResourceString(R.string.title_activity_fragment_favorites)} (1)")))
 
         val textView2 = onView(
             allOf(
@@ -210,7 +214,7 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                withContentDescription(R.string.action_bar_back_button_identifier),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -228,12 +232,23 @@ class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
         val textView3 = onView(
             allOf(
-                withId(R.id.textViewNoFavorites), withText("No favorite devices yet"),
+                withId(R.id.textViewNoFavorites), withText(R.string.no_favorite_devices_text),
                 // Guidelines mess up index.
                 isDisplayed()
             )
         )
-        textView3.check(matches(withText("No favorite devices yet")))
+        textView3.check(matches(withText(R.string.no_favorite_devices_text)))
+    }
+
+    /**
+     * Helper function to get the string based on the string resource.
+     *
+     * @param id
+     * @return
+     */
+    private fun getResourceString(id: Int): String {
+        val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
+        return targetContext.resources.getString(id)
     }
 
     private fun childAtPosition(

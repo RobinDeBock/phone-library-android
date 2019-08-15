@@ -34,7 +34,7 @@ class NavigationDrawerAndStartScreenTest {
     fun navigationDrawerAndStartScreenTest() {
         val textView = onView(
             allOf(
-                withText("Phone Library"),
+                withText(R.string.title_activity_main),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -48,11 +48,11 @@ class NavigationDrawerAndStartScreenTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Phone Library")))
+        textView.check(matches(withText(R.string.title_activity_main)))
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
+                withId(R.id.navigation_favorites), withContentDescription(R.string.bottom_nav_title_favorites),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -67,7 +67,7 @@ class NavigationDrawerAndStartScreenTest {
 
         val textView2 = onView(
             allOf(
-                withText("Favorites"),
+                withText(R.string.title_activity_fragment_favorites),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -81,11 +81,11 @@ class NavigationDrawerAndStartScreenTest {
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Favorites")))
+        textView2.check(matches(withText(R.string.title_activity_fragment_favorites)))
 
         val bottomNavigationItemView2 = onView(
             allOf(
-                withId(R.id.navigation_search), withContentDescription("Search"),
+                withId(R.id.navigation_search), withContentDescription(R.string.bottom_nav_title_search),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -100,7 +100,7 @@ class NavigationDrawerAndStartScreenTest {
 
         val textView3 = onView(
             allOf(
-                withText("Phone Library"),
+                withText(R.string.title_activity_main),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -114,7 +114,7 @@ class NavigationDrawerAndStartScreenTest {
                 isDisplayed()
             )
         )
-        textView3.check(matches(withText("Phone Library")))
+        textView3.check(matches(withText(R.string.title_activity_main)))
     }
 
     private fun childAtPosition(

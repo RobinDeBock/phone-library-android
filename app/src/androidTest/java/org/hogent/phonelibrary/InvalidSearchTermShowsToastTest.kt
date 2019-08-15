@@ -76,7 +76,7 @@ class InvalidSearchTermShowsToastTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_name_button), withText("Search by name"),
+                withId(R.id.search_name_button), withText(R.string.search_by_name),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),

@@ -42,4 +42,5 @@
     <string name="title_activity_fragment_detail">Details</string>
     <string name="title_activity_fragment_favorites">Favorieten</string>
     <string name="title_activity_fragment_list">Zoekresultaten</string>
+    <string name="action_bar_back_button_identifier">Omhoog navigeren</string>
 </resources>

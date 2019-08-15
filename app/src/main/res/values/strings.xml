@@ -2,6 +2,9 @@
     <!-- Application strings -->
     <string name="app_name" translatable="false">Phone library</string>
 
+    <!-- Action bar back button string. Is locale dependent for testing -->
+    <string name="action_bar_back_button_identifier">Navigate up</string>
+
     <!-- Menu strings -->
     <string name="bottom_nav_title_favorites">Favorites</string>
     <string name="bottom_nav_title_search">Search</string>
@@ -12,10 +15,6 @@
     <string name="title_activity_fragment_list">Search results</string>
     <string name="title_activity_fragment_detail">Detail</string>
     <string name="title_activity_fragment_favorites">Favorites</string>
-
-    <!-- Placeholder text -->
-    <string name="hello_favorites_fragment" translatable="false">Hello favorites fragment</string>
-    <string name="hello_detail_fragment" translatable="false">Hello detail fragment</string>
 
     <!-- SEARCH screen -->
     <string name="open_detail">Open detail</string>

@@ -72,7 +72,7 @@ class SortingFavoritesTest {
 
         val appCompatButton = onView(
             allOf(
-                withId(R.id.search_brand_button), withText("Search by brand"),
+                withId(R.id.search_brand_button), withText(R.string.search_by_brand),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -126,7 +126,7 @@ class SortingFavoritesTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_search), withContentDescription("Search"),
+                withId(R.id.navigation_search), withContentDescription(R.string.bottom_nav_title_search),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -177,7 +177,7 @@ class SortingFavoritesTest {
 
         val appCompatButton2 = onView(
             allOf(
-                withId(R.id.search_brand_button), withText("Search by brand"),
+                withId(R.id.search_brand_button), withText(R.string.search_by_brand),
                 childAtPosition(
                     allOf(
                         withId(R.id.frameLayout3),
@@ -231,7 +231,7 @@ class SortingFavoritesTest {
 
         val bottomNavigationItemView2 = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
+                withId(R.id.navigation_favorites), withContentDescription(R.string.bottom_nav_title_favorites),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
@@ -412,7 +412,7 @@ class SortingFavoritesTest {
 
         val appCompatImageButton = onView(
             allOf(
-                withContentDescription("Navigate up"),
+                withContentDescription(R.string.action_bar_back_button_identifier),
                 childAtPosition(
                     allOf(
                         withId(R.id.action_bar),
@@ -481,7 +481,7 @@ class SortingFavoritesTest {
 
         val bottomNavigationItemView3 = onView(
             allOf(
-                withId(R.id.navigation_favorites), withContentDescription("Favorites"),
+                withId(R.id.navigation_favorites), withContentDescription(R.string.bottom_nav_title_favorites),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_view),
