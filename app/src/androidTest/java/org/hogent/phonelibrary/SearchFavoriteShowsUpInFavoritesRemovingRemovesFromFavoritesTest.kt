@@ -22,6 +22,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Adding and removing a device from/to favorites shows onto the favorites screen.
+ *
+ */
 class SearchFavoriteShowsUpInFavoritesRemovingRemovesFromFavoritesTest {
 
     @Rule

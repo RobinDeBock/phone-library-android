@@ -20,6 +20,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Checks the app starts on the search screen and the navigation drawer works as intended.
+ *
+ */
 class NavigationDrawerAndStartScreenTest {
 
     @Rule

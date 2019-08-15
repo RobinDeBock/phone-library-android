@@ -26,6 +26,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * A search term with no results shows a toast.
+ *
+ */
 class InvalidSearchTermShowsToastTest {
 
     @Rule

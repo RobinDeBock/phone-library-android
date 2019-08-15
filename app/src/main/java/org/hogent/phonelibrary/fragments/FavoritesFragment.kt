@@ -84,6 +84,9 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
             view.sortChoice.setSelection(if (sortByBrand) 1 else 0)
         }
 
+        // Hide spinner until results are loaded.
+        view.sortChoice.visibility = View.INVISIBLE
+
         // Return the view.
         return view
     }
@@ -114,6 +117,8 @@ class FavoritesFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun handleFavoriteDevices(devices: List<Device>) {
         // Hide placeholder for no devices.
         noFavoritesPlaceholder.visibility = View.GONE
+        // Show spinner.
+        sortChoice.visibility = View.VISIBLE
         // Push devices to adapter. Check what option was selected in the sort choice spinner.
         (favoritesRecyclerView.adapter as FavoriteDevicesAdapter).setFavoriteDevices(
             devices,

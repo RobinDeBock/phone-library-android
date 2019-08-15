@@ -20,6 +20,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Tests searching by name.
+ *
+ */
 class SuccessfulByNameSearchTest {
 
     @Rule

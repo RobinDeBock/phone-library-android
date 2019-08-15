@@ -1,5 +1,10 @@
 package org.hogent.phonelibrary.domain.models
 
+/**
+ * Iterator for the device specs from a list of spec categories.
+ *
+ * @property specCategories The list of spec categories containing specs.
+ */
 class SpecCategoryDeviceSpecIterator(private val specCategories: Iterator<SpecCategory>) : Iterator<IDeviceSpec> {
     private var currentCategory: SpecCategory? = if (specCategories.hasNext()) specCategories.next() else null
     private var currentSpecIndex: Int = 0
@@ -29,10 +34,20 @@ class SpecCategoryDeviceSpecIterator(private val specCategories: Iterator<SpecCa
         return currentCategory!!.specs[currentSpecIndex - 1]
     }
 
+    /**
+     * Helper function to check that there is a spec present.
+     *
+     * @return
+     */
     private fun checkForSpecs(): Boolean {
         return currentCategory!!.specs.count() > currentSpecIndex
     }
 
+    /**
+     * Helper function to check there is a spec category present.
+     *
+     * @return
+     */
     private fun checkForCategories(): Boolean {
         return specCategories.hasNext()
     }

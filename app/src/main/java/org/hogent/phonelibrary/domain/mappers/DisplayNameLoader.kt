@@ -25,6 +25,11 @@ class DisplayNameLoader {
         SpecCategoryDeviceSpecIterator(specCategories.iterator()).forEach { loadSpec(it) }
     }
 
+    /**
+     * Helper function to load all correct string values into a spec category.
+     *
+     * @param specCategory The spec category to load the string value into.
+     */
     private fun loadSpecCategory(specCategory: SpecCategory) {
         // Set display name.
         specCategory.setDisplayName(
@@ -39,6 +44,11 @@ class DisplayNameLoader {
         )
     }
 
+    /**
+     * Helper function to load all correct string values into a spec.
+     *
+     * @param spec The spec to load the string value into.
+     */
     private fun loadSpec(spec: IDeviceSpec) {
         // Set display name.
         spec.setDisplayName(

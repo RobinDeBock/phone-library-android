@@ -11,13 +11,15 @@ import com.squareup.moshi.Types
 import org.hogent.phonelibrary.domain.models.Device
 import org.hogent.phonelibrary.domain.repository.network.json.DeviceJsonAdapter
 
+/**
+ * Set the result limit for searching by brand. Used for debugging. The max is 100 devices.
+ */
 private const val MAX_RESULTS: Int = 100
 
 class DeviceApi(private val BASE_URL: String) : IDeviceApi {
 
-    //The token is
-    //todo use setter injection for token.
-    private var token: String = "1ba2a2bf8a17defe7646963cbaea9b45ec6ede3bc20e626f"
+    // The token for communicating with the API.
+    private var token: String = "5477dcb80c1398809bcd04ddcf7fdb86769847a35673c47b"
 
     override fun fetchDevicesByName(deviceName: String): Observable<List<Device>> {
         //Build url.
@@ -60,11 +62,13 @@ class DeviceApi(private val BASE_URL: String) : IDeviceApi {
                     .responseString { _, _, result ->
                         when (result) {
                             is Result.Failure -> {
+                                // REQUEST ERROR.
                                 val ex = result.getException()
                                 Log.e("Network error: request", ex.message)
                                 emitter.onError(ex)
                             }
                             is Result.Success -> {
+                                // SUCCESSFUL RESULT.
                                 val data = result.get()
 
                                 // Check for no results. (This comes in the form of an error in the JSON result).
@@ -105,43 +109,6 @@ class DeviceApi(private val BASE_URL: String) : IDeviceApi {
                                         }
                                     }
                                 }
-                            }
-                        }
-                    }
-            } catch (ex: Exception) {
-                Log.e("Network error: exec", ex.message)
-                emitter.onError(ex)
-            }
-        }
-    }
-
-    override fun isValidApiKey(): Observable<Boolean> {
-        // Build url.
-        val url = "${BASE_URL}getlatest"
-        // Build URL parameters.
-        val urlParameters = listOf(
-            Pair("token", token), // Token
-            Pair("limit", 1) // Set limit to minimum.
-        )
-        // Perform request.
-        return Observable.create { emitter ->
-            try {
-                Fuel.get(url, urlParameters)
-                    .responseString { _, _, result ->
-                        when (result) {
-                            is Result.Failure -> {
-                                val ex = result.getException()
-                                Log.e("Network error: request", ex.message)
-                                emitter.onError(ex)
-                            }
-                            is Result.Success -> {
-                                val data = result.get()
-                                // Check for error messages in result.
-                                val error = checkForApiErrors(data)
-                                if (error != null) emitter.onError(error)
-                                // No errors, request was successful.
-                                emitter.onNext(true)
-                                emitter.onComplete()
                             }
                         }
                     }

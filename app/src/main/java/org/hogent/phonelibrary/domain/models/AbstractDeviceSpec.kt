@@ -22,9 +22,19 @@ abstract class AbstractDeviceSpec<T : Any>(private val identifier: DeviceSpecEnu
         return displayName ?: identifier.toString()
     }
 
+    /**
+     * Gets the spec identifier.
+     *
+     * @return The enum value identifying the spec.
+     */
     override fun getType(): DeviceSpecEnum {
         return identifier
     }
 
+    /**
+     * Gets the spec value.
+     *
+     * @return
+     */
     abstract fun getValue(): T
 }

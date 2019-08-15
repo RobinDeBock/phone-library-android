@@ -54,7 +54,7 @@ class DeviceDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         // Get the device from the bundle.
         arguments?.let {
-            device = it.getSerializable(ARG_DEVICE) as Device
+            device = it.getParcelable(ARG_DEVICE) as Device
         }
 
         // Initialise the view model.
@@ -180,7 +180,7 @@ class DeviceDetailFragment : Fragment() {
         fun newInstance(device: Device) =
             DeviceDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_DEVICE, device)
+                    putParcelable(ARG_DEVICE, device)
                 }
             }
     }

@@ -4,7 +4,7 @@ import android.content.Context
 import org.hogent.phonelibrary.App
 
 /**
- * Provides the context to other classes to be used.
+ * Provides the context as a dependency which can be injected.
  *
  * @property app
  */

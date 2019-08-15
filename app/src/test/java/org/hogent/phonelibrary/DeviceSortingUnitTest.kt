@@ -5,6 +5,10 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Tests the comparators for the [Device].
+ *
+ */
 class DeviceSortingUnitTest {
 
     private lateinit var devices: List<Device>

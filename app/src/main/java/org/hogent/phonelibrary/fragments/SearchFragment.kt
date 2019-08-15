@@ -66,7 +66,7 @@ class SearchFragment : Fragment() {
             // Update enable status of buttons if there's text entered.
             updateButtonEnableStatus()
             // Set the value in the view model.
-            searchDeviceViewModel.searchValue = view.inputText.text.toString()
+            searchDeviceViewModel.searchValue = view.inputText.text.toString().trim()
         }
 
         // Add clear button to edit text.
@@ -125,6 +125,13 @@ class SearchFragment : Fragment() {
                 // Show or hide progress bar.
                 progressBar.visibility = if (showLoading) View.VISIBLE else View.GONE
             })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Set the title.
+        listener!!.updateTitle(getString(R.string.title_activity_main))
     }
 
     private fun handleErrorResult(errorResult: ErrorResult) {

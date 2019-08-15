@@ -1,5 +1,9 @@
 package org.hogent.phonelibrary.domain.models
 
+/**
+ * The Enum for identifying a spec.
+ *
+ */
 enum class DeviceSpecEnum {
     //MAIN SPECS
     CPU,

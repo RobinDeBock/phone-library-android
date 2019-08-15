@@ -4,6 +4,10 @@ import com.squareup.moshi.FromJson
 import org.hogent.phonelibrary.domain.models.Device
 
 
+/**
+ * Custom adapter for conversion from [DeviceJson] to [Device].
+ *
+ */
 internal class DeviceJsonAdapter {
     @FromJson
     fun deviceFromJson(deviceJson: DeviceJson): Device {

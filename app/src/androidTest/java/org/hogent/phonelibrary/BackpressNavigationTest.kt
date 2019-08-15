@@ -22,6 +22,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Navigates through the fragments and goes back to home screen by pressing 'back'.
+ *
+ */
 class BackpressNavigationTest {
 
     @Rule

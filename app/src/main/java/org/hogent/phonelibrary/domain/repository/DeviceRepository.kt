@@ -43,8 +43,4 @@ class DeviceRepository : IDeviceApi {
         return deviceApi.fetchDevicesByName(deviceName)
     }
 
-    override fun isValidApiKey(): Observable<Boolean> {
-        return deviceApi.isValidApiKey()
-    }
-
 }

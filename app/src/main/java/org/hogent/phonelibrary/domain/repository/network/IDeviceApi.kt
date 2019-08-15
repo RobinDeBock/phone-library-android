@@ -24,11 +24,4 @@ interface IDeviceApi {
      * @return A collection of all the devices.
      */
     fun fetchDevicesByName(deviceName: String): Observable<List<Device>>
-
-    /**
-     * Check if the API key is valid.
-     *
-     * @return whether or not the API key is valid.
-     */
-    fun isValidApiKey(): Observable<Boolean>
 }

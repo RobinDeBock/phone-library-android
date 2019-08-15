@@ -1,44 +1,50 @@
 package org.hogent.phonelibrary.domain.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
 /**
- * A device. All values are optional.
+ * A device. All values are optional except the name, which is unique.
  *
  */
 @Entity(tableName = "device_table")
-class Device : Serializable {
+@Parcelize
+data class Device(
     @PrimaryKey
-    var name: String = ""
-    var brand: String? = null
+    var name: String = "",
+    var brand: String? = null,
     //Main specs
-    var cpu: String? = null
-    var screenResolution: String? = null
-    var ram: String? = null
-    var batteryShort: String? = null
-    var rearCamera: String? = null
-    var frontCamera: String? = null
+    var cpu: String? = null,
+    var screenResolution: String? = null,
+    var ram: String? = null,
+    var batteryShort: String? = null,
+    var rearCamera: String? = null,
+    var frontCamera: String? = null,
     //Additional specs
     //--Release
-    var announcedDate: String? = null
-    var releaseStatus: String? = null
+    var announcedDate: String? = null,
+    var releaseStatus: String? = null,
     //--Physical
-    var screenSize: String? = null
-    var dimensions: String? = null
-    var weight: String? = null
+    var screenSize: String? = null,
+    var dimensions: String? = null,
+    var weight: String? = null,
     //--Hardware
-    var gpu: String? = null
-    var chipset: String? = null
-    var headphoneJack: Boolean? = null
-    var usb: String? = null
-    var simType: String? = null
-    var cardSlot: String? = null
+    var gpu: String? = null,
+    var chipset: String? = null,
+    var headphoneJack: Boolean? = null,
+    var usb: String? = null,
+    var simType: String? = null,
+    var cardSlot: String? = null,
     //--Software
-    var os: String? = null
+    var os: String? = null): Parcelable {
 
-    // Display name equals the name without the brand. If brand is null, return the name.
+    /**
+     * Display name equals the name without the brand. If brand is null, the name is returned.
+     *
+     * @return The display name.
+     */
     fun displayName(): String {
         return if (brand != null) name.replace("$brand ", "") else name
     }
@@ -48,6 +54,10 @@ class Device : Serializable {
     }
 
     companion object {
+        /**
+         * The comparator compares by brand, then by display name. Not-null brand names have precedence.
+         *
+         */
         fun giveDeviceByBrandComparator(): Comparator<Device> = Comparator { device1, device2 ->
             // Sort by brand, not null brand has precedence.
             if (!(device1.brand == null && device2.brand == null)) {
@@ -68,6 +78,10 @@ class Device : Serializable {
             return@Comparator device1.displayName().compareTo(device2.displayName())
         }
 
+        /**
+         * The comparator compares by name.
+         *
+         */
         fun giveDeviceByNameComparator(): Comparator<Device> = Comparator { device1, device2 ->
             // Compare by display name (the 'name' property contains the brand).
             val compareResult = device1.displayName().compareTo(device2.displayName())

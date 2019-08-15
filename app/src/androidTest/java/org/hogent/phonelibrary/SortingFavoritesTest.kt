@@ -22,6 +22,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Adds devices to favorites and checks if they's sorted correct.
+ *
+ */
 class SortingFavoritesTest {
 
     @Rule

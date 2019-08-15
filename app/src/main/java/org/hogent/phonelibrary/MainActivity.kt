@@ -100,8 +100,6 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
     }
 
     override fun onBackPressed() {
-        resetActionBarTitle()
-
         if (isTwoPane) {
             // Two pane back press resets to home screen.
             switchFragment(FragmentNames.SEARCH, null)
@@ -149,14 +147,6 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
     }
 
     /**
-     * Sets the title of the action bar back to it's default.
-     *
-     */
-    private fun resetActionBarTitle() {
-        supportActionBar?.title = getString(R.string.title_activity_main)
-    }
-
-    /**
      * Helper function to show a new fragment on the screen.
      * If the fragment is a root fragment. Pressing the back button will close the activity.
      * If the fragment is not a root fragment, a back option will be available.
@@ -168,8 +158,6 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
             "Switch fragment",
             "Switching to fragment $fragment."
         )
-
-        resetActionBarTitle()
 
         try {
             // Check whether or not it's a root fragment.
@@ -216,11 +204,7 @@ class MainActivity : AppCompatActivity(), IParentActivity, OnDeviceSelectedListe
             supportFragmentManager.executePendingTransactions()
         } catch (ex: Exception) {
             // This exception can apparently be null.
-            if (ex == null) {
-                Log.e("Switch fragment", "Exception was null.")
-            } else {
-                Log.e("Switch fragment", ex.message)
-            }
+            Log.e("Switch fragment", ex.message)
         }
         updateActionBarBackButton()
     }

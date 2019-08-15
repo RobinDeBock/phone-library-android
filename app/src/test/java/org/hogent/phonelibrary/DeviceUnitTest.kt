@@ -6,6 +6,10 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 
+/**
+ * Checks the properties and functions of a [Device].
+ *
+ */
 class DeviceUnitTest {
 
     private lateinit var device: Device

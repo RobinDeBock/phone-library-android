@@ -48,12 +48,12 @@ class DeviceSpecMapper {
     }
 
     /**
-     * Instantiates the correct spec class type and calls helper method to add to the hashmap.
+     * Instantiates the correct spec class type and calls helper method to add to the hash map.
      *
-     * @param value
-     * @param specType
-     * @param specCategory
-     * @param specsPerCategory
+     * @param specsPerCategory The map to add the spec to.
+     * @param specCategory Which category the spec belongs to.
+     * @param specType The enum value of the spec.
+     * @param value The value of the spec.
      */
     private fun addSpecToMap(
         specsPerCategory: HashMap<SpecCategoryEnum, MutableList<IDeviceSpec>>,
@@ -71,12 +71,12 @@ class DeviceSpecMapper {
     }
 
     /**
-     * Adds the spec to the specified hashmap.
-     * If the list of the specs, linked to the the category enum value, is not yet present it will be added.
+     * Adds the spec to the specified hash map.
+     * If the list of the specs (linked to the the category enum value) is not yet present, it will be added.
      *
-     * @param deviceSpec
-     * @param category
-     * @param specsPerCategory
+     * @param deviceSpec The spec.
+     * @param category Which category the spec belongs to.
+     * @param specsPerCategory The hash map with the spec category identifier as the key and a list of specs as value.
      */
     private fun addSpecToHashMap(
         deviceSpec: IDeviceSpec,
@@ -95,6 +95,12 @@ class DeviceSpecMapper {
         }
     }
 
+    /**
+     * Converts the hash map for the spec categories to a list of spec category class instances.
+     *
+     * @param specsPerCategory The hash map with the spec category identifier as the key and a list of specs as value.
+     * @return The spec category class instances in a list.
+     */
     private fun specCategoryHashMapToList(specsPerCategory: HashMap<SpecCategoryEnum, MutableList<IDeviceSpec>>): List<SpecCategory> {
         val specCategories = mutableListOf<SpecCategory>()
         // Loop for every category saved to the dictionary.

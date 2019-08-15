@@ -12,11 +12,12 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Inject context into ContextProviderModule.
         displayNameLoader = DaggerDisplayNameLoaderComponent
             .builder()
             .contextProviderModule(ContextProviderModule(this))
             .build()
-
+        // Inject context into DatabaseModule.
         repositoryComponent = DaggerRepositoryComponent
             .builder()
             .deviceApiModule(DeviceApiModule)

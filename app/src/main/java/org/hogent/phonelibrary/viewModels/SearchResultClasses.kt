@@ -1,5 +1,7 @@
 package org.hogent.phonelibrary.viewModels
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import org.hogent.phonelibrary.domain.models.Device
 import java.io.Serializable
 
@@ -9,7 +11,7 @@ import java.io.Serializable
  * @param searchTerm The term used to search with.
  * @param searchType If there was searched by device name or brand name.
  */
-abstract class SearchResult(var searchTerm: String, var searchType: SearchType) :  Serializable
+abstract class SearchResult(open var searchTerm: String, open var searchType: SearchType): Parcelable
 
 /**
  * A successful result.
@@ -20,7 +22,8 @@ abstract class SearchResult(var searchTerm: String, var searchType: SearchType) 
  * @param searchTerm The name of the device or brand name used to search with.
  * @param searchType If there was searched by device name or brand name.
  */
-class SuccessResult(var devices: List<Device>, searchTerm: String, searchType: SearchType) :
+@Parcelize
+class SuccessResult(var devices: List<Device>, override var searchTerm: String, override var searchType: SearchType) :
     SearchResult(searchTerm, searchType)
 
 /**
@@ -32,8 +35,9 @@ class SuccessResult(var devices: List<Device>, searchTerm: String, searchType: S
  * @param searchTerm The name of the device or brand name used to search with.
  * @param searchType If there was searched by device name or brand name.
  */
-class ErrorResult(var error: Exception, searchTerm: String, searchType: SearchType) :
-    SearchResult(searchTerm, searchType)
+@Parcelize
+class ErrorResult(var error: Exception, override var searchTerm: String, override var searchType: SearchType) :
+    SearchResult(searchTerm, searchType), Parcelable
 
 enum class SearchType {
     ByDEVICE,

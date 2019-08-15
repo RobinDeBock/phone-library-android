@@ -1,5 +1,11 @@
 package org.hogent.phonelibrary.domain.models
 
+/**
+ * A spec category groups the specs.
+ *
+ * @property identifier The Enum value identifying the spec category.
+ * @property specs The list of specs contained in this spec category.
+ */
 data class SpecCategory(val identifier: SpecCategoryEnum, val specs: List<IDeviceSpec>) : IStringResourceDisplayable,
     Iterable<IDeviceSpec> {
     private var displayName: String? = null

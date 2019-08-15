@@ -92,6 +92,7 @@ class SearchDeviceViewModel : BaseViewModel() {
             }
             .doOnTerminate {
                 // Doesn't work.
+                Log.w("SearchVM on terminate", "The 'doOnTerminate' was called from the observable. This is unexpected behaviour as it wasn't working before.")
                 isLoading.postValue(false)
             }
             .subscribe({ result ->
@@ -111,11 +112,10 @@ class SearchDeviceViewModel : BaseViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                Log.i("SearchDeviceViewModel", "On subscribe called.")
                 isLoading.postValue(true)
             }
             .doOnTerminate {
-                Log.i("SearchDeviceViewModel", "On terminate called.")
+                Log.w("SearchVM on terminate", "The 'doOnTerminate' was called from the observable. This is unexpected behaviour as it wasn't working before.")
                 isLoading.postValue(false)
             }
             .subscribe({ result ->

@@ -22,6 +22,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
+/**
+ * Adding a device to favorites shows an icon in the search result list.
+ *
+ */
 class SearchFavoriteShowsIconInListTest {
 
     @Rule

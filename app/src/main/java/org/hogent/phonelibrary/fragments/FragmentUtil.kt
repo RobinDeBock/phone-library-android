@@ -12,6 +12,10 @@ import android.widget.EditText
 import androidx.appcompat.widget.AppCompatDrawableManager
 import org.hogent.phonelibrary.R
 
+/**
+ * Utility class which can be used on controls/views of fragments.
+ *
+ */
 class FragmentUtil {
     companion object {
         /**
@@ -52,9 +56,11 @@ class FragmentUtil {
         fun EditText.setupClearButtonWithAction() {
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(editable: Editable?) {
+                    // Show clear icon if edit text is not empty.
                     val icon = if (editable?.isNotBlank() == true) {
                         R.drawable.ic_clear
                     } else 0
+                    // Set icon. If edit text was not empty, value is 0 and nothing is shown.
                     setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
                 }
 
@@ -64,6 +70,7 @@ class FragmentUtil {
 
             setOnTouchListener(View.OnTouchListener { inputView, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
+                    // Check if the area of the clear icon was selected.
                     if ((this.width - this.compoundPaddingRight) < event.x) {
                         this.setText("")
                         return@OnTouchListener true
